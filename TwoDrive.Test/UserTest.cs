@@ -3,11 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TwoDrive.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class UserTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void SetGuidTest()
         {
+			
         }
     }
 }
