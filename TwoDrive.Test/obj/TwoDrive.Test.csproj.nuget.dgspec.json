@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Test\\TwoDrive.Test.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Test\\TwoDrive.Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Test\\TwoDrive.Test.csproj",
+        "projectName": "TwoDrive.Test",
+        "projectPath": "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Test\\TwoDrive.Test.csproj",
+        "packagesPath": "C:\\Users\\Juanpa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Test\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Juanpa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.0.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
