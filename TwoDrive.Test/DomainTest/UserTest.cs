@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TwoDrive.Domain;
 
@@ -14,6 +15,7 @@ namespace TwoDrive.Test.DomainTest
 		public void SetUp()
 		{
 			user = new User();
+			user.FriendList = new List<Guid>();
 		}
 
 		[TestMethod]

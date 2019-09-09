@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TwoDrive.Domain
 {
@@ -18,5 +19,17 @@ namespace TwoDrive.Domain
 		public string Email { get; set; }
 
 		public bool Administrator { get; set; }
-    }
+
+		public List<Guid> FriendList { get; set; }
+
+		public void AddToFriendList(Guid Id)
+		{
+			FriendList.Add(Id);
+		}
+
+		public void RemoveFromFriendList(Guid Id)
+		{
+			FriendList.Remove(Id);
+		}
+	}
 }
