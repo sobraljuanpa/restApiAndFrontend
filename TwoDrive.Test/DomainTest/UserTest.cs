@@ -73,5 +73,23 @@ namespace TwoDrive.Test.DomainTest
 			Assert.AreEqual(true, user.Administrator);
 		}
 
+		[TestMethod]
+		public void AddToFriendListTest()
+		{
+			Guid aux = new Guid("AC8DB7A8-6EBE-4A07-BEB9-B7AC59485B90");
+			user.AddToFriendList(aux);
+
+			Assert.AreEqual(1, user.FriendList.Count);
+		}
+
+		[TestMethod]
+		public void RemoveFromFriendListTest()
+		{
+			Guid aux = new Guid("AC8DB7A8-6EBE-4A07-BEB9-B7AC59485B90");
+			user.AddToFriendList(aux);
+			user.RemoveFromFriendList(aux);
+
+			Assert.AreEqual(0, user.FriendList.Count);
+		}
 	}
 }
