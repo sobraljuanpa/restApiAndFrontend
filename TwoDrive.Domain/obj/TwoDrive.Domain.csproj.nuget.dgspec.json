@@ -1,28 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Domain\\TwoDrive.Domain.csproj": {}
+    "C:\\Users\\PC\\Desktop\\SobralGoni\\TwoDrive.Domain\\TwoDrive.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Domain\\TwoDrive.Domain.csproj": {
+    "C:\\Users\\PC\\Desktop\\SobralGoni\\TwoDrive.Domain\\TwoDrive.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Domain\\TwoDrive.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\SobralGoni\\TwoDrive.Domain\\TwoDrive.Domain.csproj",
         "projectName": "TwoDrive.Domain",
-        "projectPath": "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Domain\\TwoDrive.Domain.csproj",
-        "packagesPath": "C:\\Users\\Juanpa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Juanpa\\Documents\\Facultad\\SobralGoni\\TwoDrive.Domain\\obj\\",
+        "projectPath": "C:\\Users\\PC\\Desktop\\SobralGoni\\TwoDrive.Domain\\TwoDrive.Domain.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\SobralGoni\\TwoDrive.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Juanpa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
