@@ -11,8 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using TwoDrive.BusinessLogic;
 using TwoDrive.DataAccess;
+using TwoDrive.Domain;
 
 namespace TwoDrive.WebApi
 {
@@ -31,6 +32,7 @@ namespace TwoDrive.WebApi
             services.AddDbContext<TwoDriveContext>(opts => opts.UseSqlServer(
                     Configuration["ConnectionString:TwoDriveDB"],
                     b => b.MigrationsAssembly("TwoDrive.WebApi")));
+            services.AddScoped<IDataRepository<User>, UserRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
