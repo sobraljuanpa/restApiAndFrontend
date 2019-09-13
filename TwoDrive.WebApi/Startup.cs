@@ -28,7 +28,9 @@ namespace TwoDrive.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TwoDriveContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:TwoDriveDB"]));
+            services.AddDbContext<TwoDriveContext>(opts => opts.UseSqlServer(
+                    Configuration["ConnectionString:TwoDriveDB"],
+                    b => b.MigrationsAssembly("TwoDrive.WebApi")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

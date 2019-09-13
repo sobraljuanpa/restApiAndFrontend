@@ -22,16 +22,16 @@ namespace TwoDrive.Domain
 
         public bool Administrator { get; set; }
 
-        public List<long> FriendList { get; set; }
+        public List<User> FriendList { get; set; }
 
-        public void AddToFriendList(long id)
+        public void AddToFriendList(User user)
         {
-            FriendList.Add(id);
+            FriendList.Add(user);
         }
 
-        public void RemoveFromFriendList(long id)
+        public void RemoveFromFriendList(User user)
         {
-            FriendList.Remove(id);
+            FriendList.Remove(user);
         }
     }
 }

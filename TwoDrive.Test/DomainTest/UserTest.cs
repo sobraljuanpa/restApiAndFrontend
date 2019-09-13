@@ -9,12 +9,14 @@ namespace TwoDrive.Test.DomainTest
     {
 
         User user;
+        User dummy;
 
         [TestInitialize]
         public void SetUp()
         {
             user = new User();
-            user.FriendList = new List<long>();
+            dummy = new User();
+            user.FriendList = new List<User>();
         }
 
         [TestMethod]
@@ -68,7 +70,7 @@ namespace TwoDrive.Test.DomainTest
         [TestMethod]
         public void AddToFriendListTest()
         {
-            user.AddToFriendList(1);
+            user.AddToFriendList(dummy);
 
             Assert.AreEqual(1, user.FriendList.Count);
         }
@@ -76,8 +78,8 @@ namespace TwoDrive.Test.DomainTest
         [TestMethod]
         public void RemoveFromFriendListTest()
         {
-            user.AddToFriendList(1);
-            user.RemoveFromFriendList(1);
+            user.AddToFriendList(dummy);
+            user.RemoveFromFriendList(dummy);
 
             Assert.AreEqual(0, user.FriendList.Count);
         }
