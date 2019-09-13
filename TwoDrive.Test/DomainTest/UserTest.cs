@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TwoDrive.Domain;
+using System.Collections.Generic;
 
 namespace TwoDrive.Test.DomainTest
 {
@@ -13,6 +14,7 @@ namespace TwoDrive.Test.DomainTest
         public void SetUp()
         {
             user = new User();
+            user.FriendList = new List<long>();
         }
 
         [TestMethod]
@@ -61,6 +63,23 @@ namespace TwoDrive.Test.DomainTest
             user.Administrator = true;
 
             Assert.AreEqual(true, user.Administrator);
+        }
+
+        [TestMethod]
+        public void AddToFriendListTest()
+        {
+            user.AddToFriendList(1);
+
+            Assert.AreEqual(1, user.FriendList.Count);
+        }
+
+        [TestMethod]
+        public void RemoveFromFriendListTest()
+        {
+            user.AddToFriendList(1);
+            user.RemoveFromFriendList(1);
+
+            Assert.AreEqual(0, user.FriendList.Count);
         }
 
     }
