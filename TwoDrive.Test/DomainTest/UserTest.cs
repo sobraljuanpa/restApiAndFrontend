@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TwoDrive.Domain.User;
+using TwoDrive.Domain;
 
 namespace TwoDrive.Test.DomainTest
 {
@@ -16,14 +16,6 @@ namespace TwoDrive.Test.DomainTest
         }
 
         [TestMethod]
-        public void SetGuidTest()
-        {
-            user.Guid = 1;
-
-            Assert.AreEqual(1, user.Guid);
-        }
-
-        [TestMethod]
         public void SetFirstNameTest()
         {
             user.FirstName = "Juan";
@@ -34,7 +26,7 @@ namespace TwoDrive.Test.DomainTest
         [TestMethod]
         public void SetLastNameTest()
         {
-            user.Name = "Perez";
+            user.LastName = "Perez";
 
             Assert.AreEqual("Perez", user.LastName);
         }
@@ -58,7 +50,7 @@ namespace TwoDrive.Test.DomainTest
         [TestMethod]
         public void SetEmailTest()
         {
-            user.Username = "juan.perez@gmail.com";
+            user.Email = "juan.perez@gmail.com";
 
             Assert.AreEqual("juan.perez@gmail.com", user.Email);
         }
