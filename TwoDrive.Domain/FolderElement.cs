@@ -11,11 +11,12 @@ namespace TwoDrive.Domain
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
-        public User Owner { get; set; }
+        [ForeignKey("User")]
+        public long OwnerId { get; set; }
 
         public string Name { get; set; }
 
-        public FolderElement Parent { get; set; }
+        public Folder Parent { get; set; }
 
         public List<User> Readers { get; set; }
 
