@@ -41,6 +41,7 @@ namespace TwoDrive.BusinessLogic
             newUser.Username = oldUser.Username;
             newUser.Password = oldUser.Password;
             newUser.FriendList = oldUser.FriendList;
+            newUser.RootFolder = oldUser.RootFolder;
 
             _context.SaveChanges();
         }
