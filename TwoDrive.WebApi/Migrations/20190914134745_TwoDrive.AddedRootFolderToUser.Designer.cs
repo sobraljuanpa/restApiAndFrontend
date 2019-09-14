@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TwoDrive.DataAccess;
 
 namespace TwoDrive.WebApi.Migrations
 {
     [DbContext(typeof(TwoDriveContext))]
-    partial class TwoDriveContextModelSnapshot : ModelSnapshot
+    [Migration("20190914134745_TwoDrive.AddedRootFolderToUser")]
+    partial class TwoDriveAddedRootFolderToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,17 +21,14 @@ namespace TwoDrive.WebApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TwoDrive.Domain.File", b =>
+            modelBuilder.Entity("TwoDrive.Domain.FolderElement", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Content");
-
-                    b.Property<DateTime>("CreationDate");
-
-                    b.Property<DateTime>("LastModifiedDate");
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("Name");
 
@@ -41,26 +40,9 @@ namespace TwoDrive.WebApi.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Files");
-                });
+                    b.ToTable("FolderElement");
 
-            modelBuilder.Entity("TwoDrive.Domain.Folder", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.Property<long>("OwnerId");
-
-                    b.Property<long?>("ParentId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("Folders");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("FolderElement");
                 });
 
             modelBuilder.Entity("TwoDrive.Domain.User", b =>
@@ -100,15 +82,37 @@ namespace TwoDrive.WebApi.Migrations
 
             modelBuilder.Entity("TwoDrive.Domain.File", b =>
                 {
-                    b.HasOne("TwoDrive.Domain.Folder", "Parent")
-                        .WithMany("Files")
-                        .HasForeignKey("ParentId");
+                    b.HasBaseType("TwoDrive.Domain.FolderElement");
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<long?>("FolderId");
+
+                    b.Property<DateTime>("LastModifiedDate");
+
+                    b.HasIndex("FolderId");
+
+                    b.HasDiscriminator().HasValue("File");
                 });
 
             modelBuilder.Entity("TwoDrive.Domain.Folder", b =>
                 {
-                    b.HasOne("TwoDrive.Domain.Folder", "Parent")
-                        .WithMany("Folders")
+                    b.HasBaseType("TwoDrive.Domain.FolderElement");
+
+                    b.Property<long?>("FolderId")
+                        .HasColumnName("FolderId1");
+
+                    b.HasIndex("FolderId");
+
+                    b.HasDiscriminator().HasValue("Folder");
+                });
+
+            modelBuilder.Entity("TwoDrive.Domain.FolderElement", b =>
+                {
+                    b.HasOne("TwoDrive.Domain.FolderElement", "Parent")
+                        .WithMany()
                         .HasForeignKey("ParentId");
                 });
 
@@ -125,6 +129,20 @@ namespace TwoDrive.WebApi.Migrations
                     b.HasOne("TwoDrive.Domain.User")
                         .WithMany("FriendList")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("TwoDrive.Domain.File", b =>
+                {
+                    b.HasOne("TwoDrive.Domain.Folder")
+                        .WithMany("Files")
+                        .HasForeignKey("FolderId");
+                });
+
+            modelBuilder.Entity("TwoDrive.Domain.Folder", b =>
+                {
+                    b.HasOne("TwoDrive.Domain.Folder")
+                        .WithMany("Folders")
+                        .HasForeignKey("FolderId");
                 });
 #pragma warning restore 612, 618
         }
