@@ -24,6 +24,8 @@ namespace TwoDrive.Domain
 
         public List<User> FriendList { get; set; }
 
+        public Folder RootFolder { get; set; }
+
         public void AddToFriendList(User user)
         {
             FriendList.Add(user);
