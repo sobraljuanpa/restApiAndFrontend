@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace TwoDrive.Domain
 {
     public class Folder : FolderElement
     {
 
-        public User Owner { get; set; }
-
         public List<File> Files { get; set; }
 
         public List<Folder> Folders { get; set; }
-
-        public List<User> Readers { get; set; }
 
         public void AddFile(File file)
         {
@@ -35,14 +29,5 @@ namespace TwoDrive.Domain
             Folders.Remove(folder);
         }
 
-        public void AddReader(User user)
-        {
-            Readers.Add(user);
-        }
-
-        public void RemoveReader(User user)
-        {
-            Readers.Remove(user);
-        }
     }
 }
