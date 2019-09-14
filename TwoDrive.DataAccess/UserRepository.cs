@@ -34,13 +34,14 @@ namespace TwoDrive.BusinessLogic
 
         public void Update(User oldUser, User newUser)
         {
-            newUser.Administrator = oldUser.Administrator;
-            newUser.FirstName = oldUser.FirstName;
-            newUser.LastName = oldUser.LastName;
-            newUser.Email = oldUser.Email;
-            newUser.Username = oldUser.Username;
-            newUser.Password = oldUser.Password;
-            newUser.FriendList = oldUser.FriendList;
+            oldUser.Administrator = newUser.Administrator;
+            oldUser.FirstName = newUser.FirstName;
+            oldUser.LastName = newUser.LastName;
+            oldUser.Email = newUser.Email;
+            oldUser.Username = newUser.Username;
+            oldUser.Password = newUser.Password;
+            oldUser.FriendList = newUser.FriendList;
+            oldUser.RootFolder = newUser.RootFolder;
 
             _context.SaveChanges();
         }
