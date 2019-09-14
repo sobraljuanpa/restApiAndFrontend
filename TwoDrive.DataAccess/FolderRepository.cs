@@ -31,12 +31,12 @@ namespace TwoDrive.DataAccess
 
         public void Update(Folder oldFolder, Folder newFolder)
         {
-            newFolder.Files = oldFolder.Files;
-            newFolder.Folders = oldFolder.Folders;
-            newFolder.Name = oldFolder.Name;
-            newFolder.OwnerId = oldFolder.OwnerId;
-            newFolder.Parent = oldFolder.Parent;
-            newFolder.Readers = oldFolder.Readers;
+            oldFolder.Files = newFolder.Files;
+            oldFolder.Folders = newFolder.Folders;
+            oldFolder.Name = newFolder.Name;
+            oldFolder.OwnerId = newFolder.OwnerId;
+            oldFolder.Parent = newFolder.Parent;
+            oldFolder.Readers = newFolder.Readers;
 
             _context.SaveChanges();
         }

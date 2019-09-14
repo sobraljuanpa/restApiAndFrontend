@@ -28,13 +28,13 @@ namespace TwoDrive.DataAccess
 
         public void Update(File oldFile, File newFile)
         {
-            newFile.Content = oldFile.Content;
-            newFile.CreationDate = oldFile.CreationDate;
-            newFile.LastModifiedDate = DateTime.Now;
-            newFile.Name = oldFile.Name;
-            newFile.OwnerId = oldFile.OwnerId;
-            newFile.Parent = oldFile.Parent;
-            newFile.Readers = oldFile.Readers;
+            oldFile.Content = newFile.Content;
+            oldFile.CreationDate = newFile.CreationDate;
+            oldFile.LastModifiedDate = DateTime.Now;
+            oldFile.Name = newFile.Name;
+            oldFile.OwnerId = newFile.OwnerId;
+            oldFile.Parent = newFile.Parent;
+            oldFile.Readers = newFile.Readers;
 
             _context.SaveChanges();
         }
