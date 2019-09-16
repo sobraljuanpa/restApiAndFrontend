@@ -201,7 +201,12 @@ namespace TwoDrive.Test.BusinessLogic
             Assert.IsTrue(logicFile.Get(3).Readers.Count == 2);
         }
 
-        
-
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void RemoveReadersNoPermissions()
+        {
+            logicFile.RemoveReader(logicFile.Get(3), user2);
+            Assert.IsTrue(logicFile.Get(3).Readers.Count == 1);
+        }
     }
 }
