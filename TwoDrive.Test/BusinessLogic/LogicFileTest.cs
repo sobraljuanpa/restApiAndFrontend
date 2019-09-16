@@ -173,6 +173,18 @@ namespace TwoDrive.Test.BusinessLogic
             Assert.AreEqual(logicFile.Get(4), file2);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void UpdateFileNoPermissions()
+        {
+            List<User> readers = new List<User>();
+            readers.Add(user);
+            File file2 = new File(user, "NEWFILE", folderCorrectly2, readers, "This is a new file.");
+            file2.Id = 4;
+            logicFile.Add(file2);
+            Assert.AreEqual(logicFile.Get(4), file2);
+        }
+
         
 
     }
