@@ -66,6 +66,12 @@ namespace TwoDrive.Test.BusinessLogic
             logicFile.Move(fileNull, folderRoot);
         }
 
+        [TestMethod]
+        public void MoveFileToRootCorrectly()
+        {
+            logicFile.Move(fileCorrectly, folderRoot);
+            Assert.IsTrue(folderRoot.Files.Contains(fileCorrectly));
+        }
 
     }
 }
