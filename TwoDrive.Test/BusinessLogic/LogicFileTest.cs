@@ -81,7 +81,12 @@ namespace TwoDrive.Test.BusinessLogic
             logicFile.Get(10);
         }
 
-        
+        [TestMethod]
+        public void getFile()
+        {
+            File fileReturn = logicFile.Get(3);
+            Assert.AreEqual(fileReturn, fileCorrectly);
+        }
 
     }
 }
