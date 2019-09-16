@@ -76,26 +76,38 @@ namespace TwoDrive.Test.BusinessLogic
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void getFileNotExist()
+        public void GetFileNotExist()
         {
             logicFile.Get(10);
         }
 
         [TestMethod]
-        public void getFile()
+        public void GetFile()
         {
             File fileReturn = logicFile.Get(3);
             Assert.AreEqual(fileReturn, fileCorrectly);
         }
 
         [TestMethod]
-        public void getAll()
+        public void GetAll()
         {
             IEnumerable<File> filesReturn = logicFile.GetAll();
             List<File> files  = new List<File>();
             files.Add(fileCorrectly);
             Assert.IsTrue(filesReturn.Equals(files));
         }
+
+        [TestMethod]
+        public void AddFile()
+        {
+            List<User> readers = new List<User>();
+            readers.Add(user);
+            File file2 = new File(user, "NEWFILE", folderCorrectly2, readers, "This is a new file.");
+            file2.Id = 4;
+            logicFile.Add(file2);
+            Assert.AreEqual(logicFile.Get(4), file2);
+        }
+
 
     }
 }
