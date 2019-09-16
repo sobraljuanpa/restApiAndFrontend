@@ -88,5 +88,14 @@ namespace TwoDrive.Test.BusinessLogic
             Assert.AreEqual(fileReturn, fileCorrectly);
         }
 
+        [TestMethod]
+        public void getAll()
+        {
+            IEnumerable<File> filesReturn = logicFile.GetAll();
+            List<File> files  = new List<File>();
+            files.Add(fileCorrectly);
+            Assert.IsTrue(filesReturn.Equals(files));
+        }
+
     }
 }
