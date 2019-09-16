@@ -19,6 +19,9 @@ namespace TwoDrive.Test.BusinessLogic
         Folder folderRoot;
         User user;
         User user2;
+        RepositoryFileMock rFi;
+        RepositoryFolderMock rFo;
+        RepositoryUserMock rU;
 
         [TestInitialize]
         public void SetUp()
@@ -27,9 +30,9 @@ namespace TwoDrive.Test.BusinessLogic
             //      +folderCorrectly2
             //          -fileCorrectly
 
-            RepositoryFileMock rFi = new RepositoryFileMock();
-            RepositoryFolderMock rFo = new RepositoryFolderMock();
-            RepositoryUserMock rU = new RepositoryUserMock();
+            rFi = new RepositoryFileMock();
+            rFo = new RepositoryFolderMock();
+            rU = new RepositoryUserMock();
 
             user = new User("Jose", "Goñi", "JoseG", "firulais123", "josepablogoni@gmail.com", true, new List<User>(), null);
             user.Id = 1;
@@ -140,5 +143,16 @@ namespace TwoDrive.Test.BusinessLogic
             logicFile.RemoveReader(logicFile.Get(3), user2);
             Assert.IsTrue(logicFile.Get(3).Readers.Count == 1);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void MoveFileNoPermissions()
+        {
+            //Cambio la logica para poner a otro usuario en el sistema y trato de acceder a archivos que no son de el.
+            ILogic<File> logic2WithOtherUser = new LogicFile(rFi, rU, rFo, user2);
+            logicFile.Move(fileCorrectly, folderRoot);
+        }
+
+        
     }
 }
