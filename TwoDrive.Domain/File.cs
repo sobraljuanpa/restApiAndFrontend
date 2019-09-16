@@ -11,7 +11,7 @@ namespace TwoDrive.Domain
             this.CreationDate = DateTime.Now;
             this.LastModifiedDate = DateTime.Now;
             this.CreationDate = DateTime.Now;
-            this.OwnerId.Add(0);
+            this.OwnerId = 0;
             this.Name = "";
             this.Parent = null;
             this.Readers = null;
@@ -23,7 +23,7 @@ namespace TwoDrive.Domain
             this.CreationDate = DateTime.Now;
             this.LastModifiedDate = DateTime.Now;
             this.CreationDate = DateTime.Now;
-            this.OwnerId.Add(user.Id);
+            this.OwnerId = user.Id;
             this.Name = name;
             this.Parent = parent;
             this.Readers = readers;

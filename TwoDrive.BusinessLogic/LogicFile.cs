@@ -22,8 +22,12 @@ namespace TwoDrive.BusinessLogic
         public void Add(File entity)
         {
             FormatIsCorrect(entity);
+            HasThePermissions(entity.OwnerId);
             entity.LastModifiedDate = DateTime.Now;
             entity.CreationDate = DateTime.Now;
+            Folder folderBefore = entity.Parent;
+            Folder folderAfter = entity.Parent;
+            folderAfter.AddFile(entity);
             _repositoryFile.Add(entity);
         }
 
@@ -52,6 +56,7 @@ namespace TwoDrive.BusinessLogic
             FormatIsCorrect(newEntity);
             FileExist(Entity.Id);
             HasThePermissions(Entity.OwnerId);
+            HasTheSameLocation(Entity, newEntity);
             _repositoryFile.Update(Entity, newEntity);
         }
 
@@ -62,7 +67,6 @@ namespace TwoDrive.BusinessLogic
             FileAlreadyInFolder(Entity, folder);
             HasThePermissions(Entity.OwnerId);
             HasThePermissions(folder.OwnerId);
-            //Actualizar el folder donde estaba, donde esta y el archivo
             Folder folderWhereFileWas = Entity.Parent;
             Folder folderWhereIsIt = folder;
             File filePrevious = Entity;
@@ -88,21 +92,21 @@ namespace TwoDrive.BusinessLogic
             Entity.RemoveReader(user);
         }
 
+        private void HasTheSameLocation(File entity, File newEntity)
+        {
+            if(!entity.Parent.Equals(newEntity.Parent))
+                throw new Exception("Las ubicaciones no coinciden.");
+        }
+
         private void UserExist(User user)
         {
             if(_repositoryUser.Get(user.Id) == null)
                 throw new Exception("El usuario al que quiere agregar a los lectores no existe.");
         }
 
-        private void HasThePermissions(List<long> ownerId)
+        private void HasThePermissions(long ownerId)
         {
-            bool stayOwner = false;
-            foreach(long owner in ownerId)
-            {
-                if (owner == _user.Id)
-                    stayOwner = true;
-            }
-            if(!stayOwner)
+            if(_user.Id == ownerId)
                 throw new Exception("El usuario no tiene los permisos para esta accion.");
         }
 
@@ -121,7 +125,6 @@ namespace TwoDrive.BusinessLogic
         private void FormatIsCorrect(File entity)
         {
             IsNullName(entity.Name);
-            IsNullOwner(entity.OwnerId);
             IsNullParent(entity.Parent);
             IsNullReaders(entity.Readers);
             IsNullContent(entity.Content);
@@ -138,13 +141,10 @@ namespace TwoDrive.BusinessLogic
             }
         }
 
-        private void TheOwnerExist(List<long> owners)
+        private void TheOwnerExist(long owners)
         {
-            foreach (long owner in owners)
-            {
-                if (_repositoryUser.Get(owner) == null)
-                    throw new Exception("Uno de los dueños especificado no existe.");
-            }
+            if (_repositoryUser.Get(owners) == null)
+                throw new Exception("Uno de los dueños especificado no existe.");
         }
 
         private void IsNullContent(string content)
@@ -163,12 +163,6 @@ namespace TwoDrive.BusinessLogic
         {
             if (parent == null)
                 throw new Exception("No existe una carpeta padre para el archivo.");
-        }
-
-        private void IsNullOwner(List<long> ownerId)
-        {
-            if (ownerId.Count == 0)
-                throw new Exception("No se especificó ningun dueño para el archivo.");
         }
 
         private void IsNullName(string name)
