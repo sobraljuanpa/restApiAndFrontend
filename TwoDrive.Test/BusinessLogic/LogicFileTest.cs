@@ -153,6 +153,15 @@ namespace TwoDrive.Test.BusinessLogic
             logicFile.Move(fileCorrectly, folderRoot);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void GetFileNoPermissions()
+        {
+            File fileReturn = logicFile.Get(3);
+            Assert.AreEqual(fileReturn, fileCorrectly);
+        }
+
+
         
     }
 }
