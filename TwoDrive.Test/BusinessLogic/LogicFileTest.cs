@@ -185,6 +185,14 @@ namespace TwoDrive.Test.BusinessLogic
             Assert.AreEqual(logicFile.Get(4), file2);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DeleteFileNoPermissions()
+        {
+            logicFile.Delete(logicFile.Get(4));
+            logicFile.Get(4);
+        }
+
         
 
     }
