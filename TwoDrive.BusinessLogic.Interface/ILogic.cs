@@ -11,5 +11,8 @@ namespace TwoDrive.BusinessLogic.Interface
         void Add(T entity);
         void Update(T Entity, T newEntity);
         void Delete(T Entity);
+        void Move(T Entity, Folder folder);
+        void AddReader(T Entity, User user);
+        void RemoveReader(T Entity, User user);
     }
 }

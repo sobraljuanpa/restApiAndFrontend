@@ -6,7 +6,7 @@ using TwoDrive.Domain;
 
 namespace TwoDrive.BusinessLogic
 {
-    public class LogicFolder : ILogic<Folder>, ILogic2<Folder>
+    public class LogicFolder : ILogic<Folder>
     {
         public void Add(Folder entity)
         {
@@ -33,7 +33,7 @@ namespace TwoDrive.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public void Move(Folder Entity, FolderElement folder)
+        public void Move(Folder Entity, Folder folder)
         {
             throw new NotImplementedException();
         }

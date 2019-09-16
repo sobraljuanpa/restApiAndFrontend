@@ -1,35 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
 
 namespace TwoDrive.Test.Mocks
 {
-    public class RepositoryUserMock
+    public class RepositoryUserMock : IDataRepository<User>
     {
-        public bool Add(User entity)
+        List<User> users = new List<User>();
+        public void Add(User entity)
         {
-            return true;
+            users.Add(entity);
         }
 
-        public bool Delete(User entity)
+        public void Delete(User entity)
         {
-            return true;
+            users.Remove(entity);
         }
 
-        public bool Get(long id)
+        public User Get(long id)
         {
-            return true;
+            return users.Find(u => u.Id == id);
         }
 
-        public bool GetAll()
+        public IEnumerable<User> GetAll()
         {
-            return true;
+            return users;
         }
 
-        public bool Update(User dbEntity, User newEntity)
+        public void Update(User dbEntity, User newEntity)
         {
-            return true;
+            users.Remove(dbEntity);
+            users.Add(newEntity);
         }
     }
 }

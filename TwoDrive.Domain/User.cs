@@ -6,6 +6,18 @@ namespace TwoDrive.Domain
 {
     public class User
     {
+        public User()
+        {
+            this.FirstName = "";
+            this.LastName = "";
+            this.Username = "";
+            this.Password = "";
+            this.Email = "";
+            this.Administrator = false;
+            this.FriendList = new List<User>();
+            this.RootFolder = null;
+        }
+
         public User(string firstName, string lastName, string username, string password, string email, bool administrator, List<User> friendList, Folder rootFolder)
         {
             this.FirstName = firstName;

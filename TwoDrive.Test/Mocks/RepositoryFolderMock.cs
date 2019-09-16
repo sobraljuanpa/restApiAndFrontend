@@ -1,32 +1,37 @@
-﻿using TwoDrive.Domain;
+﻿using System;
+using System.Collections.Generic;
+using TwoDrive.DataAccess.Interface;
+using TwoDrive.Domain;
 
 namespace TwoDrive.Test.Mocks
 {
-    public class RepositoryFolderMock
+    public class RepositoryFolderMock : IDataRepository<Folder>
     {
-        public bool Add(Folder entity)
+        List<Folder> folders = new List<Folder>();
+        public void Add(Folder entity)
         {
-            return true;
+            folders.Add(entity);
         }
 
-        public bool Delete(Folder entity)
+        public void Delete(Folder entity)
         {
-            return true;
+            folders.Remove(entity);
         }
 
-        public bool Get(long id)
+        public Folder Get(long id)
         {
-            return true;
+            return folders.Find(f => f.Id == id);
         }
 
-        public bool GetAll()
+        public IEnumerable<Folder> GetAll()
         {
-            return true;
+            return folders;
         }
 
-        public bool Update(Folder dbEntity, Folder newEntity)
+        public void Update(Folder dbEntity, Folder newEntity)
         {
-            return true;
+            folders.Remove(dbEntity);
+            folders.Add(newEntity);
         }
     }
 }

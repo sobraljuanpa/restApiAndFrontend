@@ -13,6 +13,11 @@ namespace TwoDrive.BusinessLogic
             throw new NotImplementedException();
         }
 
+        public void AddReader(User Entity, User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(User Entity)
         {
             throw new NotImplementedException();
@@ -24,6 +29,16 @@ namespace TwoDrive.BusinessLogic
         }
 
         public IEnumerable<User> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Move(User Entity, Folder folder)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveReader(User Entity, User user)
         {
             throw new NotImplementedException();
         }

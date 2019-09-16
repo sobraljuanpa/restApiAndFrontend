@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
 
 namespace TwoDrive.BusinessLogic
 {
-    public class LogicFile : ILogic<File> , ILogic2<File>
+    public class LogicFile : ILogic<File>
     {
         IDataRepository<File> _repositoryFile;
         IDataRepository<User> _repositoryUser;
@@ -56,13 +55,23 @@ namespace TwoDrive.BusinessLogic
             _repositoryFile.Update(Entity, newEntity);
         }
 
-        public void Move(File Entity, FolderElement folder)
+        public void Move(File Entity, Folder folder)
         {
             FileExist(Entity.Id);
             FolderExist(folder.Id);
             FileAlreadyInFolder(Entity, folder);
             HasThePermissions(Entity.OwnerId);
             HasThePermissions(folder.OwnerId);
+            //Actualizar el folder donde estaba, donde esta y el archivo
+            Folder folderWhereFileWas = Entity.Parent;
+            Folder folderWhereIsIt = folder;
+            File filePrevious = Entity;
+            Entity.Parent.RemoveFile(Entity);
+            _repositoryFolder.Update(folderWhereFileWas, Entity.Parent);
+            Entity.Parent = folder;
+            folder.AddFile(Entity);
+            _repositoryFile.Update(filePrevious,Entity);
+            _repositoryFolder.Update(folderWhereIsIt,folder);
         }
 
         public void AddReader(File Entity, User user)

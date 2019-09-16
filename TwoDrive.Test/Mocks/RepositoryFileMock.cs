@@ -5,31 +5,33 @@ using TwoDrive.Domain;
 
 namespace TwoDrive.Test.Mocks
 {
-    public class RepositoryFileMock
+    public class RepositoryFileMock : IDataRepository<File>
     {
-        public bool Add(File entity)
+        List<File> files = new List<File>();
+        public void Add(File entity)
         {
-            return true;
+            files.Add(entity);
         }
 
-        public bool Delete(File entity)
+        public void Delete(File entity)
         {
-            return true;
+            files.Remove(entity);
         }
 
-        public bool Get(long id)
+        public File Get(long id)
         {
-            return true;
+            return files.Find(f => f.Id == id);
         }
 
-        public bool GetAll()
+        public IEnumerable<File> GetAll()
         {
-            return true;
+            return files;
         }
 
-        public bool Update(File dbEntity, File newEntity)
+        public void Update(File dbEntity, File newEntity)
         {
-            return true;
+            files.Remove(dbEntity);
+            files.Add(newEntity);
         }
     }
 }

@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TwoDrive.BusinessLogic.Interface\TwoDrive.BusinessLogic.Interface.csproj" />
+    <ProjectReference Include="..\TwoDrive.BusinessLogic\TwoDrive.BusinessLogic.csproj" />
+    <ProjectReference Include="..\TwoDrive.DataAcces.Interfacee\TwoDrive.DataAcces.Interface.csproj" />
     <ProjectReference Include="..\TwoDrive.Domain\TwoDrive.Domain.csproj" />
   </ItemGroup>
 

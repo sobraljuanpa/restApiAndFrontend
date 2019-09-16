@@ -13,6 +13,17 @@ namespace TwoDrive.Domain
             this.Readers = readers;
             this.OwnerId.Add(user.Id);
         }
+
+        public Folder()
+        {
+            this.Files = null;
+            this.Folders = null;
+            this.Name = "";
+            this.Parent = null;
+            this.Readers = null;
+            this.OwnerId.Add(0);
+        }
+
         public List<File> Files { get; set; }
 
         public List<Folder> Folders { get; set; }
