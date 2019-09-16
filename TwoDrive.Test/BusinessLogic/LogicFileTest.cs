@@ -193,6 +193,14 @@ namespace TwoDrive.Test.BusinessLogic
             logicFile.Get(4);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void AddReadersNoPermissions()
+        {
+            logicFile.AddReader(logicFile.Get(3), user2);
+            Assert.IsTrue(logicFile.Get(3).Readers.Count == 2);
+        }
+
         
 
     }
