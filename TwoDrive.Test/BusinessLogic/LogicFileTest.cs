@@ -40,6 +40,7 @@ namespace TwoDrive.Test.BusinessLogic
             folderCorrectly2.Parent = folderRoot;
             fileCorrectly = new File(user, "file1", folderCorrectly2, new List<User>(), "Este es un archivo.");
             fileCorrectly.Readers.Add(user);
+            fileCorrectly.Id = 3;
             folderCorrectly2.Files.Add(fileCorrectly);
             user.RootFolder = folderRoot;
             folderRoot.Folders.Add(folderCorrectly2);
@@ -72,6 +73,15 @@ namespace TwoDrive.Test.BusinessLogic
             logicFile.Move(fileCorrectly, folderRoot);
             Assert.IsTrue(folderRoot.Files.Contains(fileCorrectly));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void getFileNotExist()
+        {
+            logicFile.Get(10);
+        }
+
+        
 
     }
 }
