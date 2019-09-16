@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using TwoDrive.DataAccess;
+using TwoDrive.DataAccess.Interface;
 
 namespace TwoDrive.WebApi.Migrations
 {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 
-namespace TwoDrive.DataAccess
+namespace TwoDrive.DataAccess.Interface
 {
     public interface IDataRepository<T>
     {

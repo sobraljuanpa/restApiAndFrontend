@@ -6,6 +6,18 @@ namespace TwoDrive.Domain
 {
     public class User
     {
+        public User(string firstName, string lastName, string username, string password, string email, bool administrator, List<User> friendList, Folder rootFolder)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Username = username;
+            this.Password = password;
+            this.Email = email;
+            this.Administrator = administrator;
+            this.FriendList = friendList;
+            this.RootFolder = rootFolder;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }

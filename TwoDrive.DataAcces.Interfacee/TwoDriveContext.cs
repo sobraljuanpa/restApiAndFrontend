@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TwoDrive.Domain;
 
-namespace TwoDrive.DataAccess
+namespace TwoDrive.DataAccess.Interface
 {
     public class TwoDriveContext : DbContext
     {

@@ -12,7 +12,7 @@ namespace TwoDrive.Domain
         public long Id { get; set; }
 
         [ForeignKey("User")]
-        public long OwnerId { get; set; }
+        public List<long> OwnerId { get; set; }
 
         public string Name { get; set; }
 
