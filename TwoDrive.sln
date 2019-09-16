@@ -1,17 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDrive.WebApi", "TwoDrive.WebApi\TwoDrive.WebApi.csproj", "{1E356FC3-49C8-4710-8F4F-4EAD0A6D6CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoDrive.WebApi", "TwoDrive.WebApi\TwoDrive.WebApi.csproj", "{1E356FC3-49C8-4710-8F4F-4EAD0A6D6CB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDrive.Test", "TwoDrive.Test\TwoDrive.Test.csproj", "{7E940FCB-D7D0-4713-9C15-11D92C9A3B6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoDrive.Test", "TwoDrive.Test\TwoDrive.Test.csproj", "{7E940FCB-D7D0-4713-9C15-11D92C9A3B6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDrive.Domain", "TwoDrive.Domain\TwoDrive.Domain.csproj", "{B3920D7B-6F12-4DB9-90FA-6749ED0EDCD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoDrive.Domain", "TwoDrive.Domain\TwoDrive.Domain.csproj", "{B3920D7B-6F12-4DB9-90FA-6749ED0EDCD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDrive.DataAccess", "TwoDrive.DataAccess\TwoDrive.DataAccess.csproj", "{6087B503-3C10-4B48-8574-43F8CC5AD46C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoDrive.DataAccess", "TwoDrive.DataAccess\TwoDrive.DataAccess.csproj", "{6087B503-3C10-4B48-8574-43F8CC5AD46C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDrive.BusinessLogic", "TwoDrive.BusinessLogic\TwoDrive.BusinessLogic.csproj", "{6DD10661-AB3A-41D9-8585-E63D1C510C82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoDrive.BusinessLogic", "TwoDrive.BusinessLogic\TwoDrive.BusinessLogic.csproj", "{6DD10661-AB3A-41D9-8585-E63D1C510C82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDrive.BusinessLogic.Interface", "TwoDrive.BusinessLogic.Interface\TwoDrive.BusinessLogic.Interface.csproj", "{7B7219E7-280A-4E50-BDA2-912D2A52E90E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDrive.DataAccess.Interface", "TwoDrive.DataAccess.Interface\TwoDrive.DataAccess.Interface.csproj", "{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1E356FC3-49C8-4710-8F4F-4EAD0A6D6CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,5 +87,35 @@ Global
 		{6DD10661-AB3A-41D9-8585-E63D1C510C82}.Release|x64.Build.0 = Release|Any CPU
 		{6DD10661-AB3A-41D9-8585-E63D1C510C82}.Release|x86.ActiveCfg = Release|Any CPU
 		{6DD10661-AB3A-41D9-8585-E63D1C510C82}.Release|x86.Build.0 = Release|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Debug|x64.Build.0 = Debug|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Debug|x86.Build.0 = Debug|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Release|x64.ActiveCfg = Release|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Release|x64.Build.0 = Release|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Release|x86.ActiveCfg = Release|Any CPU
+		{7B7219E7-280A-4E50-BDA2-912D2A52E90E}.Release|x86.Build.0 = Release|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Debug|x64.Build.0 = Debug|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Debug|x86.Build.0 = Debug|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Release|x64.ActiveCfg = Release|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Release|x64.Build.0 = Release|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A6EC11F-6083-483A-A17C-1C0237E9DFAD}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C7FD8B9-E593-4DE0-AD0A-EAE45B94A788}
 	EndGlobalSection
 EndGlobal

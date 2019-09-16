@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using TwoDrive.DataAccess;
+using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.Domain;
 
 namespace TwoDrive.WebApi.Controllers
@@ -13,18 +10,18 @@ namespace TwoDrive.WebApi.Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly IDataRepository<User> _userRepository;
+        private readonly ILogic<User> _userLogic;
 
-        public UserController(IDataRepository<User> userRepository)
+        public UserController(ILogic<User> userLogic)
         {
-            _userRepository = userRepository;
+            _userLogic = userLogic;
         }
 
         //GET: /api/users
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<User> users = _userRepository.GetAll();
+            IEnumerable<User> users = _userLogic.GetAll();
             return Ok(users);
         }
 
@@ -32,7 +29,7 @@ namespace TwoDrive.WebApi.Controllers
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(long id)
         {
-            User user = _userRepository.Get(id);
+            User user = _userLogic.Get(id);
 
             if(user == null)
             {
@@ -51,7 +48,7 @@ namespace TwoDrive.WebApi.Controllers
                 return BadRequest("User is null.");
             }
 
-            _userRepository.Add(user);
+            _userLogic.Add(user);
             return CreatedAtRoute("Get", new { Id = user.Id }, user);
         }
 
@@ -64,13 +61,13 @@ namespace TwoDrive.WebApi.Controllers
                 return BadRequest("User is null.");
             }
 
-            User toUpdate = _userRepository.Get(id);
+            User toUpdate = _userLogic.Get(id);
             if(toUpdate == null)
             {
                 return NotFound("Provided id does not match any users.");
             }
 
-            _userRepository.Update(toUpdate, user);
+            _userLogic.Update(toUpdate, user);
             return NoContent();
         }
 
@@ -78,13 +75,13 @@ namespace TwoDrive.WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            User user = _userRepository.Get(id);
+            User user = _userLogic.Get(id);
             if(user == null)
             {
                 return NotFound("Provided id does not match any users.");
             }
 
-            _userRepository.Delete(user);
+            _userLogic.Delete(user);
             return NoContent();
         }
     }

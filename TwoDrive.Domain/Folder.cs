@@ -4,7 +4,6 @@ namespace TwoDrive.Domain
 {
     public class Folder : FolderElement
     {
-
         public List<File> Files { get; set; }
 
         public List<Folder> Folders { get; set; }

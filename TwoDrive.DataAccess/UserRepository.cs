@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-
-using TwoDrive.DataAccess;
+using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
 
 namespace TwoDrive.BusinessLogic
