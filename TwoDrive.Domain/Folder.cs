@@ -4,6 +4,25 @@ namespace TwoDrive.Domain
 {
     public class Folder : FolderElement
     {
+       public Folder(User user, string name, Folder parent, List<User> readers, List<File> files, List<Folder> folders)
+        {
+            this.Files = files;
+            this.Folders = folders;
+            this.Name = name;
+            this.Parent = parent;
+            this.Readers = readers;
+            this.OwnerId = user.Id;
+        }
+
+        public Folder()
+        {
+            this.Files = null;
+            this.Folders = null;
+            this.Name = "";
+            this.Parent = null;
+            this.Readers = null;
+            this.OwnerId = 0;
+        }
 
         public List<File> Files { get; set; }
 
