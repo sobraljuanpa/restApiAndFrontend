@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.Domain;
 using TwoDrive.BusinessLogic;
 using TwoDrive.Test.Mocks;
@@ -11,7 +10,7 @@ namespace TwoDrive.Test.BusinessLogic
     [TestClass]
     public class LogicFileTest
     {
-        ILogic<File> logicFile;
+        FileLogic logicFile;
         File fileNull;
         File fileCorrectly;
         Folder folderNull;
@@ -60,20 +59,20 @@ namespace TwoDrive.Test.BusinessLogic
             rU.Add(user);
             rU.Add(user2);
 
-            logicFile = new FileLogic(rFi, rU, rFo, user);
+            logicFile = new FileLogic(rFi,rFo,rU);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void AddFileNullToRoot()
         {
-            logicFile.Move(fileNull, folderRoot);
+            logicFile.Move(fileNull.Id, folderRoot.Id);
         }
 
         [TestMethod]
         public void MoveFileToRootCorrectly()
         {
-            logicFile.Move(fileCorrectly, folderRoot);
+            logicFile.Move(fileCorrectly.Id, folderRoot.Id);
             Assert.IsTrue(folderRoot.Files.Contains(fileCorrectly));
         }
 
@@ -149,8 +148,8 @@ namespace TwoDrive.Test.BusinessLogic
         public void MoveFileNoPermissions()
         {
             //Cambio la logica para poner a otro usuario en el sistema y trato de acceder a archivos que no son de el.
-            ILogic<File> logic2WithOtherUser = new FileLogic(rFi, rU, rFo, user2);
-            logicFile.Move(fileCorrectly, folderRoot);
+            FileLogic logic2WithOtherUser = new FileLogic(rFi, rFo, rU);
+            logicFile.Move(fileCorrectly.Id, folderRoot.Id);
         }
 
         [TestMethod]

@@ -6,67 +6,44 @@ using TwoDrive.Domain;
 
 namespace TwoDrive.BusinessLogic
 {
-    public class FileLogic : ILogic<File>
+    public class FileLogic : FolderElementLogic<File>
     {
-        IDataRepository<File> _fileRepository;
-        IDataRepository<User> _userRepository;
         IDataRepository<Folder> _folderRepository;
-        User _user;
-        public FileLogic(IDataRepository<File> fileRepository, IDataRepository<User> userRepository, IDataRepository<Folder> folderRepository, User user)
+
+        public FileLogic(IDataRepository<File> repository, IDataRepository<Folder> folderRepository, IDataRepository<User> userRepository)
         {
-            _fileRepository = fileRepository;
-            _userRepository = userRepository;
+            base._repository = repository;
+            base._userRepository = userRepository;
             _folderRepository = folderRepository;
-            _user = user;
         }
+
         public void Add(File entity)
         {
             ValidateFormat(entity);
-            UserHasPermissions(entity.OwnerId);
             entity.LastModifiedDate = DateTime.Now;
             entity.CreationDate = DateTime.Now;
             Folder folderBefore = entity.Parent;
             Folder folderAfter = entity.Parent;
             folderAfter.AddFile(entity);
-            _fileRepository.Add(entity);
-        }
-
-        public void Delete(File Entity)
-        {
-            FileExists(Entity.Id);
-            UserHasPermissions(Entity.OwnerId);
-            _fileRepository.Delete(Entity);
-        }
-
-        public File Get(long id)
-        {
-            FileExists(id);
-            UserHasPermissions(_fileRepository.Get(id).OwnerId);
-            return _fileRepository.Get(id);
-        }
-
-        public IEnumerable<File> GetAll()
-        {
-            return _fileRepository.GetAll();
+            _folderRepository.Update(folderBefore, folderAfter);
+            _repository.Add(entity);
         }
 
         public void Update(File Entity, File newEntity)
         {
             newEntity.LastModifiedDate = DateTime.Now;
             ValidateFormat(newEntity);
-            FileExists(Entity.Id);
-            UserHasPermissions(Entity.OwnerId);
+            FolderElementExists(Entity.Id);
             HasTheSameLocation(Entity, newEntity);
-            _fileRepository.Update(Entity, newEntity);
+            _repository.Update(Entity, newEntity);
         }
-
-        public void Move(File Entity, Folder folder)
+        public void Move(long EntityId, long folderId)
         {
-            FileExists(Entity.Id);
-            FolderExists(folder.Id);
-            FileAlreadyInFolder(Entity, folder);
-            UserHasPermissions(Entity.OwnerId);
-            UserHasPermissions(folder.OwnerId);
+            File Entity = _repository.Get(EntityId);
+            Folder folder = _folderRepository.Get(folderId);
+            FolderElementExists(Entity.Id);
+            FolderElementExists(folder.Id);
+            AlreadyInFolder(Entity, folder);
             Folder folderWhereFileWas = Entity.Parent;
             Folder folderWhereIsIt = folder;
             File filePrevious = Entity;
@@ -74,52 +51,8 @@ namespace TwoDrive.BusinessLogic
             _folderRepository.Update(folderWhereFileWas, Entity.Parent);
             Entity.Parent = folder;
             folder.AddFile(Entity);
-            _fileRepository.Update(filePrevious,Entity);
-            _folderRepository.Update(folderWhereIsIt,folder);
-        }
-
-        public void AddReader(File Entity, User user)
-        {
-            UserHasPermissions(Entity.OwnerId);
-            FolderExists(user);
-            Entity.AddReader(user);
-        }
-
-        public void RemoveReader(File Entity, User user)
-        {
-            UserHasPermissions(Entity.OwnerId);
-            FolderExists(user);
-            Entity.RemoveReader(user);
-        }
-
-        private void HasTheSameLocation(File entity, File newEntity)
-        {
-            if(!entity.Parent.Equals(newEntity.Parent))
-                throw new Exception("Las ubicaciones no coinciden.");
-        }
-
-        private void FolderExists(User user)
-        {
-            if(_userRepository.Get(user.Id) == null)
-                throw new Exception("El usuario al que quiere agregar a los lectores no existe.");
-        }
-
-        private void UserHasPermissions(long ownerId)
-        {
-            if(_user.Id == ownerId)
-                throw new Exception("El usuario no tiene los permisos para esta accion.");
-        }
-
-        private void FileAlreadyInFolder(File entity, FolderElement folder)
-        {
-            if(entity.Parent.Equals(folder))
-                throw new Exception("El archivo ya esta en esa carpeta.");
-        }
-
-        private void FolderExists(long id)
-        {
-            if(_folderRepository.Get(id) == null)
-                throw new Exception("La carpeta no existe.");
+            _repository.Update(filePrevious, Entity);
+            _folderRepository.Update(folderWhereIsIt, folder);
         }
 
         private void ValidateFormat(File entity)
@@ -132,49 +65,10 @@ namespace TwoDrive.BusinessLogic
             ReadersExist(entity.Readers);
         }
 
-        private void ReadersExist(List<User> readers)
-        {
-            foreach(User reader in readers)
-            {
-                if (_userRepository.Get(reader.Id) == null)
-                    throw new Exception("Uno de los lectores especificados no existe.");
-            }
-        }
-
-        private void OwnerExists(long owners)
-        {
-            if (_userRepository.Get(owners) == null)
-                throw new Exception("Uno de los dueños especificado no existe.");
-        }
-
         private void ContentIsNull(string content)
         {
             if (content == "")
                 throw new Exception("El archivo no contiene nada.");
-        }
-
-        private void ReadersIsNull(List<User> readers)
-        {
-            if (readers.Count == 0)
-                throw new Exception("El archivo no tiene ningun lector.");
-        }
-
-        private void ParentIsNull(Folder parent)
-        {
-            if (parent == null)
-                throw new Exception("No existe una carpeta padre para el archivo.");
-        }
-
-        private void NameIsNull(string name)
-        {
-            if(name == "")
-                throw new Exception("El nombre del archivo está vacio.");
-        }
-
-        private void FileExists(long id)
-        {
-            if(_fileRepository.Get(id) == null)
-                throw new Exception("El archivo no existe.");
         }
     }
 }

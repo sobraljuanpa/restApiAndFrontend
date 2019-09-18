@@ -8,8 +8,8 @@ namespace TwoDrive.BusinessLogic.Interface
 {
     public abstract class FolderElementLogic<T> where T : FolderElement
     {
-        IDataRepository<T> _repository;
-        IDataRepository<T> _userRepository;
+        protected IDataRepository<T> _repository;
+        protected IDataRepository<User> _userRepository;
 
         public T Get(long id)
         {
@@ -27,14 +27,16 @@ namespace TwoDrive.BusinessLogic.Interface
             return _repository.GetAll();
         }
 
-        public void AddReader(File Entity, User user)
+        public void AddReader(T Entity, long userId)
         {
+            User user = _userRepository.Get(userId);
             UserExist(user.Id);
             Entity.AddReader(user);
         }
 
-        public void RemoveReader(File Entity, User user)
+        public void RemoveReader(T Entity, long userId)
         {
+            User user = _userRepository.Get(userId);
             UserExist(user.Id);
             Entity.RemoveReader(user);
         }
