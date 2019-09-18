@@ -6,7 +6,7 @@ using TwoDrive.Domain;
 
 namespace TwoDrive.BusinessLogic
 {
-    public class LogicFolder : ILogic<Folder>
+    public class FolderLogic : ILogic<Folder>
     {
         public void Add(Folder entity)
         {

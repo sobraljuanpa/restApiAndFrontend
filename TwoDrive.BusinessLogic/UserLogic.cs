@@ -6,7 +6,7 @@ using TwoDrive.Domain;
 
 namespace TwoDrive.BusinessLogic
 {
-    public class LogicUser : ILogic<User>
+    public class UserLogic : ILogic<User>
     {
         public void Add(User entity)
         {
