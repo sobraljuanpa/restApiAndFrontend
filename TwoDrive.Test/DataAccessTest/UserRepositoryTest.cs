@@ -46,13 +46,52 @@ namespace TwoDrive.Test.DataAccessTest
         [TestMethod]
         public void GetAllTest()
         {
-            
-
             var users = userRepository.GetAll();
 
             Assert.AreEqual("Pedro", users.ToList()[1].FirstName);
         }
 
+        [TestMethod]
+        public void GetByIdTest()
+        {
+            var user = userRepository.Get(1);
+
+            Assert.AreEqual("Juan", user.FirstName);
+        }
+
+        [TestMethod]
+        public void AddUserTest()
+        {
+            var auxUser = new User { FirstName = "Pepe", Id = 3};
+
+            userRepository.Add(auxUser);
+
+            mockSet.Verify(v => v.Add(It.IsAny<User>()), Times.Once());
+            mockContext.Verify(e => e.SaveChanges(), Times.Once());
+        }
+
+        [TestMethod]
+        public void UpdateUserTest()
+        {
+            var auxUser = new User { FirstName = "NoJuan", Id = 1 };
+            var user = userRepository.Get(1);
+
+            userRepository.Update(user, auxUser);
+            var modifiedUser = userRepository.Get(1);
+
+            mockContext.Verify(e => e.SaveChanges(), Times.Once());
+            Assert.AreEqual("NoJuan", modifiedUser.FirstName);
+        }
+
+        [TestMethod]
+        public void DeleteUserTest()
+        {
+            var auxPedro = new User { Administrator = true, Email = "asd@asd.asd", FirstName = "Pedro", LastName = "Marsicano", FriendList = new List<User>(), Id = 2, Password = "123asd", RootFolder = new Folder(), Username = "papap" };
+
+            userRepository.Delete(auxPedro);
+
+            mockContext.Verify(e => e.SaveChanges(), Times.Once());
+        }
 
     }
 }
