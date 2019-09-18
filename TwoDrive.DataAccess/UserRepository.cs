@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TwoDrive.Domain;
 using TwoDrive.DataAccess.Interface;
 
-namespace TwoDrive.BusinessLogic
+namespace TwoDrive.DataAccess
 {
     public class UserRepository : IDataRepository<User>
     {
