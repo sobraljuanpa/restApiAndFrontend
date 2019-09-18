@@ -28,6 +28,7 @@ namespace TwoDrive.DataAccess
         public void Add(Folder folder)
         {
             _context.Folders.Add(folder);
+            _context.SaveChanges();
         }
 
         public void Update(Folder oldFolder, Folder newFolder)

@@ -10,6 +10,11 @@ namespace TwoDrive.DataAccess
     {
         readonly TwoDriveContext _context;
 
+        public FileRepository(TwoDriveContext context)
+        {
+            _context = context;
+        }
+
         public IEnumerable<File> GetAll()
         {
             return _context.Files.ToList();

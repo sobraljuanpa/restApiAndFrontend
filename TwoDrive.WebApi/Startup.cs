@@ -27,6 +27,8 @@ namespace TwoDrive.WebApi
                     Configuration["ConnectionString:TwoDriveDB"],
                     b => b.MigrationsAssembly("TwoDrive.WebApi")));
             services.AddScoped<IDataRepository<User>, UserRepository>();
+            services.AddScoped<IDataRepository<Folder>, FolderRepository>();
+            services.AddScoped<IDataRepository<File>, FileRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
