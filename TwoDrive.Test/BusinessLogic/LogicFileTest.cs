@@ -34,14 +34,14 @@ namespace TwoDrive.Test.BusinessLogic
             rFo = new RepositoryFolderMock();
             rU = new RepositoryUserMock();
 
-            user = new User("Jose", "Goñi", "JoseG", "firulais123", "josepablogoni@gmail.com", true, new List<User>(), null);
+            user = new User { FirstName = "Jose", LastName = "Goñi", Username = "JoseG", Password = "firulais123", Email = "josepablogoni@gmail.com", Administrator = true, FriendList = new List<User>(), RootFolder = null };
             user.Id = 1;
-            folderRoot = new Folder(user, "ROOT", null, new List<User>(), new List<File>(), new List<Folder>());
+            folderRoot = new Folder { OwnerId = user.Id, Name = "ROOT", Parent = null, Readers = new List<User>(), Files = new List<File>(), Folders = new List<Folder>() };
             folderRoot.Parent = folderRoot;
             folderRoot.Readers.Add(user);
-            folderCorrectly2 = new Folder(user, "Folder1", null, new List<User>(), new List<File>(), new List<Folder>());
+            folderCorrectly2 = new Folder { OwnerId = user.Id, Name = "Folder1", Parent = null, Readers = new List<User>(), Files = new List<File>(), Folders = new List<Folder>() };
             folderCorrectly2.Parent = folderRoot;
-            fileCorrectly = new File(user, "file1", folderCorrectly2, new List<User>(), "Este es un archivo.");
+            fileCorrectly = new File { OwnerId = user.Id, Name = "file1", Parent = folderCorrectly2, Readers = new List<User>(), Content = "Este es un archivo." };
             fileCorrectly.Readers.Add(user);
             fileCorrectly.Id = 3;
             folderCorrectly2.Files.Add(fileCorrectly);
@@ -50,7 +50,7 @@ namespace TwoDrive.Test.BusinessLogic
 
             fileNull = new File();
             folderNull = new Folder();
-            user2 = new User("Juanpa", "Sobral", "JuanpaS", "firulais123", "junapasobral@gmail.com", false, new List<User>(), null);
+            user2 = new User { FirstName = "Juanpa", LastName = "Sobral", Username = "JuanpaS", Password = "firulais123", Email = "junapasobral@gmail.com", Administrator = false, FriendList = new List<User>(), RootFolder = null };
             user.Id = 2;
             
             rFi.Add(fileCorrectly);
@@ -60,7 +60,7 @@ namespace TwoDrive.Test.BusinessLogic
             rU.Add(user);
             rU.Add(user2);
 
-            logicFile = new LogicFile(rFi, rU, rFo, user);
+            logicFile = new FileLogic(rFi, rU, rFo, user);
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace TwoDrive.Test.BusinessLogic
         {
             List<User> readers = new List<User>();
             readers.Add(user);
-            File file2 = new File(user, "NEWFILE", folderCorrectly2, readers, "This is a new file.");
+            File file2 = new File { OwnerId = user.Id, Name = "NEWFILE", Parent = folderCorrectly2, Readers = readers, Content = "This is a new file." };
             file2.Id = 4;
             logicFile.Add(file2);
             Assert.AreEqual(logicFile.Get(4), file2);
@@ -116,7 +116,7 @@ namespace TwoDrive.Test.BusinessLogic
         {
             List<User> readers = new List<User>();
             readers.Add(user);
-            File file2 = new File(user, "NEWFILE", folderCorrectly2, readers, "This is a new file.");
+            File file2 = new File { OwnerId = user.Id, Name = "NEWFILE", Parent = folderCorrectly2, Readers = readers, Content = "This is a new file." };
             file2.Id = 4;
             logicFile.Add(file2);
             Assert.AreEqual(logicFile.Get(4), file2);
@@ -149,7 +149,7 @@ namespace TwoDrive.Test.BusinessLogic
         public void MoveFileNoPermissions()
         {
             //Cambio la logica para poner a otro usuario en el sistema y trato de acceder a archivos que no son de el.
-            ILogic<File> logic2WithOtherUser = new LogicFile(rFi, rU, rFo, user2);
+            ILogic<File> logic2WithOtherUser = new FileLogic(rFi, rU, rFo, user2);
             logicFile.Move(fileCorrectly, folderRoot);
         }
 
@@ -167,7 +167,7 @@ namespace TwoDrive.Test.BusinessLogic
         {
             List<User> readers = new List<User>();
             readers.Add(user);
-            File file2 = new File(user, "NEWFILE", folderCorrectly2, readers, "This is a new file.");
+            File file2 = new File { OwnerId = user.Id, Name = "NEWFILE", Parent = folderCorrectly2, Readers = readers, Content = "This is a new file." };
             file2.Id = 4;
             logicFile.Add(file2);
             Assert.AreEqual(logicFile.Get(4), file2);
@@ -179,7 +179,7 @@ namespace TwoDrive.Test.BusinessLogic
         {
             List<User> readers = new List<User>();
             readers.Add(user);
-            File file2 = new File(user, "NEWFILE", folderCorrectly2, readers, "This is a new file.");
+            File file2 = new File { OwnerId = user.Id, Name = "NEWFILE", Parent = folderCorrectly2, Readers = readers, Content = "This is a new file." };
             file2.Id = 4;
             logicFile.Add(file2);
             Assert.AreEqual(logicFile.Get(4), file2);
