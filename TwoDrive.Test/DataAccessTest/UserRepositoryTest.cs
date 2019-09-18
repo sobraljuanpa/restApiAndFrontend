@@ -16,6 +16,7 @@ namespace TwoDrive.Test.DataAccessTest
         UserRepository userRepository;
         Mock<DbSet<User>> mockSet;
         Mock<TwoDriveContext> mockContext;
+        DbContextOptions<TwoDriveContext> DbOptions;
 
         [TestInitialize]
         public void SetUp()
@@ -35,7 +36,8 @@ namespace TwoDrive.Test.DataAccessTest
             mockSet.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(pk => data.FirstOrDefault(d => d.Id == (int)pk[0]));
 
             //mockeo contexto y lo hago apuntar al mock de mi db
-            mockContext = new Mock<TwoDriveContext>();
+            DbOptions = new DbContextOptions<TwoDriveContext>();
+            mockContext = new Mock<TwoDriveContext>(DbOptions);
             mockContext.Setup(v => v.Users).Returns(mockSet.Object);
 
             userRepository = new UserRepository(mockContext.Object);
