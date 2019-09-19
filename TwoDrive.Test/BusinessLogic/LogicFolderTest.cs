@@ -46,6 +46,7 @@ namespace TwoDrive.Test.BusinessLogic
             folderCorrectly2.Files.Add(fileCorrectly);
             user.RootFolder = folderRoot;
             folderRoot.Folders.Add(folderCorrectly2);
+            folderNull = new Folder();
 
             fileNull = new File();
             folderNull = new Folder();
@@ -66,9 +67,18 @@ namespace TwoDrive.Test.BusinessLogic
         [ExpectedException(typeof(Exception))]
         public void AddFolderNullToRoot()
         {
-            logicFolder.Move(fileNull.Id, folderRoot.Id);
+            logicFolder.Move(folderNull.Id, folderRoot.Id);
         }
 
-      
+        [TestMethod]
+        public void MoveFileToRootCorrectly()
+        {
+            logicFolder.Move(folderCorrectly2.Id, folderRoot.Id);
+            Assert.IsTrue(folderRoot.Files.Contains(fileCorrectly));
+        }
+
+        
+
+
     }
 }
