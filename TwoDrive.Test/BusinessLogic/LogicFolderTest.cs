@@ -129,5 +129,18 @@ namespace TwoDrive.Test.BusinessLogic
             logicFolder.Delete(logicFolder.Get(4));
             logicFolder.Get(4);
         }
+        [TestMethod]
+        public void AddReaders()
+        {
+            logicFolder.AddReader(logicFolder.Get(3), user2.Id);
+            Assert.IsTrue(logicFolder.Get(3).Readers.Count == 2);
+        }
+
+        [TestMethod]
+        public void RemoveReaders()
+        {
+            logicFolder.RemoveReader(logicFolder.Get(3), user2.Id);
+            Assert.IsTrue(logicFolder.Get(3).Readers.Count == 1);
+        }
     }
 }
