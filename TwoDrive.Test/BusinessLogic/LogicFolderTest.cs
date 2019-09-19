@@ -90,5 +90,14 @@ namespace TwoDrive.Test.BusinessLogic
             Folder folderReturn = logicFolder.Get(3);
             Assert.AreEqual(folderReturn, folderCorrectly2);
         }
+        [TestMethod]
+        public void GetAll()
+        {
+            IEnumerable<Folder> foldersReturn = logicFolder.GetAll();
+            List<Folder> folders = new List<Folder>();
+            folders.Add(folderCorrectly2);
+            folders.Add(folderRoot);
+            Assert.IsTrue(foldersReturn.Equals(folders));
+        }
     }
 }
