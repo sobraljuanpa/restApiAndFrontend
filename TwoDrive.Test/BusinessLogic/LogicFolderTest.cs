@@ -40,6 +40,7 @@ namespace TwoDrive.Test.BusinessLogic
             folderRoot.Readers.Add(user);
             folderCorrectly2 = new Folder { OwnerId = user.Id, Name = "Folder1", Parent = null, Readers = new List<User>(), Files = new List<File>(), Folders = new List<Folder>() };
             folderCorrectly2.Parent = folderRoot;
+            folderCorrectly2.Id = 3;
             fileCorrectly = new File { OwnerId = user.Id, Name = "file1", Parent = folderCorrectly2, Readers = new List<User>(), Content = "Este es un archivo." };
             fileCorrectly.Readers.Add(user);
             fileCorrectly.Id = 3;
@@ -83,11 +84,11 @@ namespace TwoDrive.Test.BusinessLogic
         {
             logicFolder.Get(10);
         }
-
-        
-
-
-
-
+        [TestMethod]
+        public void GetFolder()
+        {
+            Folder folderReturn = logicFolder.Get(3);
+            Assert.AreEqual(folderReturn, folderCorrectly2);
+        }
     }
 }
