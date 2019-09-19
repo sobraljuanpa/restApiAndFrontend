@@ -99,5 +99,16 @@ namespace TwoDrive.Test.BusinessLogic
             folders.Add(folderRoot);
             Assert.IsTrue(foldersReturn.Equals(folders));
         }
+
+        [TestMethod]
+        public void AddFolder()
+        {
+            List<User> readers = new List<User>();
+            readers.Add(user);
+            Folder folder2 = new Folder { OwnerId = user.Id, Name = "NEWFOLDER", Parent = folderRoot, Readers = readers, Files = new List<File>(), Folders = new List<Folder>() };
+            folder2.Id = 4;
+            logicFolder.Add(folder2);
+            Assert.AreEqual(logicFolder.Get(4), folder2);
+        }
     }
 }
