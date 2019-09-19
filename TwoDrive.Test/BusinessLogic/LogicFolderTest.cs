@@ -71,13 +71,22 @@ namespace TwoDrive.Test.BusinessLogic
         }
 
         [TestMethod]
-        public void MoveFileToRootCorrectly()
+        public void MoveFolderToRootCorrectly()
         {
             logicFolder.Move(folderCorrectly2.Id, folderRoot.Id);
             Assert.IsTrue(folderRoot.Files.Contains(fileCorrectly));
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void GetFolderNotExist()
+        {
+            logicFolder.Get(10);
+        }
+
         
+
+
 
 
     }
