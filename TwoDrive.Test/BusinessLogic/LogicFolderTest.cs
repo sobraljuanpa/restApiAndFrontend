@@ -8,9 +8,9 @@ using System;
 namespace TwoDrive.Test.BusinessLogic
 {
     [TestClass]
-    public class LogicFileTest
+    public class LogicFolderTest
     {
-        FileLogic logicFile;
+        FolderLogic logicFolder;
         File fileNull;
         File fileCorrectly;
         Folder folderNull;
@@ -51,7 +51,7 @@ namespace TwoDrive.Test.BusinessLogic
             folderNull = new Folder();
             user2 = new User { FirstName = "Juanpa", LastName = "Sobral", Username = "JuanpaS", Password = "firulais123", Email = "junapasobral@gmail.com", Administrator = false, FriendList = new List<User>(), RootFolder = null };
             user.Id = 2;
-            
+
             rFi.Add(fileCorrectly);
             rFi.Add(fileNull);
             rFo.Add(folderRoot);
@@ -59,88 +59,16 @@ namespace TwoDrive.Test.BusinessLogic
             rU.Add(user);
             rU.Add(user2);
 
-            logicFile = new FileLogic(rFi,rFo,rU);
+            logicFolder = new FolderLogic(rFo, rU);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void AddFileNullToRoot()
+        public void AddFolderNullToRoot()
         {
-            logicFile.Move(fileNull.Id, folderRoot.Id);
+            logicFolder.Move(fileNull.Id, folderRoot.Id);
         }
 
-        [TestMethod]
-        public void MoveFileToRootCorrectly()
-        {
-            logicFile.Move(fileCorrectly.Id, folderRoot.Id);
-            Assert.IsTrue(folderRoot.Files.Contains(fileCorrectly));
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void GetFileNotExist()
-        {
-            logicFile.Get(10);
-        }
-
-        [TestMethod]
-        public void GetFile()
-        {
-            File fileReturn = logicFile.Get(3);
-            Assert.AreEqual(fileReturn, fileCorrectly);
-        }
-
-        [TestMethod]
-        public void GetAll()
-        {
-            IEnumerable<File> filesReturn = logicFile.GetAll();
-            List<File> files  = new List<File>();
-            files.Add(fileCorrectly);
-            Assert.IsTrue(filesReturn.Equals(files));
-        }
-
-        [TestMethod]
-        public void AddFile()
-        {
-            List<User> readers = new List<User>();
-            readers.Add(user);
-            File file2 = new File { OwnerId = user.Id, Name = "NEWFILE", Parent = folderCorrectly2, Readers = readers, Content = "This is a new file." };
-            file2.Id = 4;
-            logicFile.Add(file2);
-            Assert.AreEqual(logicFile.Get(4), file2);
-        }
-
-        [TestMethod]
-        public void UpdateFile()
-        {
-            List<User> readers = new List<User>();
-            readers.Add(user);
-            File file2 = new File { OwnerId = user.Id, Name = "NEWFILE", Parent = folderCorrectly2, Readers = readers, Content = "This is a new file." };
-            file2.Id = 4;
-            logicFile.Add(file2);
-            Assert.AreEqual(logicFile.Get(4), file2);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void DeleteFile()
-        {
-            logicFile.Delete(logicFile.Get(4));
-            logicFile.Get(4);
-        }
-
-        [TestMethod]
-        public void AddReaders()
-        {
-            logicFile.AddReader(logicFile.Get(3), user2.Id);
-            Assert.IsTrue(logicFile.Get(3).Readers.Count == 2);
-        }
-
-        [TestMethod]
-        public void RemoveReaders()
-        {
-            logicFile.RemoveReader(logicFile.Get(3), user2.Id);
-            Assert.IsTrue(logicFile.Get(3).Readers.Count == 1);
-        }
+      
     }
 }

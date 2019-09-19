@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TwoDrive.DataAcces.Interfacee\TwoDrive.DataAcces.Interface.csproj" />
     <ProjectReference Include="..\TwoDrive.Domain\TwoDrive.Domain.csproj" />
   </ItemGroup>
 
