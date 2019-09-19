@@ -121,5 +121,13 @@ namespace TwoDrive.Test.BusinessLogic
             logicFolder.Add(folder2);
             Assert.AreEqual(logicFolder.Get(4), folder2);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DeleteFolder()
+        {
+            logicFolder.Delete(logicFolder.Get(4));
+            logicFolder.Get(4);
+        }
     }
 }
