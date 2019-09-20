@@ -36,12 +36,12 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //GET: /api/folders/5
-        [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(long id)
+        [HttpGet("{id}")]
+        public IActionResult Get(long folderId)
         {
             try
             {
-                Folder folder = _folderLogic.Get(id);
+                Folder folder = _folderLogic.Get(folderId);
                 return Ok(folder);
             }
             catch (Exception e)
@@ -67,11 +67,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //POST: /api/folders/3/users/2
         [HttpPost("{id}/users/{idUsers}")]
-        public IActionResult PostReaders(long id, long idUsers)
+        public IActionResult PostReaders(long folderId, long idUsers)
         {
             try
             {
-                _folderLogic.AddReader(_folderLogic.Get(id), idUsers);
+                _folderLogic.AddReader(_folderLogic.Get(folderId), idUsers);
                 return NoContent();
             }
             catch (Exception e)
@@ -82,11 +82,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //PUT: /api/folders/5
         [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody] Folder folder)
+        public IActionResult Put(long folderId, [FromBody] Folder folder)
         {
             try
             {
-                _folderLogic.Update(_folderLogic.Get(id), folder);
+                _folderLogic.Update(_folderLogic.Get(folderId), folder);
                 return NoContent();
             }
             catch (Exception e)
@@ -97,11 +97,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //PUT: /api/folders/5/folders/3
         [HttpPut("{id}/folder/{idFolder}")]
-        public IActionResult Move(long id, long idFolder)
+        public IActionResult Move(long folderId, long idFolder)
         {
             try
             {
-                _folderLogic.Move(id, idFolder);
+                _folderLogic.Move(folderId, idFolder);
                 return NoContent();
             }
             catch (Exception e)
@@ -112,11 +112,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //DELETE: /api/folders/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(long folderId)
         {
             try
             {
-                _folderLogic.Delete(_folderLogic.Get(id));
+                _folderLogic.Delete(_folderLogic.Get(folderId));
                 return NoContent();
             }
             catch (Exception e)
@@ -128,11 +128,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //DELETE: /api/folders/5/users/3
         [HttpDelete("{id}/users/{idReader}")]
-        public IActionResult DeleteReaders(long id, long idReader)
+        public IActionResult DeleteReaders(long folderId, long idReader)
         {
             try
             {
-                _folderLogic.RemoveReader(_folderLogic.Get(id), idReader);
+                _folderLogic.RemoveReader(_folderLogic.Get(folderId), idReader);
                 return NoContent();
             }
             catch (Exception e)

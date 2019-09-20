@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TwoDrive.BusinessLogic;
-using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
 
@@ -37,12 +34,12 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //GET: /api/files/5
-        [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(long id)
+        [HttpGet("{id}")]
+        public IActionResult Get(long fileId)
         {
             try
             {
-                File file = _fileLogic.Get(id);
+                File file = _fileLogic.Get(fileId);
                 return Ok(file);
             }
             catch (Exception e)
@@ -68,11 +65,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //POST: /api/files/3/users/2
         [HttpPost("{id}/users/{idUsers}")]
-        public IActionResult PostReaders(long id, long idUsers)
+        public IActionResult PostReaders(long fileId, long idUsers)
         {
             try
             {
-                _fileLogic.AddReader(_fileLogic.Get(id), idUsers);
+                _fileLogic.AddReader(_fileLogic.Get(fileId), idUsers);
                 return NoContent();
             }
             catch (Exception e)
@@ -83,11 +80,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //PUT: /api/files/5
         [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody] File file)
+        public IActionResult Put(long fileId, [FromBody] File file)
         {
             try
             {
-                _fileLogic.Update(_fileLogic.Get(id), file);
+                _fileLogic.Update(_fileLogic.Get(fileId), file);
                 return NoContent();
             }
             catch (Exception e)
@@ -98,11 +95,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //PUT: /api/files/5/folders/3
         [HttpPut("{id}/folder/{idFolder}")]
-        public IActionResult Move(long id, long idFolder)
+        public IActionResult Move(long fileId, long idFolder)
         {
             try
             {
-                _fileLogic.Move(id, idFolder);
+                _fileLogic.Move(fileId, idFolder);
                 return NoContent();
             }
             catch (Exception e)
@@ -113,11 +110,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //DELETE: /api/files/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(long fileId)
         {
             try
             {
-                _fileLogic.Delete(_fileLogic.Get(id));
+                _fileLogic.Delete(_fileLogic.Get(fileId));
                 return NoContent();
             }
             catch (Exception e)
@@ -129,11 +126,11 @@ namespace TwoDrive.WebApi.Controllers
 
         //DELETE: /api/files/5/users/3
         [HttpDelete("{id}/users/{idReader}")]
-        public IActionResult DeleteReaders(long id, long idReader)
+        public IActionResult DeleteReaders(long fileId, long idReader)
         {
             try
             {
-                _fileLogic.RemoveReader(_fileLogic.Get(id),idReader);
+                _fileLogic.RemoveReader(_fileLogic.Get(fileId),idReader);
                 return NoContent();
             }
             catch (Exception e)
