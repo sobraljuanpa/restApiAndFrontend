@@ -9,8 +9,8 @@ namespace TwoDrive.DataAccess.Interface
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Folder> Folders { get; set; }
-        public DbSet<File> Files { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Folder> Folders { get; set; }
+        public virtual DbSet<File> Files { get; set; }
     }
 }
