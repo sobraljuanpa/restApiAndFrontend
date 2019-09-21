@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TwoDrive.Domain;
 
 namespace TwoDrive.DataAccess.Interface
 {
@@ -9,5 +10,6 @@ namespace TwoDrive.DataAccess.Interface
         void Add(T entity);
         void Update(T dbEntity, T newEntity);
         void Delete(T entity);
+        User Authenticate(string username, string password);
     }
 }

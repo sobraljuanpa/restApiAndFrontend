@@ -13,6 +13,11 @@ namespace TwoDrive.DataAccess
         {
             _context = context;
         }
+        
+        public User Authenticate(string a, string b)
+        {
+            return null;
+        }
 
         public IEnumerable<Folder> GetAll()
         {

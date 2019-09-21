@@ -33,7 +33,7 @@ namespace TwoDrive.Test.BusinessLogic
             rFo = new RepositoryFolderMock();
             rU = new RepositoryUserMock();
 
-            user = new User { FirstName = "Jose", LastName = "Goñi", Username = "JoseG", Password = "firulais123", Email = "josepablogoni@gmail.com", Administrator = true, FriendList = new List<User>(), RootFolder = null };
+            user = new User { FirstName = "Jose", LastName = "Goñi", Username = "JoseG", Password = "firulais123", Email = "josepablogoni@gmail.com", Role = "Admin", FriendList = new List<User>(), RootFolder = null };
             user.Id = 1;
             folderRoot = new Folder { OwnerId = user.Id, Name = "ROOT", Parent = null, Readers = new List<User>(), Files = new List<File>(), Folders = new List<Folder>() };
             folderRoot.Parent = folderRoot;
@@ -49,7 +49,7 @@ namespace TwoDrive.Test.BusinessLogic
 
             fileNull = new File();
             folderNull = new Folder();
-            user2 = new User { FirstName = "Juanpa", LastName = "Sobral", Username = "JuanpaS", Password = "firulais123", Email = "junapasobral@gmail.com", Administrator = false, FriendList = new List<User>(), RootFolder = null };
+            user2 = new User { FirstName = "Juanpa", LastName = "Sobral", Username = "JuanpaS", Password = "firulais123", Email = "junapasobral@gmail.com", Role = "User", FriendList = new List<User>(), RootFolder = null };
             user.Id = 2;
             
             rFi.Add(fileCorrectly);

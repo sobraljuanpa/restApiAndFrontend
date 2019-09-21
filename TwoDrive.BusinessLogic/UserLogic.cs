@@ -13,6 +13,12 @@ namespace TwoDrive.BusinessLogic
         {
             _repository = repository;
         }
+
+        public User Authenticate(string username, string password)
+        {
+            return _repository.Authenticate(username, password);
+        }
+
         public void Add(User entity)
         {
             ValidateFormat(entity);

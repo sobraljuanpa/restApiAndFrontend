@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using TwoDrive.Domain;
 using TwoDrive.DataAccess.Interface;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System;
 
 namespace TwoDrive.DataAccess
 {
@@ -12,6 +17,38 @@ namespace TwoDrive.DataAccess
         public UserRepository(TwoDriveContext context)
         {
             _context = context;
+        }
+
+        public User Authenticate(string username, string password)
+        {
+            var user = _context.Users.SingleOrDefault(
+                x => x.Username == username && x.Password == password);
+
+            //Si no encuentro user retorno null
+            if(user == null)
+            {
+                return null;
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("Ahora este es nuestro secreto.");
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role)
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(15),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            user.Token = tokenHandler.WriteToken(token);
+
+            //saco la pass antes de retornar, esto habria que hacerlo siempre
+            user.Password = null;
+
+            return user;
         }
 
         public IEnumerable<User> GetAll()
@@ -33,7 +70,7 @@ namespace TwoDrive.DataAccess
 
         public void Update(User oldUser, User newUser)
         {
-            oldUser.Administrator = newUser.Administrator;
+            oldUser.Role = newUser.Role;
             oldUser.FirstName = newUser.FirstName;
             oldUser.LastName = newUser.LastName;
             oldUser.Email = newUser.Email;

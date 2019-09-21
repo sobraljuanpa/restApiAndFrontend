@@ -15,6 +15,11 @@ namespace TwoDrive.DataAccess
             _context = context;
         }
 
+        public User Authenticate(string a, string b)
+        {
+            return null;
+        }
+
         public IEnumerable<File> GetAll()
         {
             return _context.Files.ToList();
