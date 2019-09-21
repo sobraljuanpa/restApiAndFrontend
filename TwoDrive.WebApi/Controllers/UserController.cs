@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.Domain;
@@ -7,6 +8,7 @@ using TwoDrive.Domain;
 namespace TwoDrive.WebApi.Controllers
 {
     [Route("/api/users")]
+    [Authorize]//esto hace q todos los endpoint del controller esten protegidos por defecto
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -18,7 +20,23 @@ namespace TwoDrive.WebApi.Controllers
             _userLogic = userLogic;
         }
 
+        //Endpoint para autenticacion
+        [AllowAnonymous]//este cualquiera puede tirarle
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody]User userParams)
+        {
+            var user = _userLogic.Authenticate(userParams.Username, userParams.Password);
+
+            if (user == null)
+            {
+                return BadRequest(new { message = "Username or password is incorrect" });
+            }
+
+            return Ok(user);
+        }
+
         //GET: /api/users
+        [Authorize(Roles = Role.Admin)]//solo dejo que los admins accedan a todos los usuarios
         [HttpGet]
         public IActionResult Get()
         {
@@ -37,15 +55,30 @@ namespace TwoDrive.WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            try
+            var user = _userLogic.Get(id);
+
+            if (user == null)
             {
-                User user = _userLogic.Get(id);
-                return Ok(user);
+                return NotFound();
             }
-            catch (Exception e)
+
+            //solo dejo que los admins accedan a otros usuarios por Id
+            var currentUserId = int.Parse(User.Identity.Name);//esto en realidad trae toda la info del usuario?
+            if (id != currentUserId && !User.IsInRole(Role.Admin))
             {
-                return NotFound(e.Message);
+                return Forbid();
             }
+
+            return Ok(user);
+            //try
+            //{
+            //    User user = _userLogic.Get(id);
+            //    return Ok(user);
+            //}
+            //catch (Exception e)
+            //{
+            //    return NotFound(e.Message);
+            //}
         }
 
         //POST: /api/users
