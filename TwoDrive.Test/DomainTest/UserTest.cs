@@ -62,9 +62,9 @@ namespace TwoDrive.Test.DomainTest
         [TestMethod]
         public void SetAdministratorTest()
         {
-            user.Administrator = true;
+            user.Role = "Admin";
 
-            Assert.AreEqual(true, user.Administrator);
+            Assert.AreEqual("Admin", user.Role);
         }
 
         [TestMethod]

@@ -12,5 +12,19 @@ namespace TwoDrive.DataAccess.Interface
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Folder> Folders { get; set; }
         public virtual DbSet<File> Files { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 1,
+                FirstName = "Admin",
+                LastName = "Istrador",
+                Username = "admin",
+                Password = "admin",
+                Email = "admin@admin.admin",
+                Role = "Admin"
+            });
+        }
     }
 }

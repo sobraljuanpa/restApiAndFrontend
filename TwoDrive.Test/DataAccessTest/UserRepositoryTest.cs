@@ -23,8 +23,8 @@ namespace TwoDrive.Test.DataAccessTest
         {
             var data = new List<User>
             {
-                new User { Administrator = true, Email = "pap@pap.pap", FirstName = "Juan", LastName = "Sobral", FriendList = new List<User>(), Id = 1, Password = "123asd", RootFolder = new Folder(), Username = "papap" },
-                new User { Administrator = true, Email = "asd@asd.asd", FirstName = "Pedro", LastName = "Marsicano", FriendList = new List<User>(), Id = 2, Password = "123asd", RootFolder = new Folder(), Username = "papap" }
+                new User { Role = "Admin", Email = "pap@pap.pap", FirstName = "Juan", LastName = "Sobral", FriendList = new List<User>(), Id = 1, Password = "123asd", RootFolder = new Folder(), Username = "papap" },
+                new User { Role = "Admin", Email = "asd@asd.asd", FirstName = "Pedro", LastName = "Marsicano", FriendList = new List<User>(), Id = 2, Password = "123asd", RootFolder = new Folder(), Username = "papap" }
             }.AsQueryable();
 
             //mockeo tabla de vehiculos
@@ -86,7 +86,7 @@ namespace TwoDrive.Test.DataAccessTest
         [TestMethod]
         public void DeleteUserTest()
         {
-            var auxPedro = new User { Administrator = true, Email = "asd@asd.asd", FirstName = "Pedro", LastName = "Marsicano", FriendList = new List<User>(), Id = 2, Password = "123asd", RootFolder = new Folder(), Username = "papap" };
+            var auxPedro = new User { Role = "Admin", Email = "asd@asd.asd", FirstName = "Pedro", LastName = "Marsicano", FriendList = new List<User>(), Id = 2, Password = "123asd", RootFolder = new Folder(), Username = "papap" };
 
             userRepository.Delete(auxPedro);
 

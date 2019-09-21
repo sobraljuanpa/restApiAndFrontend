@@ -11,5 +11,6 @@ namespace TwoDrive.BusinessLogic.Interface
         void Add(T entity);
         void Update(T Entity, T newEntity);
         void Delete(T Entity);
+        User Authenticate(string user, string pass);
     }
 }
