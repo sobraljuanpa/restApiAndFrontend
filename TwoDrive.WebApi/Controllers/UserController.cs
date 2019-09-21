@@ -34,7 +34,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //GET: /api/users/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
             try

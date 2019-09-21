@@ -8,9 +8,9 @@ using System;
 namespace TwoDrive.Test.BusinessLogic
 {
     [TestClass]
-    public class LogicFileTest
+    public class LogicFolderTest
     {
-        FileLogic logicFile;
+        FolderLogic logicFolder;
         File fileNull;
         File fileCorrectly;
         Folder folderNull;
@@ -40,18 +40,20 @@ namespace TwoDrive.Test.BusinessLogic
             folderRoot.Readers.Add(user);
             folderCorrectly2 = new Folder { OwnerId = user.Id, Name = "Folder1", Parent = null, Readers = new List<User>(), Files = new List<File>(), Folders = new List<Folder>() };
             folderCorrectly2.Parent = folderRoot;
+            folderCorrectly2.Id = 3;
             fileCorrectly = new File { OwnerId = user.Id, Name = "file1", Parent = folderCorrectly2, Readers = new List<User>(), Content = "Este es un archivo." };
             fileCorrectly.Readers.Add(user);
             fileCorrectly.Id = 3;
             folderCorrectly2.Files.Add(fileCorrectly);
             user.RootFolder = folderRoot;
             folderRoot.Folders.Add(folderCorrectly2);
+            folderNull = new Folder();
 
             fileNull = new File();
             folderNull = new Folder();
             user2 = new User { FirstName = "Juanpa", LastName = "Sobral", Username = "JuanpaS", Password = "firulais123", Email = "junapasobral@gmail.com", Administrator = false, FriendList = new List<User>(), RootFolder = null };
             user.Id = 2;
-            
+
             rFi.Add(fileCorrectly);
             rFi.Add(fileNull);
             rFo.Add(folderRoot);
@@ -59,88 +61,86 @@ namespace TwoDrive.Test.BusinessLogic
             rU.Add(user);
             rU.Add(user2);
 
-            logicFile = new FileLogic(rFi,rFo,rU);
+            logicFolder = new FolderLogic(rFo, rU);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void AddFileNullToRoot()
+        public void AddFolderNullToRoot()
         {
-            logicFile.Move(fileNull.Id, folderRoot.Id);
+            logicFolder.Move(folderNull.Id, folderRoot.Id);
         }
 
         [TestMethod]
-        public void MoveFileToRootCorrectly()
+        public void MoveFolderToRootCorrectly()
         {
-            logicFile.Move(fileCorrectly.Id, folderRoot.Id);
+            logicFolder.Move(folderCorrectly2.Id, folderRoot.Id);
             Assert.IsTrue(folderRoot.Files.Contains(fileCorrectly));
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void GetFileNotExist()
+        public void GetFolderNotExist()
         {
-            logicFile.Get(10);
+            logicFolder.Get(10);
         }
-
         [TestMethod]
-        public void GetFile()
+        public void GetFolder()
         {
-            File fileReturn = logicFile.Get(3);
-            Assert.AreEqual(fileReturn, fileCorrectly);
+            Folder folderReturn = logicFolder.Get(3);
+            Assert.AreEqual(folderReturn, folderCorrectly2);
         }
-
         [TestMethod]
         public void GetAll()
         {
-            IEnumerable<File> filesReturn = logicFile.GetAll();
-            List<File> files  = new List<File>();
-            files.Add(fileCorrectly);
-            Assert.IsTrue(filesReturn.Equals(files));
+            IEnumerable<Folder> foldersReturn = logicFolder.GetAll();
+            List<Folder> folders = new List<Folder>();
+            folders.Add(folderCorrectly2);
+            folders.Add(folderRoot);
+            Assert.IsTrue(foldersReturn.Equals(folders));
         }
 
         [TestMethod]
-        public void AddFile()
+        public void AddFolder()
         {
             List<User> readers = new List<User>();
             readers.Add(user);
-            File file2 = new File { OwnerId = user.Id, Name = "NEWFILE", Parent = folderCorrectly2, Readers = readers, Content = "This is a new file." };
-            file2.Id = 4;
-            logicFile.Add(file2);
-            Assert.AreEqual(logicFile.Get(4), file2);
+            Folder folder2 = new Folder { OwnerId = user.Id, Name = "NEWFOLDER", Parent = folderRoot, Readers = readers, Files = new List<File>(), Folders = new List<Folder>() };
+            folder2.Id = 4;
+            logicFolder.Add(folder2);
+            Assert.AreEqual(logicFolder.Get(4), folder2);
         }
 
         [TestMethod]
-        public void UpdateFile()
+        public void UpdateFodler()
         {
             List<User> readers = new List<User>();
             readers.Add(user);
-            File file2 = new File { OwnerId = user.Id, Name = "NEWFILE", Parent = folderCorrectly2, Readers = readers, Content = "This is a new file." };
-            file2.Id = 4;
-            logicFile.Add(file2);
-            Assert.AreEqual(logicFile.Get(4), file2);
+            Folder folder2 = new Folder { OwnerId = user.Id, Name = "NEWFOLDER", Parent = folderRoot, Readers = readers, Files = new List<File>(), Folders = new List<Folder>() };
+            folder2.Id = 4;
+            logicFolder.Add(folder2);
+            Assert.AreEqual(logicFolder.Get(4), folder2);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void DeleteFile()
+        public void DeleteFolder()
         {
-            logicFile.Delete(logicFile.Get(4));
-            logicFile.Get(4);
+            logicFolder.Delete(logicFolder.Get(4));
+            logicFolder.Get(4);
         }
-
         [TestMethod]
         public void AddReaders()
         {
-            logicFile.AddReader(logicFile.Get(3), user2.Id);
-            Assert.IsTrue(logicFile.Get(3).Readers.Count == 2);
+            logicFolder.AddReader(logicFolder.Get(3), user2.Id);
+            Assert.IsTrue(logicFolder.Get(3).Readers.Count == 2);
         }
 
         [TestMethod]
         public void RemoveReaders()
         {
-            logicFile.RemoveReader(logicFile.Get(3), user2.Id);
-            Assert.IsTrue(logicFile.Get(3).Readers.Count == 1);
+            logicFolder.RemoveReader(logicFolder.Get(3), user2.Id);
+            Assert.IsTrue(logicFolder.Get(3).Readers.Count == 1);
         }
     }
 }
