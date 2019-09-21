@@ -22,7 +22,9 @@ namespace TwoDrive.Domain
 
         public bool Administrator { get; set; }
 
-        public List<User> FriendList { get; set; }
+        public string Role { get; set; }
+
+        public string Token { get; set; }
 
         public Folder RootFolder { get; set; }
 
