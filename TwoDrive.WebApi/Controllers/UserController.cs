@@ -82,6 +82,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //POST: /api/users
+        [Authorize(Roles = Role.Admin)]
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
@@ -112,6 +113,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //DELETE: /api/users/5
+        [Authorize(Roles = Role.Admin)]
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
