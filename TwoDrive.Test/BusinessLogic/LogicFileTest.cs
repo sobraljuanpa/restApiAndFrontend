@@ -29,10 +29,6 @@ namespace TwoDrive.Test.BusinessLogic
             folderRepository = new Mock<IDataRepository<Folder>>();
             userRepository = new Mock<IDataRepository<User>>();
             fileLogic = new FileLogic(fileRepository.Object, folderRepository.Object, userRepository.Object);
-            //fileRepository.Setup(f => f.Add(It.IsAny<File>()));
-            //fileRepository.Setup(f => f.Update(It.IsAny<File>(), It.IsAny<File>()));
-            //folderRepository.Setup(f => f.Add(It.IsAny<Folder>()));
-            //folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
         }
 
         [TestMethod]
