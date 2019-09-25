@@ -42,6 +42,7 @@ namespace TwoDrive.BusinessLogic
             IsFolderRoot(folderId);
             Folder folderWhereFolderWas = Entity.Parent;
             Folder folderWhereIsIt = folder.Parent;
+            FoldersNull(folderWhereIsIt);
             folderWhereIsIt.AddFolder(folder);
             folderWhereFolderWas.RemoveFolder(Entity);
             _repository.Update(Entity.Parent,folderWhereFolderWas);
