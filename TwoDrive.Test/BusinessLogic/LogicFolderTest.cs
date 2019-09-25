@@ -24,11 +24,11 @@ namespace TwoDrive.Test.BusinessLogic
             folderRoot = new Folder { Parent = null, Readers = null, OwnerId = 0, Name = "ROOT", Files = null, Folders = null, Id = 0 };
             folder = new Folder { Parent = folderRoot, Readers = null, OwnerId = 0, Name = "Folder1", Files = null, Folders = null, Id = 1 };
             file = new File { Content = "Algo de texto.", CreationDate = DateTime.Now, Id = 0, LastModifiedDate = DateTime.Now, Name = "Archivo", OwnerId = 0, Parent = folder, Readers = null };
-            folderNull = new Folder();
+            folderNull = new Folder { Parent = folderRoot};
             folderRepository = new Mock<IDataRepository<Folder>>();
             userRepository = new Mock<IDataRepository<User>>();
             folderLogic = new FolderLogic(folderRepository.Object, userRepository.Object);
-            //folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folderRoot);
+            
         }
 
         [TestMethod]
@@ -54,6 +54,16 @@ namespace TwoDrive.Test.BusinessLogic
         public void UpdateFolderNull()
         {
             folderLogic.Update(folder, folderNull);
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void UpdateFolder()
+        {
+            folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
+            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folderRoot);
+            userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            folderLogic.Update(folderNull, folder);
             folderRepository.VerifyAll();
         }
 
