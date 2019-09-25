@@ -10,32 +10,43 @@ namespace TwoDrive.Test.BusinessLogic
     [TestClass]
     public class LogicFolderTest
     {
-        Mock<IDataRepository<File>> fileRepository;
         Mock<IDataRepository<Folder>> folderRepository;
         Mock<IDataRepository<User>> userRepository;
         FolderLogic folderLogic;
         File file;
         Folder folderNull;
         Folder folder;
+        Folder folderRoot;
 
         [TestInitialize]
         public void SetUp()
         {
-            folder = new Folder { Parent = null, Readers = null, OwnerId = 0, Name = "ROOT", Files = null, Folders = null, Id = 0 };
+            folderRoot = new Folder { Parent = null, Readers = null, OwnerId = 0, Name = "ROOT", Files = null, Folders = null, Id = 0 };
+            folder = new Folder { Parent = folderRoot, Readers = null, OwnerId = 0, Name = "Folder1", Files = null, Folders = null, Id = 1 };
             file = new File { Content = "Algo de texto.", CreationDate = DateTime.Now, Id = 0, LastModifiedDate = DateTime.Now, Name = "Archivo", OwnerId = 0, Parent = folder, Readers = null };
             folderNull = new Folder();
-            fileRepository = new Mock<IDataRepository<File>>();
             folderRepository = new Mock<IDataRepository<Folder>>();
             userRepository = new Mock<IDataRepository<User>>();
             folderLogic = new FolderLogic(folderRepository.Object, userRepository.Object);
+            //folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folderRoot);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void AddFileNullToRoot()
+        public void AddFolderNullToRoot()
         {
             folderLogic.Add(folderNull);
-            fileRepository.VerifyAll(); //No se llaman los metodos del repo.
+            folderRepository.VerifyAll(); //No se llaman los metodos del repo.
+        }
+
+        [TestMethod]
+        public void AddFolderToRoot()
+        {
+            userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            folderRepository.Setup(f => f.Add(It.IsAny<Folder>()));
+            folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
+            folderLogic.Add(folder);
+            folderRepository.VerifyAll();
         }
 
 
