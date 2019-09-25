@@ -30,8 +30,6 @@ namespace TwoDrive.BusinessLogic
             _repository.Add(entity);
         }
 
-        
-
         public void Update(File Entity, File newEntity)
         {
             newEntity.LastModifiedDate = DateTime.Now;

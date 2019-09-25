@@ -38,8 +38,8 @@ namespace TwoDrive.Test.BusinessLogic
         public void AddFileNullToRoot()
         {
             File fileNull = new File();
-            fileRepository.VerifyAll(); //No se llaman los metodos del repo.
             fileLogic.Add(fileNull);
+            fileRepository.VerifyAll(); //No se llaman los metodos del repo.
         }
 
         [TestMethod]
@@ -50,6 +50,15 @@ namespace TwoDrive.Test.BusinessLogic
             folderRepository.Setup(f => f.Add(It.IsAny<Folder>()));
             folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
             fileLogic.Add(file);
+            fileRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void UpdateFileNull()
+        {
+            File fileNull = new File();
+            fileLogic.Update(file,fileNull);
             fileRepository.VerifyAll();
         }
 
