@@ -10,6 +10,21 @@
 			"item": [
 				{
 					"name": "GetUserWithAdmin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00c8b748-abc8-42e5-a58b-ff646711c700",
+								"exec": [
+									"pm.test(\"Response is 200 with jsonBody\", function(){",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.have.jsonBody();",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -41,6 +56,25 @@
 				},
 				{
 					"name": "GetAdminToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dc376bff-b65a-4799-85d1-897349d784fe",
+								"exec": [
+									"pm.test(\"Response is 200 with jsonBody\", function(){",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.have.jsonBody();",
+									"});",
+									"",
+									"pm.test(\"Body contains token\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"token\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -78,6 +112,21 @@
 				},
 				{
 					"name": "GetUserWithAllowedUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d7de60e6-bfa8-482f-8473-c172b8ed5983",
+								"exec": [
+									"pm.test(\"Response is 200 with jsonBody\", function(){",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.have.jsonBody();",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -109,6 +158,25 @@
 				},
 				{
 					"name": "GetUser1Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22336d55-1cba-483c-aa55-587e3a97e4c5",
+								"exec": [
+									"pm.test(\"Response is 200 with jsonBody\", function(){",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.have.jsonBody();",
+									"});",
+									"",
+									"pm.test(\"Body contains token\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"token\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -142,6 +210,21 @@
 				},
 				{
 					"name": "GetUserWithUnallowedUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1d86c6c1-9e2c-4b66-aa29-743a7d28adca",
+								"exec": [
+									"pm.test(\"Response is 403 without jsonBody\", function(){",
+									"   pm.response.to.have.status(403);",
+									"   pm.response.to.not.have.jsonBody();",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -195,7 +278,7 @@
 	],
 	"variable": [
 		{
-			"id": "849dd93b-d2e9-49d2-92a0-3b6103cbdffd",
+			"id": "60173e59-ae51-4786-bdc5-9059c0843f95",
 			"key": "url",
 			"value": "http://localhost:57901/api/",
 			"type": "string"
