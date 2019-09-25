@@ -6,26 +6,169 @@
 	},
 	"item": [
 		{
-			"name": "GetUserWithAdmin",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
+			"name": "usersEndpointTests",
+			"item": [
+				{
+					"name": "GetUserWithAdmin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1NjkzNzM0MzAsImV4cCI6MTU2OTM3NDMzMCwiaWF0IjoxNTY5MzczNDMwfQ.cTviKEfyXqGKtA2HnjVbfwb_xwcbQu1gDFxFvvwKG6E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57901/api/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57901",
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAdminToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"admin\",\n\t\"password\":\"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57901/api/users/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57901",
+							"path": [
+								"api",
+								"users",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserWithAllowedUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTM3MzcwNSwiZXhwIjoxNTY5Mzc0NjA1LCJpYXQiOjE1NjkzNzM3MDV9.6uHcttVAKZXfM448pJgs73oYw3PvsaE4lr9wVPdCn2w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:57901/api/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57901",
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser1Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"user1\",\n\t\"password\":\"user1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users/authenticate",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserWithUnallowedUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTM3MzcwNSwiZXhwIjoxNTY5Mzc0NjA1LCJpYXQiOjE1NjkzNzM3MDV9.6uHcttVAKZXfM448pJgs73oYw3PvsaE4lr9wVPdCn2w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}users/3",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetAdminToken",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -52,9 +195,9 @@
 	],
 	"variable": [
 		{
-			"id": "9f426e87-9f32-48eb-b21f-aee35af897d6",
+			"id": "849dd93b-d2e9-49d2-92a0-3b6103cbdffd",
 			"key": "url",
-			"value": "http://http://localhost:57901/api/",
+			"value": "http://localhost:57901/api/",
 			"type": "string"
 		}
 	],
