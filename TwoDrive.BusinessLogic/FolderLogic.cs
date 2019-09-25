@@ -38,6 +38,7 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(Entity.Id);
             FolderElementExists(folder.Id);
             AlreadyInFolder(Entity, folder);
+            IsFolderRoot(folderId);
             Folder folderWhereFolderWas = Entity.Parent;
             Folder folderWhereIsIt = folder.Parent;
             folderWhereIsIt.AddFolder(folder);
@@ -53,6 +54,12 @@ namespace TwoDrive.BusinessLogic
             ReadersIsNull(entity.Readers);
             OwnerExists(entity.OwnerId);
             ReadersExist(entity.Readers);
+        }
+
+        private void IsFolderRoot(long folderId)
+        {
+            if(_repository.Get(folderId).Parent == null)
+                throw new Exception("La carpeta RAIZ no puede ser movida.");
         }
     }
 }

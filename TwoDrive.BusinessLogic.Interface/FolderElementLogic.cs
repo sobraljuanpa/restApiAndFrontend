@@ -61,10 +61,13 @@ namespace TwoDrive.BusinessLogic.Interface
 
         protected void ReadersExist(List<User> readers)
         {
-            foreach (User reader in readers)
+            if(readers.Count != 0)
             {
-                if (_userRepository.Get(reader.Id) == null)
-                    throw new Exception("Uno de los lectores especificados no existe.");
+                foreach (User reader in readers)
+                {
+                    if (_userRepository.Get(reader.Id) == null)
+                        throw new Exception("Uno de los lectores especificados no existe.");
+                }
             }
         }
 

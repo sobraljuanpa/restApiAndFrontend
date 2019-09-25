@@ -24,10 +24,13 @@ namespace TwoDrive.BusinessLogic
             entity.CreationDate = DateTime.Now;
             Folder folderBefore = entity.Parent;
             Folder folderAfter = entity.Parent;
+            folderFileNull(folderAfter);
             folderAfter.AddFile(entity);
             _folderRepository.Update(folderBefore, folderAfter);
             _repository.Add(entity);
         }
+
+        
 
         public void Update(File Entity, File newEntity)
         {
@@ -59,7 +62,17 @@ namespace TwoDrive.BusinessLogic
         {
             NameIsNull(entity.Name);
             ParentIsNull(entity.Parent);
-            ReadersIsNull(entity.Readers);
+            try
+            {
+                ReadersIsNull(entity.Readers);
+            }
+            catch (Exception)
+            {
+                List<User> readers = new List<User>();
+                if (entity.Parent.Readers == null) entity.Parent.Readers = new List<User>();
+                readers = entity.Parent.Readers;
+                entity.Readers = readers;
+            }
             ContentIsNull(entity.Content);
             OwnerExists(entity.OwnerId);
             ReadersExist(entity.Readers);
@@ -69,6 +82,12 @@ namespace TwoDrive.BusinessLogic
         {
             if (content == "")
                 throw new Exception("El archivo no contiene nada.");
+        }
+
+        private void folderFileNull(Folder folderAfter)
+        {
+            if (folderAfter.Files == null)
+                folderAfter.Files = new List<File>();
         }
     }
 }
