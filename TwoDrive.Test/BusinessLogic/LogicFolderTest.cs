@@ -49,6 +49,14 @@ namespace TwoDrive.Test.BusinessLogic
             folderRepository.VerifyAll();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void UpdateFolderNull()
+        {
+            folderLogic.Update(folder, folderNull);
+            folderRepository.VerifyAll();
+        }
+
 
     }
 }
