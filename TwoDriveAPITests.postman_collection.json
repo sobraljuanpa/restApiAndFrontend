@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "cc407124-475e-4ac1-853e-b9021141ec2c",
+		"name": "TwoDriveAPITests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetUserWithAdmin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAdminToken",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e852abe5-1953-412a-b1c3-741fff3bde46",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a83eeae6-5e1d-4e01-96c2-de5c7a4ad751",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "9f426e87-9f32-48eb-b21f-aee35af897d6",
+			"key": "url",
+			"value": "http://http://localhost:57901/api/",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

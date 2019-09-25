@@ -20,11 +20,27 @@ namespace TwoDrive.DataAccess.Interface
             {
                 Id = 1,
                 FirstName = "Admin",
-                LastName = "Istrador",
+                LastName = "Istrator",
                 Username = "admin",
                 Password = "admin",
                 Email = "admin@admin.admin",
                 Role = "Admin"
+            }, new User {
+                Id = 2,
+                FirstName = "First",
+                LastName = "TestUser",
+                Username = "user1",
+                Password = "user1",
+                Email = "user1@user1.user1",
+                Role = "User"
+            }, new User {
+                Id = 3,
+                FirstName = "Second",
+                LastName = "TestUser",
+                Username = "user2",
+                Password = "user2",
+                Email = "user2@user2.user2",
+                Role = "User"
             });
         }
     }
