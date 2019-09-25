@@ -48,9 +48,11 @@ namespace TwoDrive.BusinessLogic
             Folder folderWhereFileWas = Entity.Parent;
             Folder folderWhereIsIt = folder;
             File filePrevious = Entity;
+            folderFileNull(Entity.Parent);
             Entity.Parent.RemoveFile(Entity);
             _folderRepository.Update(folderWhereFileWas, Entity.Parent);
             Entity.Parent = folder;
+            folderFileNull(folder);
             folder.AddFile(Entity);
             _repository.Update(filePrevious, Entity);
             _folderRepository.Update(folderWhereIsIt, folder);

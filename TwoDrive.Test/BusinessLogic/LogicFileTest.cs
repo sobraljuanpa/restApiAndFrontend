@@ -79,5 +79,17 @@ namespace TwoDrive.Test.BusinessLogic
             fileRepository.VerifyAll();
         }
 
+        [TestMethod]
+        public void MoveFile()
+        {
+            fileRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(file);
+            folderRepository.Setup(f => f.Add(It.IsAny<Folder>()));
+            folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
+            Folder folderMove = new Folder { Parent = folder, Readers = null, OwnerId = 0, Name = "folder1", Files = null, Folders = null, Id = 2 };
+            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folderMove);
+            fileLogic.Move(file.Id, folder.Id);
+            fileRepository.VerifyAll();
+        }
+
     }
 }
