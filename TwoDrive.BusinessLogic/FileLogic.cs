@@ -40,10 +40,10 @@ namespace TwoDrive.BusinessLogic
         }
         public void Move(long EntityId, long folderId)
         {
+            FolderElementExists(EntityId);
+            FolderElementExists(folderId);
             File Entity = _repository.Get(EntityId);
             Folder folder = _folderRepository.Get(folderId);
-            FolderElementExists(Entity.Id);
-            FolderElementExists(folder.Id);
             AlreadyInFolder(Entity, folder);
             Folder folderWhereFileWas = Entity.Parent;
             Folder folderWhereIsIt = folder;

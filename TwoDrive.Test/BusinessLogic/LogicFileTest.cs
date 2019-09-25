@@ -75,5 +75,13 @@ namespace TwoDrive.Test.BusinessLogic
             fileRepository.VerifyAll();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void MoveFileNull()
+        {
+            fileLogic.Move(file.Id, fileNull.Id);
+            fileRepository.VerifyAll();
+        }
+
     }
 }
