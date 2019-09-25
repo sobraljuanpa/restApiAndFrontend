@@ -23,14 +23,20 @@ namespace TwoDrive.Test.BusinessLogic
         {
             folder = new Folder { Parent = null, Readers = null, OwnerId = 0, Name = "ROOT", Files = null, Folders = null, Id = 0 };
             file = new File { Content = "Algo de texto.", CreationDate = DateTime.Now, Id = 0, LastModifiedDate = DateTime.Now, Name = "Archivo", OwnerId = 0, Parent = folder, Readers = null };
-            folderNull = new Folder {};
+            folderNull = new Folder();
             fileRepository = new Mock<IDataRepository<File>>();
             folderRepository = new Mock<IDataRepository<Folder>>();
             userRepository = new Mock<IDataRepository<User>>();
             folderLogic = new FolderLogic(folderRepository.Object, userRepository.Object);
         }
 
-        
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void AddFileNullToRoot()
+        {
+            folderLogic.Add(folderNull);
+            fileRepository.VerifyAll(); //No se llaman los metodos del repo.
+        }
 
 
     }
