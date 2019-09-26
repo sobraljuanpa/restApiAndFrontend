@@ -95,9 +95,9 @@ namespace TwoDrive.BusinessLogic.Interface
                 throw new Exception("El archivo no tiene ningun lector.");
         }
 
-        protected void ParentIsNull(Folder parent)
+        protected void ParentIsNull(T Entity)
         {
-            if (parent == null)
+            if (Entity.Parent == null)
                 throw new Exception("No existe una carpeta padre para el archivo.");
         }
 

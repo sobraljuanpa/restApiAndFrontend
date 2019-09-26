@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
@@ -22,13 +23,14 @@ namespace TwoDrive.BusinessLogic
             ValidateFormat(entity);
             entity.LastModifiedDate = DateTime.Now;
             entity.CreationDate = DateTime.Now;
+            entity.Parent = GetFileId(entity.Parent.Id);
             Folder folderBefore = entity.Parent;
             Folder folderAfter = entity.Parent;
             folderFileNull(folderAfter);
+            _repository.Add(entity);
             folderAfter.AddFile(entity);
             _folderRepository.Update(folderBefore, folderAfter);
-            _repository.Add(entity);
-        }
+        } 
 
         public void Update(File Entity, File newEntity)
         {
@@ -61,7 +63,7 @@ namespace TwoDrive.BusinessLogic
         private void ValidateFormat(File entity)
         {
             NameIsNull(entity.Name);
-            ParentIsNull(entity.Parent);
+            ParentIsNull(entity);
             try
             {
                 ReadersIsNull(entity.Readers);
@@ -88,6 +90,12 @@ namespace TwoDrive.BusinessLogic
         {
             if (folderAfter.Files == null)
                 folderAfter.Files = new List<File>();
+        }
+
+        private Folder GetFileId(long Id)
+        {
+            var folder = _folderRepository.Get(Id);
+            return folder;
         }
     }
 }

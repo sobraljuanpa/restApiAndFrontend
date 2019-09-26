@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
@@ -14,15 +15,17 @@ namespace TwoDrive.BusinessLogic
             base._repository = repository;
             base._userRepository = userRepository;
         }
-        public void Add(Folder entity)
+        public Folder Add(Folder entity)
         {
             ValidateFormat(entity);
+            entity.Parent = GetFolderId(entity.Parent.Id);
             Folder folderBefore = entity.Parent;
             Folder folderAfter = entity.Parent;
             FoldersNull(folderAfter);
+            _repository.Add(entity);
             folderAfter.AddFolder(entity);
             _repository.Update(folderBefore, folderAfter);
-            _repository.Add(entity);
+            return entity;
         }
 
         public void Update(Folder Entity, Folder newEntity)
@@ -49,10 +52,17 @@ namespace TwoDrive.BusinessLogic
             _repository.Update(folder.Parent, folderWhereIsIt);
         }
 
+        public void AddFatherFolder(Folder folder)
+        {
+            folder.Parent = _repository.Get(folder.Parent.Id);
+        }
+
         private void ValidateFormat(Folder entity)
         {
             NameIsNull(entity.Name);
-            ParentIsNull(entity.Parent);
+            ParentIsNull(entity);
+            if (entity.Files == null) entity.Files = new List<File>();
+            if (entity.Folders == null) entity.Folders = new List<Folder>();
             try
             {
                 ReadersIsNull(entity.Readers);
@@ -78,6 +88,12 @@ namespace TwoDrive.BusinessLogic
         {
             if (folderAfter.Folders == null)
                 folderAfter.Folders = new List<Folder>();
+        }
+
+        private Folder GetFolderId(long id)
+        {
+            var folder = _repository.Get(id);
+            return folder;
         }
     }
 }

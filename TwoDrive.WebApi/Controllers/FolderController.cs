@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TwoDrive.BusinessLogic;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
@@ -36,7 +34,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //GET: /api/folders/5
-        [HttpGet("{id}")]
+        [HttpGet("{folderId}", Name = "GetFolder")]
         public IActionResult Get(long folderId)
         {
             try
@@ -56,8 +54,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _folderLogic.Add(folders);
-                return CreatedAtRoute("Get", new { Id = folders.Id }, folders);
+                var folderAux = _folderLogic.Add(folders);
+                return CreatedAtRoute(
+                    routeName: "GetFolder",
+                    routeValues: new { Id = folderAux.Id },
+                    value: folderAux
+                    );
             }
             catch (Exception e)
             {
@@ -66,7 +68,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //POST: /api/folders/3/users/2
-        [HttpPost("{id}/users/{idUsers}")]
+        [HttpPost("{folderId}/users/{idUsers}")]
         public IActionResult PostReaders(long folderId, long idUsers)
         {
             try
@@ -81,7 +83,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //PUT: /api/folders/5
-        [HttpPut("{id}")]
+        [HttpPut("{folderId}")]
         public IActionResult Put(long folderId, [FromBody] Folder folder)
         {
             try
@@ -96,7 +98,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //PUT: /api/folders/5/folders/3
-        [HttpPut("{id}/folder/{idFolder}")]
+        [HttpPut("{folderId}/folder/{idFolder}")]
         public IActionResult Move(long folderId, long idFolder)
         {
             try
@@ -111,7 +113,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //DELETE: /api/folders/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{folderId}")]
         public IActionResult Delete(long folderId)
         {
             try
@@ -127,7 +129,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //DELETE: /api/folders/5/users/3
-        [HttpDelete("{id}/users/{idReader}")]
+        [HttpDelete("{folderId}/users/{idReader}")]
         public IActionResult DeleteReaders(long folderId, long idReader)
         {
             try

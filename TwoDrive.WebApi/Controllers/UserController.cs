@@ -9,7 +9,7 @@ using TwoDrive.Domain;
 namespace TwoDrive.WebApi.Controllers
 {
     [Route("/api/users")]
-    [Authorize]//esto hace q todos los endpoint del controller esten protegidos por defecto
+    //[Authorize]//esto hace q todos los endpoint del controller esten protegidos por defecto
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -81,7 +81,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //POST: /api/users
-        [Authorize(Roles = Role.Admin)]
+        //[Authorize(Roles = Role.Admin)]
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
