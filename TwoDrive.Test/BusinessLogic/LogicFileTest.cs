@@ -123,5 +123,13 @@ namespace TwoDrive.Test.BusinessLogic
             fileLogic.Delete(file);
             fileRepository.VerifyAll();
         }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            fileRepository.Setup(f => f.GetAll()).Returns(new List<File>());
+            fileLogic.GetAll();
+            fileRepository.VerifyAll();
+        }
     }
 }
