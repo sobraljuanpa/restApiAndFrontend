@@ -101,5 +101,13 @@ namespace TwoDrive.Test.BusinessLogic
             folderLogic.Get(file.Id);
             folderRepository.VerifyAll();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DeleteFolderNull()
+        {
+            folderLogic.Delete(folderNull);
+            folderRepository.VerifyAll();
+        }
     }
 }
