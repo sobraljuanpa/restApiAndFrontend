@@ -91,5 +91,79 @@ namespace TwoDrive.Test.BusinessLogic
             fileRepository.VerifyAll();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void GetFileNull()
+        {
+            fileLogic.Get(3);
+            fileRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GetFile()
+        {
+            fileRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(file);
+            fileLogic.Get(file.Id);
+            fileRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DeleteFileNull()
+        {
+            fileLogic.Delete(fileNull);
+            fileRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void DeleteFile()
+        {
+            fileRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(file);
+            fileRepository.Setup(f => f.Delete(It.IsAny<File>()));
+            fileLogic.Delete(file);
+            fileRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            fileRepository.Setup(f => f.GetAll()).Returns(new List<File>());
+            fileLogic.GetAll();
+            fileRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void AddReaderNotExist()
+        {
+            fileLogic.AddReader(file,7);
+            fileRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void AddReader()
+        {
+            userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            fileRepository.Setup(f => f.Update(It.IsAny<File>(), It.IsAny<File>()));
+            fileLogic.AddReader(file,2);
+            fileRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void RemoveReaderNotExist()
+        {
+            fileLogic.RemoveReader(file, 7);
+            fileRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void RemoveReader()
+        {
+            userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            fileRepository.Setup(f => f.Update(It.IsAny<File>(), It.IsAny<File>()));
+            fileLogic.RemoveReader(file, 2);
+            fileRepository.VerifyAll();
+        }
     }
 }

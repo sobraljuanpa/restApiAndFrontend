@@ -29,16 +29,22 @@ namespace TwoDrive.BusinessLogic.Interface
 
         public void AddReader(T Entity, long userId)
         {
+            UserExist(userId);
+            ListReadersNotNull(Entity);
+            T fileUpdate = Entity;
             User user = _userRepository.Get(userId);
-            UserExist(user.Id);
-            Entity.AddReader(user);
+            fileUpdate.AddReader(user);
+            _repository.Update(Entity, fileUpdate);
         }
 
         public void RemoveReader(T Entity, long userId)
         {
+            UserExist(userId);
+            ListReadersNotNull(Entity);
+            T fileUpdate = Entity;
             User user = _userRepository.Get(userId);
-            UserExist(user.Id);
             Entity.RemoveReader(user);
+            _repository.Update(Entity, fileUpdate);
         }
 
         protected void FolderElementExists(long id)
@@ -99,6 +105,12 @@ namespace TwoDrive.BusinessLogic.Interface
         {
             if (_userRepository.Get(id) == null)
                 throw new Exception("El usuario no existe.");
+        }
+
+        private void ListReadersNotNull(T entity)
+        {
+            if (entity.Readers == null)
+                entity.Readers = new List<User>();
         }
     }
 }

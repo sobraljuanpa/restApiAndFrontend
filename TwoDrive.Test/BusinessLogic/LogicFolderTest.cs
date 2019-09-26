@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
 using TwoDrive.BusinessLogic;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
@@ -86,6 +87,79 @@ namespace TwoDrive.Test.BusinessLogic
             folderRepository.VerifyAll();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void GetFolderNull()
+        {
+            folderLogic.Get(3);
+            folderRepository.VerifyAll();
+        }
 
+        [TestMethod]
+        public void GetFolder()
+        {
+            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folder);
+            folderLogic.Get(file.Id);
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DeleteFolderNull()
+        {
+            folderLogic.Delete(folderNull);
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void DeleteFolder()
+        {
+            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folder);
+            folderRepository.Setup(f => f.Delete(It.IsAny<Folder>()));
+            folderLogic.Delete(folder);
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            folderRepository.Setup(f => f.GetAll()).Returns(new List<Folder>());
+            folderLogic.GetAll();
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void AddReaderNotExist()
+        {
+            folderLogic.AddReader(folder, 7);
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void AddReader()
+        {
+            userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
+            folderLogic.AddReader(folder, 2);
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void RemoveReaderNotExist()
+        {
+            folderLogic.RemoveReader(folder, 7);
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void RemoveReader()
+        {
+            userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
+            folderLogic.RemoveReader(folder, 2);
+            folderRepository.VerifyAll();
+        }
     }
 }
