@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TwoDrive.BusinessLogic;
+using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.Domain;
 
 namespace TwoDrive.WebApi.Controllers
@@ -13,9 +14,9 @@ namespace TwoDrive.WebApi.Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly UserLogic _userLogic;
+        private readonly ILogic<User> _userLogic;
 
-        public UserController(UserLogic userLogic)
+        public UserController(ILogic<User> userLogic)
         {
             _userLogic = userLogic;
         }

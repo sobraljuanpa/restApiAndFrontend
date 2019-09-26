@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
 
 namespace TwoDrive.BusinessLogic
 {
-    public class UserLogic
+    public class UserLogic : ILogic<User>
     {
         IDataRepository<User> _userRepository;
         IDataRepository<Folder> _folderRepository;
@@ -61,11 +62,13 @@ namespace TwoDrive.BusinessLogic
 
         public void Delete(User Entity)
         {
+            ValidateUserInSystem(Entity.Id);
             _userRepository.Delete(Entity);
         }
 
         public User Get(long id)
         {
+            ValidateUserInSystem(id);
             return _userRepository.Get(id);
         }
 
@@ -78,6 +81,7 @@ namespace TwoDrive.BusinessLogic
         {
             ValidateFormat(newEntity);
             NotRepeated(newEntity);
+            ValidateUserInSystem(Entity.Id);
             Entity.Id = newEntity.Id;
             _userRepository.Update(Entity, newEntity);
         }
@@ -100,6 +104,12 @@ namespace TwoDrive.BusinessLogic
                 throw new Exception("El usuario no contiene una contrasena.");
             if (entity.Email == null)
                 throw new Exception("El usuario no contiene un mail.");
+        }
+
+        private void ValidateUserInSystem(long entity)
+        {
+            if(_userRepository.Get(entity) == null)
+                throw new Exception("El usuario no existe en el sistema.");
         }
     }
 }
