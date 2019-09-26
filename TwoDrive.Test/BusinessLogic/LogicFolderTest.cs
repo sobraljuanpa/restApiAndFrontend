@@ -109,5 +109,14 @@ namespace TwoDrive.Test.BusinessLogic
             folderLogic.Delete(folderNull);
             folderRepository.VerifyAll();
         }
+
+        [TestMethod]
+        public void DeleteFolder()
+        {
+            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folder);
+            folderRepository.Setup(f => f.Delete(It.IsAny<Folder>()));
+            folderLogic.Delete(folder);
+            folderRepository.VerifyAll();
+        }
     }
 }
