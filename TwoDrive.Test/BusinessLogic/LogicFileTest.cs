@@ -111,9 +111,17 @@ namespace TwoDrive.Test.BusinessLogic
         [ExpectedException(typeof(Exception))]
         public void DeleteFileNull()
         {
-            fileLogic.Get(3);
+            fileLogic.Delete(fileNull);
             fileRepository.VerifyAll();
         }
 
+        [TestMethod]
+        public void DeleteFile()
+        {
+            fileRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(file);
+            fileRepository.Setup(f => f.Delete(It.IsAny<File>()));
+            fileLogic.Delete(file);
+            fileRepository.VerifyAll();
+        }
     }
 }
