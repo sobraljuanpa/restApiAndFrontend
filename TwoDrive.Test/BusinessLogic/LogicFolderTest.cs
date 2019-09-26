@@ -152,5 +152,14 @@ namespace TwoDrive.Test.BusinessLogic
             folderLogic.RemoveReader(folder, 7);
             folderRepository.VerifyAll();
         }
+
+        [TestMethod]
+        public void RemoveReader()
+        {
+            userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
+            folderLogic.RemoveReader(folder, 2);
+            folderRepository.VerifyAll();
+        }
     }
 }
