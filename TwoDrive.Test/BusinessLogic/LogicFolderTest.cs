@@ -88,9 +88,17 @@ namespace TwoDrive.Test.BusinessLogic
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void GetFileNull()
+        public void GetFolderNull()
         {
             folderLogic.Get(3);
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GetFolder()
+        {
+            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folder);
+            folderLogic.Get(file.Id);
             folderRepository.VerifyAll();
         }
     }
