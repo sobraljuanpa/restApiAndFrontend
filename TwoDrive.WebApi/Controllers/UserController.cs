@@ -53,33 +53,31 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //GET: /api/users/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUser")]
         public IActionResult Get(long id)
         {
-            var user = _userLogic.Get(id);
+            //var user = _userLogic.Get(id);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            //solo dejo que los admins accedan a otros usuarios por Id
-            var currentUserId = int.Parse(User.Identity.Name);//esto en realidad trae toda la info del usuario?
-            if (id != currentUserId && !User.IsInRole(Role.Admin))
-            {
-                return Forbid();
-            }
-
-            return Ok(user);
-            //try
+            //if (user == null)
             //{
-            //    User user = _userLogic.Get(id);
-            //    return Ok(user);
+            //    return NotFound();
             //}
-            //catch (Exception e)
+
+            ////solo dejo que los admins accedan a otros usuarios por Id
+            //var currentUserId = int.Parse(User.Identity.Name);//esto en realidad trae toda la info del usuario?
+            //if (id != currentUserId && !User.IsInRole(Role.Admin))
             //{
-            //    return NotFound(e.Message);
-            //}
+            //    return Forbid();
+            //}          
+            try
+            {
+                User user = _userLogic.Get(id);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         //POST: /api/users
@@ -90,7 +88,11 @@ namespace TwoDrive.WebApi.Controllers
             try
             {
                 var auxUser = _userLogic.Add(user);
-                return CreatedAtRoute("Get", new { Id = auxUser.Id }, auxUser);
+                return CreatedAtRoute(
+                    routeName: "GetUser",
+                    routeValues: new { Id = auxUser.Id },
+                    value: auxUser
+                    );
             }
             catch (Exception e)
             {

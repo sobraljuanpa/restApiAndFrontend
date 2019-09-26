@@ -56,7 +56,6 @@ namespace TwoDrive.BusinessLogic
             var auxUser = _userRepository.Get(GetUserId(user.Username));
             auxUser.RootFolder = _folderRepository.Get(GetUserRootFolderId(user.Username));
             _userRepository.Update(user, auxUser);
-
             return auxUser;
         }
 
