@@ -55,7 +55,7 @@ namespace TwoDrive.BusinessLogic.Interface
 
         protected void AlreadyInFolder(T entity, Folder folder)
         {
-            if (entity.Parent.Equals(folder))
+            if (entity.Parent.Id == folder.Id)
                 throw new Exception("El archivo ya esta en esa carpeta.");
         }
 
