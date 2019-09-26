@@ -55,16 +55,19 @@ namespace TwoDrive.BusinessLogic.Interface
 
         protected void AlreadyInFolder(T entity, Folder folder)
         {
-            if (entity.Parent.Equals(folder))
+            if (entity.Parent.Id == folder.Id)
                 throw new Exception("El archivo ya esta en esa carpeta.");
         }
 
         protected void ReadersExist(List<User> readers)
         {
-            foreach (User reader in readers)
+            if(readers.Count != 0)
             {
-                if (_userRepository.Get(reader.Id) == null)
-                    throw new Exception("Uno de los lectores especificados no existe.");
+                foreach (User reader in readers)
+                {
+                    if (_userRepository.Get(reader.Id) == null)
+                        throw new Exception("Uno de los lectores especificados no existe.");
+                }
             }
         }
 

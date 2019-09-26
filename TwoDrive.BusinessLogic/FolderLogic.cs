@@ -19,6 +19,7 @@ namespace TwoDrive.BusinessLogic
             ValidateFormat(entity);
             Folder folderBefore = entity.Parent;
             Folder folderAfter = entity.Parent;
+            FoldersNull(folderAfter);
             folderAfter.AddFolder(entity);
             _repository.Update(folderBefore, folderAfter);
             _repository.Add(entity);
@@ -33,13 +34,15 @@ namespace TwoDrive.BusinessLogic
         }
         public void Move(long EntityId, long folderId)
         {
+            FolderElementExists(EntityId);
+            FolderElementExists(folderId);
             Folder Entity = _repository.Get(EntityId);
             Folder folder = _repository.Get(folderId);
-            FolderElementExists(Entity.Id);
-            FolderElementExists(folder.Id);
             AlreadyInFolder(Entity, folder);
+            IsFolderRoot(folderId);
             Folder folderWhereFolderWas = Entity.Parent;
             Folder folderWhereIsIt = folder.Parent;
+            FoldersNull(folderWhereIsIt);
             folderWhereIsIt.AddFolder(folder);
             folderWhereFolderWas.RemoveFolder(Entity);
             _repository.Update(Entity.Parent,folderWhereFolderWas);
@@ -50,9 +53,31 @@ namespace TwoDrive.BusinessLogic
         {
             NameIsNull(entity.Name);
             ParentIsNull(entity.Parent);
-            ReadersIsNull(entity.Readers);
+            try
+            {
+                ReadersIsNull(entity.Readers);
+            }
+            catch (Exception)
+            {
+                List<User> readers = new List<User>();
+                if (entity.Parent.Readers == null) entity.Parent.Readers = new List<User>();
+                readers = entity.Parent.Readers;
+                entity.Readers = readers;
+            }
             OwnerExists(entity.OwnerId);
             ReadersExist(entity.Readers);
+        }
+
+        private void IsFolderRoot(long folderId)
+        {
+            if(_repository.Get(folderId).Parent == null)
+                throw new Exception("La carpeta RAIZ no puede ser movida.");
+        }
+
+        private void FoldersNull(Folder folderAfter)
+        {
+            if (folderAfter.Folders == null)
+                folderAfter.Folders = new List<Folder>();
         }
     }
 }
