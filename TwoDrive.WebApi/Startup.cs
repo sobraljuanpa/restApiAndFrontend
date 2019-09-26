@@ -33,7 +33,7 @@ namespace TwoDrive.WebApi
             services.AddScoped<IDataRepository<User>, UserRepository>();
             services.AddScoped<IDataRepository<Folder>, FolderRepository>();
             services.AddScoped<IDataRepository<File>, FileRepository>();
-            services.AddScoped<ILogic<User>, UserLogic>();
+            services.AddScoped<UserLogic>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //esto es lo de autenticacion
