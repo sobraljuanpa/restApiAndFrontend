@@ -40,8 +40,11 @@ namespace TwoDrive.BusinessLogic.Interface
         public void RemoveReader(T Entity, long userId)
         {
             UserExist(userId);
+            ListReadersNotNull(Entity);
+            T fileUpdate = Entity;
             User user = _userRepository.Get(userId);
             Entity.RemoveReader(user);
+            _repository.Update(Entity, fileUpdate);
         }
 
         protected void FolderElementExists(long id)
