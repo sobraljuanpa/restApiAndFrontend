@@ -135,5 +135,14 @@ namespace TwoDrive.Test.BusinessLogic
             folderLogic.AddReader(folder, 7);
             folderRepository.VerifyAll();
         }
+
+        [TestMethod]
+        public void AddReader()
+        {
+            userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
+            folderLogic.AddReader(folder, 2);
+            folderRepository.VerifyAll();
+        }
     }
 }
