@@ -39,8 +39,8 @@ namespace TwoDrive.BusinessLogic.Interface
 
         public void RemoveReader(T Entity, long userId)
         {
+            UserExist(userId);
             User user = _userRepository.Get(userId);
-            UserExist(user.Id);
             Entity.RemoveReader(user);
         }
 
