@@ -6,11 +6,13 @@ namespace TwoDrive.BusinessLogic.Interface
 {
     public interface ILogic<T>
     {
+        User Authenticate(string username, string password);
+        long GetUserId(string username);
+        long GetUserRootFolderId(string username);
         IEnumerable<T> GetAll();
         T Get(long id);
-        void Add(T entity);
+        T Add(T entity);
         void Update(T Entity, T newEntity);
         void Delete(T Entity);
-        User Authenticate(string user, string pass);
     }
 }
