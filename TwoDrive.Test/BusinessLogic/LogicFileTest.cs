@@ -99,5 +99,13 @@ namespace TwoDrive.Test.BusinessLogic
             fileRepository.VerifyAll();
         }
 
+        [TestMethod]
+        public void GetFile()
+        {
+            fileRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(file);
+            fileLogic.Get(file.Id);
+            fileRepository.VerifyAll();
+        }
+
     }
 }
