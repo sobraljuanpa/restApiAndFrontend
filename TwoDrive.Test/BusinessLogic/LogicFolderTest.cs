@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
 using TwoDrive.BusinessLogic;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
@@ -116,6 +117,14 @@ namespace TwoDrive.Test.BusinessLogic
             folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folder);
             folderRepository.Setup(f => f.Delete(It.IsAny<Folder>()));
             folderLogic.Delete(folder);
+            folderRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            folderRepository.Setup(f => f.GetAll()).Returns(new List<Folder>());
+            folderLogic.GetAll();
             folderRepository.VerifyAll();
         }
     }
