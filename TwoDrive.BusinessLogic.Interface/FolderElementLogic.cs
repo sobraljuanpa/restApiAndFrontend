@@ -29,8 +29,8 @@ namespace TwoDrive.BusinessLogic.Interface
 
         public void AddReader(T Entity, long userId)
         {
+            UserExist(userId);
             User user = _userRepository.Get(userId);
-            UserExist(user.Id);
             Entity.AddReader(user);
         }
 

@@ -131,5 +131,13 @@ namespace TwoDrive.Test.BusinessLogic
             fileLogic.GetAll();
             fileRepository.VerifyAll();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void AddReaderNotExist()
+        {
+            fileLogic.AddReader(file,7);
+            fileRepository.VerifyAll();
+        }
     }
 }
