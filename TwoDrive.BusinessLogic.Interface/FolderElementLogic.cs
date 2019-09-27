@@ -53,18 +53,6 @@ namespace TwoDrive.BusinessLogic.Interface
                 throw new Exception("El elemento no existe.");
         }
 
-        protected void HasTheSameLocation(T entity, T newEntity)
-        {
-            if (!entity.Parent.Equals(newEntity.Parent))
-                throw new Exception("Las ubicaciones no coinciden.");
-        }
-
-        protected void AlreadyInFolder(T entity, Folder folder)
-        {
-            if (entity.Parent.Id == folder.Id)
-                throw new Exception("El archivo ya esta en esa carpeta.");
-        }
-
         protected void ReadersExist(List<User> readers)
         {
             if(readers.Count != 0)

@@ -1,0 +1,417 @@
+{
+	"info": {
+		"_postman_id": "344b9411-268f-4a74-b909-067c6e3de69e",
+		"name": "ProbandoSistemaCompleto",
+		"description": "Creo un usuario comun -> Agrego carpetas y archivos al mismo -> las muevo de lugar e elimino.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AgregoUnUsuarioAlSistema",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"FirstName\": \"José Pablo\", \n\t\"LastName\": \"Goñi Estefan\", \n\t\"Username\": \"JosePabloGoni\",\n\t\"Password\": \"Josepa\", \n\t\"Email\": \"josepablogoni@gmail.com\", \n\t\"Role\": \"User\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53319/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LogeoConMiUsuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"Username\": \"JosePabloGoni\",\n\t\"Password\": \"Josepa\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53319/api/users/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"users",
+						"authenticate"
+					]
+				},
+				"description": "Me registro al sistema para que me de un TOKEN"
+			},
+			"response": []
+		},
+		{
+			"name": "MeTraigoMiUsuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTUwNjkzOSwiZXhwIjoxNTY5NTA3ODM5LCJpYXQiOjE1Njk1MDY5Mzl9.6SolXbJ0TDUFOJhs3rU8R9JSGmXDD35z4xPHkI49gTw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:53319/api/users/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"users",
+						"6"
+					]
+				},
+				"description": "Traigo todos los datos de mi logeo."
+			},
+			"response": []
+		},
+		{
+			"name": "RootUsuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTUwNjkzOSwiZXhwIjoxNTY5NTA3ODM5LCJpYXQiOjE1Njk1MDY5Mzl9.6SolXbJ0TDUFOJhs3rU8R9JSGmXDD35z4xPHkI49gTw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:53319/api/folders/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"folders",
+						"3"
+					]
+				},
+				"description": "Me traigo los datos de la carpeta root que se crea por defecto al crearse el usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "AgregarCarpetaARoot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTUwNjkzOSwiZXhwIjoxNTY5NTA3ODM5LCJpYXQiOjE1Njk1MDY5Mzl9.6SolXbJ0TDUFOJhs3rU8R9JSGmXDD35z4xPHkI49gTw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"Parent\": { \"id\": \"3\" },\n\t\"OwnerId\": \"6\", \n\t\"Name\": \"Folder1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53319/api/folders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"folders"
+					]
+				},
+				"description": "Agrego una carpeta a la carpeta ROOT del usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "AgregoRedearsACarpeta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTUwNjkzOSwiZXhwIjoxNTY5NTA3ODM5LCJpYXQiOjE1Njk1MDY5Mzl9.6SolXbJ0TDUFOJhs3rU8R9JSGmXDD35z4xPHkI49gTw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:53319/api/folders/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"folders",
+						"4"
+					]
+				},
+				"description": "Agrego el usuario con id = 4 a la carpeta que acabamos de crear"
+			},
+			"response": []
+		},
+		{
+			"name": "ModificoCarpetaRecienCreada",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTUwNjkzOSwiZXhwIjoxNTY5NTA3ODM5LCJpYXQiOjE1Njk1MDY5Mzl9.6SolXbJ0TDUFOJhs3rU8R9JSGmXDD35z4xPHkI49gTw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"Name\": \"Esta carpeta quedo modificada\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53319/api/folders/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"folders",
+						"5"
+					]
+				},
+				"description": "Agrego el usuario con id = 4 a la carpeta que acabamos de crear"
+			},
+			"response": []
+		},
+		{
+			"name": "EliminoCarpeta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTUwNjkzOSwiZXhwIjoxNTY5NTA3ODM5LCJpYXQiOjE1Njk1MDY5Mzl9.6SolXbJ0TDUFOJhs3rU8R9JSGmXDD35z4xPHkI49gTw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"Name\": \"Esta carpeta quedo modificada\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53319/api/folders/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"folders",
+						"4"
+					]
+				},
+				"description": "Elimino una carpeta creada del sistema."
+			},
+			"response": []
+		},
+		{
+			"name": "MuevoCarpetas",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTUwNjkzOSwiZXhwIjoxNTY5NTA3ODM5LCJpYXQiOjE1Njk1MDY5Mzl9.6SolXbJ0TDUFOJhs3rU8R9JSGmXDD35z4xPHkI49gTw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"Name\": \"Esta carpeta quedo modificada\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53319/api/folders/22/folder/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"folders",
+						"22",
+						"folder",
+						"3"
+					]
+				},
+				"description": "Muevo las carpetas de lugar."
+			},
+			"response": []
+		},
+		{
+			"name": "Elimino un usuario lector",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:53319/api/folders/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53319",
+					"path": [
+						"api",
+						"folders",
+						"4"
+					]
+				},
+				"description": "Elimino un usuario lector de una carpeta"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

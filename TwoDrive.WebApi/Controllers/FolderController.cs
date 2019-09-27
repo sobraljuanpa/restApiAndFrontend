@@ -57,7 +57,7 @@ namespace TwoDrive.WebApi.Controllers
                 var folderAux = _folderLogic.Add(folders);
                 return CreatedAtRoute(
                     routeName: "GetFolder",
-                    routeValues: new { Id = folderAux.Id },
+                    routeValues: new { folderId = folderAux.Id },
                     value: folderAux
                     );
             }

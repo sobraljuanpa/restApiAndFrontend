@@ -35,9 +35,8 @@ namespace TwoDrive.BusinessLogic
         public void Update(File Entity, File newEntity)
         {
             newEntity.LastModifiedDate = DateTime.Now;
-            ValidateFormat(newEntity);
             FolderElementExists(Entity.Id);
-            HasTheSameLocation(Entity, newEntity);
+            CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
         }
         public void Move(long EntityId, long folderId)
@@ -46,7 +45,7 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(folderId);
             File Entity = _repository.Get(EntityId);
             Folder folder = _folderRepository.Get(folderId);
-            AlreadyInFolder(Entity, folder);
+            IsTheSameOwner(Entity, folder);
             Folder folderWhereFileWas = Entity.Parent;
             Folder folderWhereIsIt = folder;
             File filePrevious = Entity;
@@ -58,6 +57,12 @@ namespace TwoDrive.BusinessLogic
             folder.AddFile(Entity);
             _repository.Update(filePrevious, Entity);
             _folderRepository.Update(folderWhereIsIt, folder);
+        }
+
+        private void IsTheSameOwner(File entity, Folder folder)
+        {
+            if (entity.OwnerId != folder.OwnerId)
+                throw new Exception("Esta accediendo a carpetas que no son su propiedad.");
         }
 
         private void ValidateFormat(File entity)
@@ -78,6 +83,16 @@ namespace TwoDrive.BusinessLogic
             ContentIsNull(entity.Content);
             OwnerExists(entity.OwnerId);
             ReadersExist(entity.Readers);
+        }
+
+        private void CopyEntity(File old, File newF)
+        {
+            if (newF.Name == null) newF.Name = old.Name;
+            if (newF.OwnerId == 0) newF.OwnerId = old.OwnerId;
+            if (newF.Parent == null) newF.Parent = old.Parent;
+            if (newF.Readers == null) newF.Readers = old.Readers;
+            if (newF.Content == null) newF.Content = old.Content;
+            if (newF.CreationDate == null) newF.CreationDate = old.CreationDate;
         }
 
         private void ContentIsNull(string content)

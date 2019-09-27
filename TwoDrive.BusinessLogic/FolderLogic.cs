@@ -30,9 +30,8 @@ namespace TwoDrive.BusinessLogic
 
         public void Update(Folder Entity, Folder newEntity)
         {
-            ValidateFormat(newEntity);
             FolderElementExists(Entity.Id);
-            HasTheSameLocation(Entity, newEntity);
+            CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
         }
         public void Move(long EntityId, long folderId)
@@ -41,7 +40,7 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(folderId);
             Folder Entity = _repository.Get(EntityId);
             Folder folder = _repository.Get(folderId);
-            AlreadyInFolder(Entity, folder);
+            IsTheSameOwner(Entity, folder);
             IsFolderRoot(folderId);
             Folder folderWhereFolderWas = Entity.Parent;
             Folder folderWhereIsIt = folder.Parent;
@@ -55,6 +54,21 @@ namespace TwoDrive.BusinessLogic
         public void AddFatherFolder(Folder folder)
         {
             folder.Parent = _repository.Get(folder.Parent.Id);
+        }
+
+        private void CopyEntity(Folder old, Folder newE){
+            if (newE.Files == null) newE.Files = old.Files;
+            if (newE.Folders == null) newE.Folders = old.Folders;
+            if (newE.Name == null) newE.Name = old.Name;
+            if (newE.OwnerId == 0) newE.OwnerId = old.OwnerId;
+            if (newE.Parent == null) newE.Parent = old.Parent;
+            if (newE.Readers == null) newE.Readers = old.Readers;
+        }
+
+        private void IsTheSameOwner(Folder entity, Folder folder)
+        {
+            if(entity.OwnerId != folder.OwnerId)
+                throw new Exception("Esta accediendo a carpetas que no son su propiedad.");
         }
 
         private void ValidateFormat(Folder entity)
