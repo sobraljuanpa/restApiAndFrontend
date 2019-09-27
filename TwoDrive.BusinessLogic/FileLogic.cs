@@ -18,7 +18,7 @@ namespace TwoDrive.BusinessLogic
             _folderRepository = folderRepository;
         }
 
-        public void Add(File entity)
+        public File Add(File entity)
         {
             ValidateFormat(entity);
             entity.LastModifiedDate = DateTime.Now;
@@ -30,6 +30,7 @@ namespace TwoDrive.BusinessLogic
             _repository.Add(entity);
             folderAfter.AddFile(entity);
             _folderRepository.Update(folderBefore, folderAfter);
+            return entity;
         } 
 
         public void Update(File Entity, File newEntity)
