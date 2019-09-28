@@ -56,32 +56,32 @@ namespace TwoDrive.WebApi.Controllers
         [HttpGet("{id}", Name = "GetUser")]
         public IActionResult Get(long id)
         {
-            //var user = _userLogic.Get(id);
-
-            //if (user == null)
-            //{
-            //    return NotFound();
-            //}
-
-            ////solo dejo que los admins accedan a otros usuarios por Id
-            //var currentUserId = int.Parse(User.Identity.Name);//esto en realidad trae toda la info del usuario?
-            //if (id != currentUserId && !User.IsInRole(Role.Admin))
-            //{
-            //    return Forbid();
-            //}          
             try
             {
                 User user = _userLogic.Get(id);
-                return Ok(user);
+                //Si no hay un usuario con ese id retorno 404 (Not found)
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                var currentUserId = int.Parse(User.Identity.Name);
+                //Si el usuario autenticado no es el mismo que el del id/un admin retorno 401 (Unauthorized)
+                if (id != currentUserId && !User.IsInRole(Role.Admin))
+                {
+                    return Unauthorized();
+                }
+
+                return Ok(User);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-                return NotFound(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
         //POST: /api/users
-        //[Authorize(Roles = Role.Admin)]
+        [Authorize(Roles = Role.Admin)]
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
@@ -101,6 +101,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //PUT: /api/users/5
+        [Authorize(Roles = Role.Admin)]
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] User user)
         {
