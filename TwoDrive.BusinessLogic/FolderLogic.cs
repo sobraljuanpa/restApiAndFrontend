@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
@@ -73,6 +73,12 @@ namespace TwoDrive.BusinessLogic
 
         private void ValidateFormat(Folder entity)
         {
+            var regex = new Regex("$-rootFolder");
+            if (regex.IsMatch(entity.Name))
+            {
+                throw new Exception("The name format you specified is reserved for user root folders");
+            }
+
             NameIsNull(entity.Name);
             ParentIsNull(entity);
             if (entity.Files == null) entity.Files = new List<File>();
