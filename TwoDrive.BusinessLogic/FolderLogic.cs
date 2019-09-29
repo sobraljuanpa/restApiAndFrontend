@@ -47,11 +47,12 @@ namespace TwoDrive.BusinessLogic
             DeleteFolder(entity);
         }
         public void Move(long EntityId, long folderId)
-        {  
+        {
             FolderElementExists(EntityId);
             FolderElementExists(folderId);
             Folder Entity = _repository.Get(EntityId);
             Folder folder = _repository.Get(folderId);
+            NotMoveSubFolder(Entity, folder);
             IsTheSameOwner(Entity, folder);
             IsFolderRoot(folderId);
             Folder folderWhereFolderWas = Entity.Parent;
@@ -88,6 +89,14 @@ namespace TwoDrive.BusinessLogic
             foreach (var folder in ParentF.Folders)
             {
                 if(folder.Name == Entity.Name) throw new Exception("El nombre de la carpeta ya existe.");
+            }
+        }
+
+        private void NotMoveSubFolder(Folder entity, Folder folder)
+        {
+            foreach(var f in entity.Folders)
+            {
+                if(f.Id == folder.Id) throw new Exception("No puede mover a una subcarpeta.");
             }
         }
 
