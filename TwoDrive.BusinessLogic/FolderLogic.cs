@@ -35,7 +35,7 @@ namespace TwoDrive.BusinessLogic
             _repository.Update(Entity, newEntity);
         }
         public void Move(long EntityId, long folderId)
-        {
+        {  
             FolderElementExists(EntityId);
             FolderElementExists(folderId);
             Folder Entity = _repository.Get(EntityId);
@@ -71,8 +71,17 @@ namespace TwoDrive.BusinessLogic
                 throw new Exception("Esta accediendo a carpetas que no son su propiedad.");
         }
 
+        private void FolderNameIsValid(Folder Entity, Folder ParentF)
+        {
+            foreach (var folder in ParentF.Folders)
+            {
+                if(folder.Name == Entity.Name) throw new Exception("El nombre de la carpeta ya existe.");
+            }
+        }
+
         private void ValidateFormat(Folder entity)
         {
+            FolderNameIsValid(entity, entity.Parent);
             var regex = new Regex("$-rootFolder");
             if (regex.IsMatch(entity.Name))
             {
