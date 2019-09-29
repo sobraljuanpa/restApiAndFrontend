@@ -13,6 +13,7 @@ namespace TwoDrive.Test.BusinessLogic
     {
         Mock<IDataRepository<Folder>> folderRepository;
         Mock<IDataRepository<User>> userRepository;
+        Mock<IDataRepository<File>> fileRepository;
         FolderLogic folderLogic;
         File file;
         Folder folderNull;
@@ -28,7 +29,8 @@ namespace TwoDrive.Test.BusinessLogic
             folderNull = new Folder { Parent = folderRoot};
             folderRepository = new Mock<IDataRepository<Folder>>();
             userRepository = new Mock<IDataRepository<User>>();
-            folderLogic = new FolderLogic(folderRepository.Object, userRepository.Object);
+            fileRepository = new Mock<IDataRepository<File>>();
+            folderLogic = new FolderLogic(folderRepository.Object, userRepository.Object, fileRepository.Object);
             
         }
 

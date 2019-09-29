@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
@@ -10,10 +9,12 @@ namespace TwoDrive.BusinessLogic
 {
     public class FolderLogic : FolderElementLogic<Folder>
     {
-        public FolderLogic(IDataRepository<Folder> repository, IDataRepository<User> userRepository)
+        IDataRepository<File> _fileRepository;
+        public FolderLogic(IDataRepository<Folder> repository, IDataRepository<User> userRepository, IDataRepository<File> fileRepository)
         {
             base._repository = repository;
             base._userRepository = userRepository;
+            _fileRepository = fileRepository;
         }
         public Folder Add(Folder entity)
         {
@@ -33,6 +34,17 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(Entity.Id);
             CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
+        }
+
+        public void Delete(Folder entity)
+        {
+            var regex = new Regex("$-rootFolder");
+            if (regex.IsMatch(entity.Name))
+            {
+                throw new Exception("The name format you specified is reserved for user root folders, you can not delete it");
+            }
+            FolderElementExists(entity.Id);
+            DeleteFolder(entity);
         }
         public void Move(long EntityId, long folderId)
         {  
@@ -123,6 +135,19 @@ namespace TwoDrive.BusinessLogic
         {
             var folder = _repository.Get(id);
             return folder;
+        }
+
+        private void DeleteFolder(Folder folder)
+        {
+            foreach (File f in folder.Files)
+            {
+                _fileRepository.Delete(f);
+            }
+            foreach (Folder f in folder.Folders)
+            {
+                DeleteFolder(f);
+            }
+            Delete(folder);
         }
     }
 }

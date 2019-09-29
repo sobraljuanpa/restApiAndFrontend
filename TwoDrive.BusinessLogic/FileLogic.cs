@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text.RegularExpressions;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
@@ -58,6 +58,17 @@ namespace TwoDrive.BusinessLogic
             folder.AddFile(Entity);
             _repository.Update(filePrevious, Entity);
             _folderRepository.Update(folderWhereIsIt, folder);
+        }
+
+        public void Delete(File Entity)
+        {
+            var regex = new Regex("$-rootFolder");
+            if (regex.IsMatch(Entity.Name))
+            {
+                throw new Exception("The name format you specified is reserved for user root folders, you can not delete it");
+            }
+            FolderElementExists(Entity.Id);
+            _repository.Delete(Entity);
         }
 
         private void IsTheSameOwner(File entity, Folder folder)

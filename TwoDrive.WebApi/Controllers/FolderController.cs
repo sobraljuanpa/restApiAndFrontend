@@ -13,9 +13,9 @@ namespace TwoDrive.WebApi.Controllers
     {
         private readonly FolderLogic _folderLogic;
 
-        public FolderController(IDataRepository<Folder> repository, IDataRepository<User> userRepository)
+        public FolderController(IDataRepository<Folder> repository, IDataRepository<User> userRepository, IDataRepository<File> fileRepository)
         {
-            _folderLogic = new FolderLogic(repository,userRepository);
+            _folderLogic = new FolderLogic(repository,userRepository, fileRepository);
         }
 
         //GET: /api/folders
