@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.RegularExpressions;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
 
@@ -18,6 +18,11 @@ namespace TwoDrive.BusinessLogic.Interface
         }
         public void Delete(T Entity)
         {
+            var regex = new Regex("$-rootFolder");
+            if (regex.IsMatch(Entity.Name))
+            {
+                throw new Exception("The name format you specified is reserved for user root folders, you can not delete it");
+            }
             FolderElementExists(Entity.Id);
             _repository.Delete(Entity);
         }
