@@ -55,6 +55,7 @@ namespace TwoDrive.BusinessLogic
             Entity.Parent.RemoveFile(Entity);
             _folderRepository.Update(folderWhereFileWas, Entity.Parent);
             Entity.Parent = folder;
+            Entity.LastModifiedDate = DateTime.Now;
             folderFileNull(folder);
             folder.AddFile(Entity);
             _repository.Update(filePrevious, Entity);

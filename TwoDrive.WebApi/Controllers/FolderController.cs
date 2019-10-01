@@ -92,10 +92,20 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
+                bool friendList = false;
+                User user = _users.Get(int.Parse(User.Identity.Name));
                 if (_folderLogic.Get(folderId).OwnerId == int.Parse(User.Identity.Name))
                 {
-                    _folderLogic.AddReader(_folderLogic.Get(folderId), idUsers);
-                    return NoContent();
+                    foreach (var users in user.FriendList)
+                    {
+                        if (users.Id == idUsers) friendList = true;
+                    }
+                    if (friendList)
+                    {
+                        _folderLogic.AddReader(_folderLogic.Get(folderId), idUsers);
+                        return NoContent();
+                    }
+                    else return Unauthorized("El usuario al que desea agregar como lector no existe en su lista de amigos.");
                 }
                 else return Unauthorized();
             }
