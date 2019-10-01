@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using TwoDrive.BusinessLogic;
@@ -12,13 +13,16 @@ namespace TwoDrive.WebApi.Controllers
     public class FileController : ControllerBase
     {
         private readonly FileLogic _fileLogic;
+        private readonly IDataRepository<User> _users;
 
         public FileController(IDataRepository<File> repository, IDataRepository<Folder> folderRepository, IDataRepository<User> userRepository)
         {
             _fileLogic = new FileLogic(repository,folderRepository,userRepository);
+            _users = userRepository;
         }
 
         //GET: /api/files
+        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult Get()
         {
@@ -39,8 +43,20 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
+                bool canRead = false;
+                var currentUser = _users.Get(int.Parse(User.Identity.Name));
                 File file = _fileLogic.Get(id);
-                return Ok(file);
+                if (currentUser.Id == file.OwnerId || currentUser.Role == "Admin") canRead = true;
+                else
+                {
+                    foreach (var user in file.Readers)
+                    {
+                        if (user.Id == currentUser.Id) canRead = true;
+                    }
+                }
+                if (canRead) return Ok(file);
+                else return Unauthorized();
+
             }
             catch (Exception e)
             {
@@ -69,12 +85,16 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                var fileAux = _fileLogic.Add(file);
-                return CreatedAtRoute(
-                    routeName: "GetFile",
-                    routeValues: new { id = fileAux.Id },
-                    value: fileAux
-                    );
+                if (_fileLogic.Get(file.Parent.Id).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    var fileAux = _fileLogic.Add(file);
+                    return CreatedAtRoute(
+                        routeName: "GetFile",
+                        routeValues: new { id = fileAux.Id },
+                        value: fileAux
+                        );
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -88,8 +108,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _fileLogic.AddReader(_fileLogic.Get(fileId), idUsers);
-                return NoContent();
+                if (_fileLogic.Get(fileId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _fileLogic.AddReader(_fileLogic.Get(fileId), idUsers);
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -103,8 +127,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _fileLogic.Update(_fileLogic.Get(fileId), file);
-                return NoContent();
+                if (_fileLogic.Get(fileId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _fileLogic.Update(_fileLogic.Get(fileId), file);
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -118,8 +146,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _fileLogic.Move(fileId, idFolder);
-                return NoContent();
+                if (_fileLogic.Get(fileId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _fileLogic.Move(fileId, idFolder);
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -133,8 +165,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _fileLogic.Delete(_fileLogic.Get(fileId));
-                return NoContent();
+                if (_fileLogic.Get(fileId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _fileLogic.Delete(_fileLogic.Get(fileId));
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -149,8 +185,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _fileLogic.RemoveReader(_fileLogic.Get(fileId),idReader);
-                return NoContent();
+                if (_fileLogic.Get(fileId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _fileLogic.RemoveReader(_fileLogic.Get(fileId), idReader);
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {

@@ -8,7 +8,7 @@ using TwoDrive.Domain;
 namespace TwoDrive.WebApi.Controllers
 {
     [Route("/api/users")]
-    //[Authorize]//esto hace q todos los endpoint del controller esten protegidos por defecto
+    [Authorize]//esto hace q todos los endpoint del controller esten protegidos por defecto
     [ApiController]
     public class UserController : ControllerBase
     {

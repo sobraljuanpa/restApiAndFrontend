@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using TwoDrive.BusinessLogic;
@@ -12,13 +13,16 @@ namespace TwoDrive.WebApi.Controllers
     public class FolderController : ControllerBase
     {
         private readonly FolderLogic _folderLogic;
+        private readonly IDataRepository<User> _users;
 
         public FolderController(IDataRepository<Folder> repository, IDataRepository<User> userRepository, IDataRepository<File> fileRepository)
         {
             _folderLogic = new FolderLogic(repository,userRepository, fileRepository);
+            _users = userRepository;
         }
 
         //GET: /api/folders
+        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult Get()
         {
@@ -39,8 +43,19 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
+                bool canRead = false;
+                var currentUser = _users.Get(int.Parse(User.Identity.Name));
                 Folder folder = _folderLogic.Get(folderId);
-                return Ok(folder);
+                if (currentUser.Id == folder.OwnerId || currentUser.Role == "Admin") canRead = true;
+                else
+                {
+                    foreach (var user in folder.Readers)
+                    {
+                        if (user.Id == currentUser.Id) canRead = true;
+                    }
+                }
+                if (canRead) return Ok(folder);
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -54,12 +69,16 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                var folderAux = _folderLogic.Add(folders);
-                return CreatedAtRoute(
-                    routeName: "GetFolder",
-                    routeValues: new { folderId = folderAux.Id },
-                    value: folderAux
-                    );
+                if (_folderLogic.Get(folders.Parent.Id).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    var folderAux = _folderLogic.Add(folders);
+                    return CreatedAtRoute(
+                        routeName: "GetFolder",
+                        routeValues: new { folderId = folderAux.Id },
+                        value: folderAux
+                        );
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -73,8 +92,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _folderLogic.AddReader(_folderLogic.Get(folderId), idUsers);
-                return NoContent();
+                if (_folderLogic.Get(folderId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _folderLogic.AddReader(_folderLogic.Get(folderId), idUsers);
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -88,8 +111,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _folderLogic.Update(_folderLogic.Get(folderId), folder);
-                return NoContent();
+                if (_folderLogic.Get(folderId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _folderLogic.Update(_folderLogic.Get(folderId), folder);
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -103,8 +130,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _folderLogic.Move(folderId, idFolder);
-                return NoContent();
+                if (_folderLogic.Get(folderId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _folderLogic.Move(folderId, idFolder);
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -118,8 +149,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _folderLogic.Delete(_folderLogic.Get(folderId));
-                return NoContent();
+                if (_folderLogic.Get(folderId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _folderLogic.Delete(_folderLogic.Get(folderId));
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
@@ -134,8 +169,12 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                _folderLogic.RemoveReader(_folderLogic.Get(folderId), idReader);
-                return NoContent();
+                if (_folderLogic.Get(folderId).OwnerId == int.Parse(User.Identity.Name))
+                {
+                    _folderLogic.RemoveReader(_folderLogic.Get(folderId), idReader);
+                    return NoContent();
+                }
+                else return Unauthorized();
             }
             catch (Exception e)
             {
