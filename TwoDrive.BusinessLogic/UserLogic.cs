@@ -85,6 +85,20 @@ namespace TwoDrive.BusinessLogic
             _userRepository.Update(Entity, newEntity);
         }
 
+        public void AddFriend(User user, User userFriend)
+        {
+            ValidateUserInSystem(userFriend.Id);
+            user.AddToFriendList(userFriend);
+            _userRepository.Update(_userRepository.Get(user.Id), user);
+        }
+
+        public void RemoveFriend(User user, User userFriend)
+        {
+            ValidateUserInSystem(userFriend.Id);
+            user.RemoveFromFriendList(userFriend);
+            _userRepository.Update(_userRepository.Get(user.Id), user);
+        }
+
         private void NotRepeated(User entity)
         {
             if(_userRepository.Get(entity.Id) != null)

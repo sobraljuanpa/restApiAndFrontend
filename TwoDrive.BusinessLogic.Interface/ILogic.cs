@@ -14,5 +14,7 @@ namespace TwoDrive.BusinessLogic.Interface
         T Add(T entity);
         void Update(T Entity, T newEntity);
         void Delete(T Entity);
+        void AddFriend(T user, T userFriend);
+        void RemoveFriend(T user, T userFriend);
     }
 }

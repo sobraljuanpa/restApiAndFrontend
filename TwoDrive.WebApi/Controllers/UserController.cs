@@ -79,6 +79,23 @@ namespace TwoDrive.WebApi.Controllers
             }
         }
 
+        //POST: /api/Users/5
+        [HttpPost("{idUser}")]
+        public IActionResult PostFriend(long idUser)
+        {
+            try
+            {
+                User user = _userLogic.Get(int.Parse(User.Identity.Name));
+                User userFriend = _userLogic.Get(idUser);
+                _userLogic.AddFriend(user, userFriend);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
         //POST: /api/users
         [Authorize(Roles = Role.Admin)]
         [HttpPost]
@@ -124,6 +141,23 @@ namespace TwoDrive.WebApi.Controllers
             {
                 _userLogic.Delete(_userLogic.Get(id));
                 return NoContent();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        //POST: /api/Users/5
+        [HttpDelete("{idUser}")]
+        public IActionResult DeleteFriend(long idUser)
+        {
+            try
+            {
+                User user = _userLogic.Get(int.Parse(User.Identity.Name));
+                User userFriend = _userLogic.Get(idUser);
+                _userLogic.RemoveFriend(user, userFriend);
+                return Ok();
             }
             catch (Exception e)
             {
