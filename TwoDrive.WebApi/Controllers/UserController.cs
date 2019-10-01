@@ -71,7 +71,7 @@ namespace TwoDrive.WebApi.Controllers
                     return Unauthorized();
                 }
 
-                return Ok(User);
+                return Ok(user);
             }
             catch(Exception e)
             {

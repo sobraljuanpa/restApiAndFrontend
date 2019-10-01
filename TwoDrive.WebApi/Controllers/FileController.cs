@@ -48,6 +48,21 @@ namespace TwoDrive.WebApi.Controllers
             }            
         }
 
+        //GET: /api/files/view?fileName=a&lastName=b
+        [HttpGet("view")]
+        public IActionResult GetSorted(string fileName, string sortOrder)
+        {
+            try
+            {
+                List<File> files = _fileLogic.GetSortedFiles(int.Parse(User.Identity.Name), sortOrder, fileName);
+                return Ok(files);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         //POST: /api/files
         [HttpPost]
         public IActionResult Post([FromBody] File file)
