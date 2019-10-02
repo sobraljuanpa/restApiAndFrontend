@@ -23,8 +23,8 @@ namespace TwoDrive.Test.BusinessLogic
         [TestInitialize]
         public void SetUp()
         {
-            folderRoot = new Folder { Parent = null, Readers = null, OwnerId = 0, Name = "ROOT", Files = null, Folders = null, Id = 0 };
-            folder = new Folder { Parent = folderRoot, Readers = null, OwnerId = 0, Name = "Folder1", Files = null, Folders = null, Id = 1 };
+            folderRoot = new Folder { Parent = null, Readers = null, OwnerId = 0, Name = "ROOT", Files = new List<File>(), Folders = new List<Folder>(), Id = 0 };
+            folder = new Folder { Parent = folderRoot, Readers = null, OwnerId = 0, Name = "Folder1", Files = new List<File>(), Folders = new List<Folder>(), Id = 1 };
             file = new File { Content = "Algo de texto.", CreationDate = DateTime.Now, Id = 0, LastModifiedDate = DateTime.Now, Name = "Archivo", OwnerId = 0, Parent = folder, Readers = null };
             folderNull = new Folder { Parent = folderRoot};
             folderRepository = new Mock<IDataRepository<Folder>>();
@@ -35,7 +35,7 @@ namespace TwoDrive.Test.BusinessLogic
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void AddFolderNullToRoot()
         {
             folderLogic.Add(folderNull);
@@ -46,6 +46,7 @@ namespace TwoDrive.Test.BusinessLogic
         public void AddFolderToRoot()
         {
             userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folderRoot);
             folderRepository.Setup(f => f.Add(It.IsAny<Folder>()));
             folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
             folderLogic.Add(folder);
@@ -82,7 +83,7 @@ namespace TwoDrive.Test.BusinessLogic
         public void MoveFolder()
         {
             folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
-            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(new Folder { Parent = new Folder { Id = 8} });
+            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(new Folder { Parent = new Folder { Id = 8} , Files = new List<File>(), Folders = new List<Folder>()});
             userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
             Folder folderMove = new Folder { Parent = folder, Readers = null, OwnerId = 0, Name = "Folder2", Files = null, Folders = null, Id = 2 };
             folderLogic.Move(folder.Id, folderMove.Id);
@@ -106,7 +107,7 @@ namespace TwoDrive.Test.BusinessLogic
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void DeleteFolderNull()
         {
             folderLogic.Delete(folderNull);

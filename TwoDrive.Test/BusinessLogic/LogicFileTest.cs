@@ -44,6 +44,7 @@ namespace TwoDrive.Test.BusinessLogic
         {
             fileRepository.Setup(f => f.Add(It.IsAny<File>()));
             userRepository.Setup(u => u.Get(It.IsAny<long>())).Returns(new User());
+            folderRepository.Setup(f => f.Get(It.IsAny<long>())).Returns(folder);
             folderRepository.Setup(f => f.Add(It.IsAny<Folder>()));
             folderRepository.Setup(f => f.Update(It.IsAny<Folder>(), It.IsAny<Folder>()));
             fileLogic.Add(file);
@@ -108,7 +109,7 @@ namespace TwoDrive.Test.BusinessLogic
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(System.ArgumentNullException))]
         public void DeleteFileNull()
         {
             fileLogic.Delete(fileNull);

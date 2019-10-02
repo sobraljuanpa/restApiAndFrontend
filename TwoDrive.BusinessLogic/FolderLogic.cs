@@ -156,7 +156,7 @@ namespace TwoDrive.BusinessLogic
             {
                 DeleteFolder(f);
             }
-            Delete(folder);
+            _repository.Delete(folder);
         }
     }
 }
