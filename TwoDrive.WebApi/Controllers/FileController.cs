@@ -13,11 +13,13 @@ namespace TwoDrive.WebApi.Controllers
     public class FileController : ControllerBase
     {
         private readonly FileLogic _fileLogic;
+        private readonly FolderLogic _folderLogic;
         private readonly IDataRepository<User> _users;
 
-        public FileController(IDataRepository<File> repository, IDataRepository<Folder> folderRepository, IDataRepository<User> userRepository)
+        public FileController(IDataRepository<File> fileRepository, IDataRepository<Folder> folderRepository, IDataRepository<User> userRepository)
         {
-            _fileLogic = new FileLogic(repository,folderRepository,userRepository);
+            _fileLogic = new FileLogic(fileRepository, folderRepository, userRepository);
+            _folderLogic = new FolderLogic(folderRepository, userRepository, fileRepository);
             _users = userRepository;
         }
 
@@ -93,7 +95,7 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                if (_fileLogic.Get(file.Parent.Id).OwnerId == int.Parse(User.Identity.Name))
+                if (_folderLogic.Get(file.Parent.Id).OwnerId == int.Parse(User.Identity.Name))
                 {
                     var fileAux = _fileLogic.Add(file);
                     return CreatedAtRoute(
