@@ -9,6 +9,7 @@ using TwoDrive.Domain;
 namespace TwoDrive.WebApi.Controllers
 {
     [Route("/api/files")]
+    [Authorize]
     [ApiController]
     public class FileController : ControllerBase
     {
@@ -177,7 +178,7 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                if (_fileLogic.Get(fileId).OwnerId == int.Parse(User.Identity.Name))
+                if (_fileLogic.Get(fileId).OwnerId == int.Parse(User.Identity.Name) || User.IsInRole(Role.Admin))
                 {
                     _fileLogic.Delete(_fileLogic.Get(fileId));
                     return NoContent();
