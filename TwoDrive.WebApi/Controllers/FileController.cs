@@ -70,8 +70,16 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                List<File> files = _fileLogic.GetSortedFiles(int.Parse(User.Identity.Name), sortOrder, fileName);
-                return Ok(files);
+                if(!User.IsInRole(Role.Admin))
+                {
+                    List<File> files = _fileLogic.GetSortedFiles(int.Parse(User.Identity.Name), sortOrder, fileName);
+                    return Ok(files);
+                }
+                else
+                {
+                    List<File> files = _fileLogic.GetAllSortedFiles(sortOrder, fileName);
+                    return Ok(files);
+                }
             }
             catch(Exception e)
             {
