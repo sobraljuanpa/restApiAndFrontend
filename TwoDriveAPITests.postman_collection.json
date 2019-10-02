@@ -31,13 +31,20 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1NjkzNzM0MzAsImV4cCI6MTU2OTM3NDMzMCwiaWF0IjoxNTY5MzczNDMwfQ.cTviKEfyXqGKtA2HnjVbfwb_xwcbQu1gDFxFvvwKG6E",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1Njk4ODM4MTUsImV4cCI6MTU2OTg4NDcxNSwiaWF0IjoxNTY5ODgzODE1fQ.JEW0GAgiNYNzDzobde7JaL9u4Q7YCtte3iVp2cShFso",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:57901/api/users/2",
 							"protocol": "http",
@@ -249,6 +256,275 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "AddNewUserTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1Njk4ODQwNTgsImV4cCI6MTU2OTg4NDk1OCwiaWF0IjoxNTY5ODg0MDU4fQ.ZQLo0ql0Xf_nGZXva_t8z46eLdCfqeg7UeMFdC9CJCg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"New\",\n\t\"lastName\": \"User\",\n\t\"username\":\"newUser\",\n\t\"password\":\"newUser\",\n\t\"email\": \"user@user.user\",\n\t\"Role\": \"User\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57901/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57901",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddAnotherNewUserTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1Njk5Nzk1NTEsImV4cCI6MTU2OTk4MDQ1MSwiaWF0IjoxNTY5OTc5NTUxfQ.nphmm3hU86hNwURRWUbxLhqwgsk5_RtRPbnaVjpwof4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Another\",\n\t\"lastName\": \"User\",\n\t\"username\":\"anotherUser\",\n\t\"password\":\"anotherUser\",\n\t\"email\": \"user@user.user\",\n\t\"Role\": \"User\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57901/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57901",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "filesEndpointTests",
+			"item": [
+				{
+					"name": "AddFileTest1NewUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"prueba\",\n\t\"parent\": {\"id\": \"1\"},\n\t\"ownerid\":\"4\",\n\t\"content\":\"algo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57901/api/files/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57901",
+							"path": [
+								"api",
+								"files",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddFileTest2NewUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"pruebaOtroArchivo\",\n\t\"parent\": {\"id\": \"1\"},\n\t\"ownerid\":\"4\",\n\t\"content\":\"otro Contenido\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57901/api/files/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57901",
+							"path": [
+								"api",
+								"files",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddFileTest3AnotherUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjUiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTk4MDM4MCwiZXhwIjoxNTY5OTgxMjgwLCJpYXQiOjE1Njk5ODAzODB9.w8rmlMp4FikkasY2Irf58paQoZjw7CV-325hNYTimVs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"anotherUserTest\",\n\t\"parent\": {\"id\": \"2\"},\n\t\"ownerid\":\"5\",\n\t\"content\":\"anotherContent\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:57901/api/files/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57901",
+							"path": [
+								"api",
+								"files",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ViewSortedFilesUserWithNoFiles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1Njk5ODA1MjMsImV4cCI6MTU2OTk4MTQyMywiaWF0IjoxNTY5OTgwNTIzfQ.B2r_5LutU7x063oW0n-lpalwRNeZ5hNs0kmAqJpoQhQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:57901/api/files/view?fileName=&sortOrder=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "57901",
+							"path": [
+								"api",
+								"files",
+								"view"
+							],
+							"query": [
+								{
+									"key": "fileName",
+									"value": ""
+								},
+								{
+									"key": "sortOrder",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -278,7 +554,7 @@
 	],
 	"variable": [
 		{
-			"id": "60173e59-ae51-4786-bdc5-9059c0843f95",
+			"id": "468c1012-efc1-4a58-8888-e10ccf1e59a7",
 			"key": "url",
 			"value": "http://localhost:57901/api/",
 			"type": "string"
