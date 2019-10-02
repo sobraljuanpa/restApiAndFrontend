@@ -23,14 +23,14 @@ namespace TwoDrive.WebApi.Controllers
             _users = userRepository;
         }
 
-        //GET: /api/files
+        //GET: /api/files?fileName=a&sortOrder=b
         [Authorize(Roles = Role.Admin)]
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(string fileName, string sortOrder)
         {
             try
             {
-                IEnumerable<File> files = _fileLogic.GetAll();
+                List<File> files = _fileLogic.GetAllSortedFiles(sortOrder, fileName);
                 return Ok(files);
             }
             catch (Exception e)
@@ -66,22 +66,14 @@ namespace TwoDrive.WebApi.Controllers
             }            
         }
 
-        //GET: /api/files/view?fileName=a&lastName=b
+        //GET: /api/files/view?fileName=a&sortOrder=b
         [HttpGet("view")]
         public IActionResult GetSorted(string fileName, string sortOrder)
         {
             try
             {
-                if(!User.IsInRole(Role.Admin))
-                {
-                    List<File> files = _fileLogic.GetSortedFiles(int.Parse(User.Identity.Name), sortOrder, fileName);
-                    return Ok(files);
-                }
-                else
-                {
-                    List<File> files = _fileLogic.GetAllSortedFiles(sortOrder, fileName);
-                    return Ok(files);
-                }
+                List<File> files = _fileLogic.GetSortedFiles(int.Parse(User.Identity.Name), sortOrder, fileName);
+                return Ok(files);
             }
             catch(Exception e)
             {
