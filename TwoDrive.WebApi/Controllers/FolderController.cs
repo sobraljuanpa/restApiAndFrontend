@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using TwoDrive.BusinessLogic;
+using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
 
@@ -12,12 +12,12 @@ namespace TwoDrive.WebApi.Controllers
     [ApiController]
     public class FolderController : ControllerBase
     {
-        private readonly FolderLogic _folderLogic;
+        private readonly FolderElementLogic<Folder> _folderLogic;
         private readonly IDataRepository<User> _users;
 
-        public FolderController(IDataRepository<Folder> repository, IDataRepository<User> userRepository, IDataRepository<File> fileRepository)
+        public FolderController(FolderElementLogic<Folder> folderLogic, IDataRepository<User> userRepository)
         {
-            _folderLogic = new FolderLogic(repository,userRepository, fileRepository);
+            _folderLogic = folderLogic;
             _users = userRepository;
         }
 

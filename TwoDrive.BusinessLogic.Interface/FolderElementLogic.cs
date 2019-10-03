@@ -10,6 +10,12 @@ namespace TwoDrive.BusinessLogic.Interface
         protected IDataRepository<T> _repository;
         protected IDataRepository<User> _userRepository;
 
+        public abstract T Add(T entity);
+        public abstract void Update(T Entity, T newEntity);
+        public abstract void Move(long EntityId, long folderId);
+        public abstract void Delete(T Entity);
+        public abstract List<T> GetAllSortedFiles(string sortOrder = null, string fileName = null);
+        public abstract List<T> GetSortedFiles(long userId, string sortOrder = null, string fileName = null);
         public T Get(long id)
         {
             FolderElementExists(id);

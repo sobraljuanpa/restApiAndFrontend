@@ -19,7 +19,7 @@ namespace TwoDrive.BusinessLogic
             _folderRepository = folderRepository;
         }
 
-        public File Add(File entity)
+        public override File Add(File entity)
         {
             ValidateFormat(entity);
             entity.LastModifiedDate = DateTime.Now;
@@ -34,14 +34,14 @@ namespace TwoDrive.BusinessLogic
             return entity;
         } 
 
-        public void Update(File Entity, File newEntity)
+        public override void Update(File Entity, File newEntity)
         {
             newEntity.LastModifiedDate = DateTime.Now;
             FolderElementExists(Entity.Id);
             CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
         }
-        public void Move(long EntityId, long folderId)
+        public override void Move(long EntityId, long folderId)
         {
             FolderElementExists(EntityId);
             FolderElementExists(folderId);
@@ -62,7 +62,7 @@ namespace TwoDrive.BusinessLogic
             _folderRepository.Update(folderWhereIsIt, folder);
         }
 
-        public void Delete(File Entity)
+        public override void Delete(File Entity)
         {
             var regex = new Regex("$-rootFolder");
             if (regex.IsMatch(Entity.Name))
@@ -127,7 +127,7 @@ namespace TwoDrive.BusinessLogic
             return folder;
         }
 
-        public List<File> GetAllSortedFiles(string sortOrder = null, string fileName = null)
+        public override List<File> GetAllSortedFiles(string sortOrder = null, string fileName = null)
         {
             var files = from f in _repository.GetAll() select f;
 
@@ -166,7 +166,7 @@ namespace TwoDrive.BusinessLogic
             return files.ToList();
         }
 
-        public List<File> GetSortedFiles(long userId, string sortOrder = null, string fileName = null)
+        public override List<File> GetSortedFiles(long userId, string sortOrder = null, string fileName = null)
         {
             var files = from f in _repository.GetAll() select f;
 

@@ -16,7 +16,7 @@ namespace TwoDrive.BusinessLogic
             base._userRepository = userRepository;
             _fileRepository = fileRepository;
         }
-        public Folder Add(Folder entity)
+        public override Folder Add(Folder entity)
         {
             ValidateFormat(entity);
             entity.Parent = GetFolderId(entity.Parent.Id);
@@ -29,14 +29,14 @@ namespace TwoDrive.BusinessLogic
             return entity;
         }
 
-        public void Update(Folder Entity, Folder newEntity)
+        public override void Update(Folder Entity, Folder newEntity)
         {
             FolderElementExists(Entity.Id);
             CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
         }
 
-        public void Delete(Folder entity)
+        public override void Delete(Folder entity)
         {
             var regex = new Regex("$-rootFolder");
             if (regex.IsMatch(entity.Name))
@@ -46,7 +46,7 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(entity.Id);
             DeleteFolder(entity);
         }
-        public void Move(long EntityId, long folderId)
+        public override void Move(long EntityId, long folderId)
         {
             FolderElementExists(EntityId);
             FolderElementExists(folderId);
@@ -157,6 +157,16 @@ namespace TwoDrive.BusinessLogic
                 DeleteFolder(f);
             }
             _repository.Delete(folder);
+        }
+
+        public override List<Folder> GetAllSortedFiles(string sortOrder = null, string fileName = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Folder> GetSortedFiles(long userId, string sortOrder = null, string fileName = null)
+        {
+            throw new NotImplementedException();
         }
     }
 }
