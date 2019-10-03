@@ -12,6 +12,7 @@ using TwoDrive.BusinessLogic.Interface;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace TwoDrive.WebApi
 {
@@ -54,6 +55,11 @@ namespace TwoDrive.WebApi
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TwoDrive API", Version = "v1" });
             });
         }
 
