@@ -76,6 +76,13 @@ namespace TwoDrive.WebApi
                 app.UseHsts();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TwoDrive API V1");
+                c.RoutePrefix = string.Empty;
+            });
+
             app.UseCors(x => x
             .AllowAnyOrigin()
             .AllowAnyMethod()
