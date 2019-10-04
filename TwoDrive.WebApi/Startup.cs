@@ -12,6 +12,7 @@ using TwoDrive.BusinessLogic.Interface;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace TwoDrive.WebApi
 {
@@ -57,6 +58,11 @@ namespace TwoDrive.WebApi
                     ValidateAudience = false
                 };
             });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TwoDrive API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +77,13 @@ namespace TwoDrive.WebApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TwoDrive API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseCors(x => x
             .AllowAnyOrigin()
