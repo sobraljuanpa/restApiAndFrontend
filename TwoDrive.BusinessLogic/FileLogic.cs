@@ -207,18 +207,7 @@ namespace TwoDrive.BusinessLogic
             return files.ToList();
         }
 
-        public class UserTuples
-        {
-            public UserTuples()
-            {
-
-            }
-
-            public long ownerId { get; set; }
-            public int numberOfFiles { get; set; }
-        }
-
-        public IEnumerable<UserTuples> GetTop10FileOwners()
+        public override IEnumerable<UserTuples> GetTop10FileOwners()
         {
             var tuples = from f in _repository.GetAll()
                          group f by f.OwnerId into fileGroups

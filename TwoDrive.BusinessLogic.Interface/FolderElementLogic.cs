@@ -16,7 +16,17 @@ namespace TwoDrive.BusinessLogic.Interface
         public abstract void Delete(T Entity);
         public abstract List<T> GetAllSortedFiles(string sortOrder = null, string fileName = null);
         public abstract List<T> GetSortedFiles(long userId, string sortOrder = null, string fileName = null);
-        public abstract List<T> GetTop10FileOwners();
+        public class UserTuples
+        {
+            public UserTuples()
+            {
+
+            }
+
+            public long ownerId { get; set; }
+            public int numberOfFiles { get; set; }
+        }
+        public abstract IEnumerable<UserTuples> GetTop10FileOwners();
         public T Get(long id)
         {
             FolderElementExists(id);

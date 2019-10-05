@@ -42,7 +42,7 @@ namespace TwoDrive.WebApi.Controllers
 
         //GET: /api/files/top10
         [Authorize(Roles = Role.Admin)]
-        [HttpGet]
+        [HttpGet("top10")]
         public IActionResult Get()
         {
             return Ok(_fileLogic.GetTop10FileOwners());   
