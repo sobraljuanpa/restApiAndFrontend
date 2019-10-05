@@ -10,9 +10,11 @@ namespace TwoDrive.BusinessLogic
     public class ReportLogic : IReport<File>
     {
         IDataRepository<File> _repository;
-        public ReportLogic(IDataRepository<File> repository)
+        IDataRepository<LogItem> _logRepository;
+        public ReportLogic(IDataRepository<File> repository, IDataRepository<LogItem> logRepository)
         {
             _repository = repository;
+            _logRepository = logRepository;
         }
 
         public List<File> GetAllSortedFiles(string sortOrder = null, string fileName = null)
@@ -104,6 +106,14 @@ namespace TwoDrive.BusinessLogic
                 t => t.Item2).Distinct().Take(10).ToList();
 
             return tuples;
+        }
+
+        public int GetUserModifications(DateTime start, DateTime finish, User user)
+        {
+            int countMod = (from f in _logRepository.GetAll()
+                            where (f.Date > start || f.Date < finish) && f.UserId == user.Id
+                            select f).Count();
+            return countMod;
         }
     }
 }
