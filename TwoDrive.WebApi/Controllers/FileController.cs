@@ -40,6 +40,14 @@ namespace TwoDrive.WebApi.Controllers
             }
         }
 
+        //GET: /api/files/top10
+        [Authorize(Roles = Role.Admin)]
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_fileLogic.GetTop10FileOwners());   
+        }
+
         //GET: /api/files/5
         [HttpGet("{id}", Name = "GetFile")]
         public IActionResult Get(long id)
