@@ -35,6 +35,7 @@ namespace TwoDrive.WebApi
             services.AddScoped<IDataRepository<Folder>, FolderRepository>();
             services.AddScoped<IDataRepository<File>, FileRepository>();
             services.AddScoped<ILogic<User>, UserLogic>();
+            services.AddScoped<IReport<File>, ReportLogic>(); 
             services.AddScoped<FolderElementLogic<File>, FileLogic>();
             services.AddScoped<FolderElementLogic<Folder>, FolderLogic>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
