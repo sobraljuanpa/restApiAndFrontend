@@ -158,19 +158,5 @@ namespace TwoDrive.BusinessLogic
             }
             _repository.Delete(folder);
         }
-
-        public override List<Folder> GetAllSortedFiles(string sortOrder = null, string fileName = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override List<Folder> GetSortedFiles(long userId, string sortOrder = null, string fileName = null)
-        {
-            throw new NotImplementedException();
-        }
-        public override IEnumerable<UserTuples> GetTop10FileOwners()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
