@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TwoDrive.BusinessLogic.Interface
 {
@@ -7,5 +8,6 @@ namespace TwoDrive.BusinessLogic.Interface
         List<T> GetAllSortedFiles(string sortOrder = null, string fileName = null);
         List<T> GetSortedFiles(long userId, string sortOrder = null, string fileName = null);
         IEnumerable<(long,int)> GetTop10FileOwners();
+        int GetUserModifications(DateTime start, DateTime finish, User user);
     }
 }

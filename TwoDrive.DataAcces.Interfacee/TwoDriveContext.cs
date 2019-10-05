@@ -12,6 +12,7 @@ namespace TwoDrive.DataAccess.Interface
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Folder> Folders { get; set; }
         public virtual DbSet<File> Files { get; set; }
+        public virtual DbSet<LogItem> Logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
