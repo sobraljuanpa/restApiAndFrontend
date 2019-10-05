@@ -1,0 +1,603 @@
+openapi: 3.0.1
+info:
+  title: TwoDrive API
+  version: '1'
+  
+security:
+  - bearerAuth: []
+
+paths:
+  /api/files:
+    get:
+      tags:
+        - File
+      parameters:
+        - name: fileName
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+        - File
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/File'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/File'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/File'
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/files/{id}':
+    get:
+      tags:
+        - File
+      operationId: GetFile
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  /api/files/view:
+    get:
+      tags:
+        - File
+      parameters:
+        - name: fileName
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/files/{fileId}/users/{idUsers}':
+    post:
+      tags:
+        - File
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: idUsers
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/files/{fileId}':
+    put:
+      tags:
+        - File
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/File'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/File'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/File'
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+        - File
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/files/{fileId}/folder/{idFolder}':
+    put:
+      tags:
+        - File
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: idFolder
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/files/{fileId}/users/{idReader}':
+    delete:
+      tags:
+        - File
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: idReader
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  /api/folders:
+    get:
+      tags:
+        - Folder
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+        - Folder
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/folders/{folderId}':
+    get:
+      tags:
+        - Folder
+      operationId: GetFolder
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      tags:
+        - Folder
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+        - Folder
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/folders/{folderId}/users/{idUsers}':
+    post:
+      tags:
+        - Folder
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: idUsers
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/folders/{folderId}/folder/{idFolder}':
+    put:
+      tags:
+        - Folder
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: idFolder
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/folders/{folderId}/users/{idReader}':
+    delete:
+      tags:
+        - Folder
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: idReader
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  /api/users/authenticate:
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Invalid credentials
+  /api/users:
+    get:
+      tags:
+        - User
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/users/{id}':
+    get:
+      tags:
+        - User
+      operationId: GetUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/users/{idUser}':
+    post:
+      tags:
+        - User
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+        - User
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '501':
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+          nullable: false
+        lastName:
+          type: string
+          nullable: false
+        username:
+          type: string
+          nullable: false
+        password:
+          type: string
+          nullable: false
+        email:
+          type: string
+          nullable: false
+        role:
+          type: string
+          nullable: false
+        token:
+          type: string
+          nullable: true
+        friendList:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          nullable: false
+        rootFolder:
+          $ref: '#/components/schemas/Folder'
+      additionalProperties: false
+    Folder:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+          nullable: false
+        folders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Folder'
+          nullable: false
+        id:
+          type: integer
+          format: int64
+        ownerId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: false
+        parent:
+          $ref: '#/components/schemas/Folder'
+        readers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          nullable: true
+      additionalProperties: false
+    File:
+      type: object
+      properties:
+        content:
+          type: string
+          nullable: false
+        creationDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        id:
+          type: integer
+          format: int64
+        ownerId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: false
+        parent:
+          $ref: '#/components/schemas/Folder'
+        readers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          nullable: false
+      additionalProperties: false
