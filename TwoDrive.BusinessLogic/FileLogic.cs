@@ -11,12 +11,14 @@ namespace TwoDrive.BusinessLogic
     public class FileLogic : FolderElementLogic<File>
     {
         IDataRepository<Folder> _folderRepository;
+        IDataRepository<LogItem> _logRepository;
 
-        public FileLogic(IDataRepository<File> repository, IDataRepository<Folder> folderRepository, IDataRepository<User> userRepository)
+        public FileLogic(IDataRepository<File> repository, IDataRepository<Folder> folderRepository, IDataRepository<User> userRepository, IDataRepository<LogItem> logRepository)
         {
             base._repository = repository;
             base._userRepository = userRepository;
             _folderRepository = folderRepository;
+            _logRepository = logRepository;
         }
 
         public override File Add(File entity)
@@ -28,9 +30,10 @@ namespace TwoDrive.BusinessLogic
             Folder folderBefore = entity.Parent;
             Folder folderAfter = entity.Parent;
             folderFileNull(folderAfter);
-            _repository.Add(entity);
+            _repository.Add(entity);           
             folderAfter.AddFile(entity);
             _folderRepository.Update(folderBefore, folderAfter);
+            _logRepository.Add(new LogItem(entity.OwnerId, DateTime.Now));
             return entity;
         } 
 
@@ -40,6 +43,7 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(Entity.Id);
             CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
+            _logRepository.Add(new LogItem(newEntity.OwnerId, DateTime.Now));
         }
         public override void Move(long EntityId, long folderId)
         {
@@ -60,6 +64,7 @@ namespace TwoDrive.BusinessLogic
             folder.AddFile(Entity);
             _repository.Update(filePrevious, Entity);
             _folderRepository.Update(folderWhereIsIt, folder);
+            _logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now));
         }
 
         public override void Delete(File Entity)
@@ -71,6 +76,7 @@ namespace TwoDrive.BusinessLogic
             }
             FolderElementExists(Entity.Id);
             _repository.Delete(Entity);
+            _logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now));
         }
 
         private void IsTheSameOwner(File entity, Folder folder)
