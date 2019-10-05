@@ -53,9 +53,9 @@ namespace TwoDrive.WebApi.Controllers
             }
         }
 
-        //GET: /api/users/5/top10
+        //GET: /api/users/5/reports?startdate=A&finishDate=B
         [Authorize(Roles = Role.Admin)]
-        [HttpGet("{id}/top10/{startDate}/{finishDate}")]
+        [HttpGet("{id}/reports")]
         public IActionResult GetModification(long id, DateTime startDate, DateTime finishDate)
         {
             try
