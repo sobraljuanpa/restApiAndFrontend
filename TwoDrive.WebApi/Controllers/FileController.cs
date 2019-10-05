@@ -47,7 +47,15 @@ namespace TwoDrive.WebApi.Controllers
         [HttpGet("top10")]
         public IActionResult Get()
         {
-            return Ok(_reportLogic.GetTop10FileOwners());   
+            try
+            {
+                var top10 = _reportLogic.GetTop10FileOwners();
+                return Ok(top10);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         //GET: /api/files/5

@@ -14,10 +14,12 @@ namespace TwoDrive.WebApi.Controllers
     {
 
         private readonly ILogic<User> _userLogic;
+        private readonly IReport<File> _reportLogic;
 
-        public UserController(ILogic<User> userLogic)
+        public UserController(ILogic<User> userLogic, IReport<File> reportLogic)
         {
             _userLogic = userLogic;
+            _reportLogic = reportLogic;
         }
 
         //Endpoint para autenticacion
@@ -44,6 +46,22 @@ namespace TwoDrive.WebApi.Controllers
             {
                 IEnumerable<User> users = _userLogic.GetAll();
                 return Ok(users);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        //GET: /api/users/5/top10
+        [Authorize(Roles = Role.Admin)]
+        [HttpGet("{id}/top10/{startDate}/{finishDate}")]
+        public IActionResult GetModification(long id, DateTime startDate, DateTime finishDate)
+        {
+            try
+            {
+                int count = _reportLogic.GetUserModifications(startDate, finishDate, _userLogic.Get(id));
+                return Ok(count);
             }
             catch (Exception e)
             {
