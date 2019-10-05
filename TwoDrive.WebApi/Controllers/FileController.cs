@@ -15,10 +15,12 @@ namespace TwoDrive.WebApi.Controllers
     {
         private readonly FolderElementLogic<File> _fileLogic;
         private readonly FolderElementLogic<Folder> _folderLogic;
+        private readonly IReport<File> _reportLogic;
         private readonly IDataRepository<User> _users;
 
-        public FileController(FolderElementLogic<File> fileLogic, FolderElementLogic<Folder> folderLogic, IDataRepository<User> userRepository)
+        public FileController(IReport<File> reportLogic, FolderElementLogic<File> fileLogic, FolderElementLogic<Folder> folderLogic, IDataRepository<User> userRepository)
         {
+            _reportLogic = reportLogic;
             _fileLogic = fileLogic;
             _folderLogic = folderLogic;
             _users = userRepository;
@@ -31,7 +33,7 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                List<File> files = _fileLogic.GetAllSortedFiles(sortOrder, fileName);
+                List<File> files = _reportLogic.GetAllSortedFiles(sortOrder, fileName);
                 return Ok(files);
             }
             catch (Exception e)
@@ -45,7 +47,7 @@ namespace TwoDrive.WebApi.Controllers
         [HttpGet("top10")]
         public IActionResult Get()
         {
-            return Ok(_fileLogic.GetTop10FileOwners());   
+            return Ok(_reportLogic.GetTop10FileOwners());   
         }
 
         //GET: /api/files/5
@@ -81,7 +83,7 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                List<File> files = _fileLogic.GetSortedFiles(int.Parse(User.Identity.Name), sortOrder, fileName);
+                List<File> files = _reportLogic.GetSortedFiles(int.Parse(User.Identity.Name), sortOrder, fileName);
                 return Ok(files);
             }
             catch(Exception e)
