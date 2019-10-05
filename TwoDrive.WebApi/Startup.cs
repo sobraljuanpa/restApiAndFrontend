@@ -34,6 +34,7 @@ namespace TwoDrive.WebApi
             services.AddScoped<IDataRepository<User>, UserRepository>();
             services.AddScoped<IDataRepository<Folder>, FolderRepository>();
             services.AddScoped<IDataRepository<File>, FileRepository>();
+            services.AddScoped<IDataRepository<LogItem>, LogRepository>();
             services.AddScoped<ILogic<User>, UserLogic>();
             services.AddScoped<IReport<File>, ReportLogic>(); 
             services.AddScoped<FolderElementLogic<File>, FileLogic>();
