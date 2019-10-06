@@ -110,17 +110,20 @@ namespace TwoDrive.BusinessLogic
 
         public int GetUserModifications(DateTime start, DateTime finish, User user)
         {
-            if(start == null)
-            {
-                start = DateTime.UtcNow.AddDays(-7);
-            }
-            if(finish == null)
-            {
-                finish = DateTime.UtcNow;
-            }
-
             int countMod = (from f in _logRepository.GetAll()
                             where (f.Date > start || f.Date < finish) && f.UserId == user.Id
+                            select f).Count();
+
+            return countMod;
+        }
+
+        public int GetUserModifications(string start, string finish, User user)
+        {
+            var startDate = DateTime.UtcNow.AddDays(-7);
+            var finishDate = DateTime.UtcNow;
+
+            int countMod = (from f in _logRepository.GetAll()
+                            where (f.Date > startDate || f.Date < finishDate) && f.UserId == user.Id
                             select f).Count();
 
             return countMod;

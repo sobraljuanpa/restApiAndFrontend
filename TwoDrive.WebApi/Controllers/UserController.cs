@@ -56,11 +56,24 @@ namespace TwoDrive.WebApi.Controllers
         //GET: /api/users/5/reports?startdate=A&finishDate=B
         [Authorize(Roles = Role.Admin)]
         [HttpGet("{id}/reports")]
-        public IActionResult GetModification(long id, DateTime startDate, DateTime finishDate)
+        public IActionResult GetModification(long id, string startDate, string finishDate)
         {
             try
             {
-                int count = _reportLogic.GetUserModifications(startDate, finishDate, _userLogic.Get(id));
+                int count = 0;
+                try
+                {
+                    var start = DateTime.Parse(startDate);
+                    var finish = DateTime.Parse(finishDate);
+                    count = _reportLogic.GetUserModifications(start, finish, _userLogic.Get(id));
+                }
+                catch(Exception e)
+                {
+                    string start = null;
+                    string finish = null;
+                    count = _reportLogic.GetUserModifications(start, finish, _userLogic.Get(id));
+                }
+                
                 return Ok(count);
             }
             catch (Exception e)

@@ -10,5 +10,8 @@ namespace TwoDrive.BusinessLogic.Interface
         List<T> GetSortedFiles(long userId, string sortOrder = null, string fileName = null);
         IEnumerable<(long,int)> GetTop10FileOwners();
         int GetUserModifications(DateTime start, DateTime finish, User user);
+
+        int GetUserModifications(string start, string finish, User user);
+
     }
 }
