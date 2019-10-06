@@ -59,7 +59,7 @@ namespace TwoDrive.DataAccess
 
         public User Get(long id)
         {
-            return _context.Users.FirstOrDefault(
+            return _context.Users.Include(u => u.FriendList).Include(u => u.RootFolder).FirstOrDefault(
                 u => u.Id == id);
         }
 
