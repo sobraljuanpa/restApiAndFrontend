@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TwoDrive.DataAccess.Interface;
 
 namespace TwoDrive.WebApi.Migrations
 {
     [DbContext(typeof(TwoDriveContext))]
-    partial class TwoDriveContextModelSnapshot : ModelSnapshot
+    [Migration("20191006202536_TwoDrive.RemovedExtraUsers")]
+    partial class TwoDriveRemovedExtraUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
