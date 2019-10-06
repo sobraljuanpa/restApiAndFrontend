@@ -110,7 +110,7 @@ namespace TwoDrive.WebApi.Controllers
             }
             catch (Exception e)
             {
-                return NotFound(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
