@@ -142,7 +142,7 @@ namespace TwoDrive.WebApi.Controllers
                         _fileLogic.AddReader(_fileLogic.Get(fileId), idUsers);
                         return NoContent();
                     }
-                    else return Unauthorized("El usuario al que desea agregar como lector no existe en su lista de amigos.");
+                    else return Unauthorized("The user you are trying to add as a reader is not on your friendlist.");
                 }
                 else return Unauthorized();
             }
