@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using TwoDrive.Domain;
 
 namespace TwoDrive.DataAccess.Interface
@@ -27,6 +28,11 @@ namespace TwoDrive.DataAccess.Interface
                 Email = "admin@admin.admin",
                 Role = "Admin"
             });
+        }
+
+        public object Include(Func<object, object> p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

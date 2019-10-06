@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace TwoDrive.DataAccess
 {
@@ -53,7 +54,7 @@ namespace TwoDrive.DataAccess
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users.ToList();
+            return _context.Users.Include(u => u.FriendList).Include(u => u.RootFolder).ToList();
         }
 
         public User Get(long id)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TwoDrive.Domain;
 using TwoDrive.DataAccess.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace TwoDrive.DataAccess
 {
@@ -21,12 +22,12 @@ namespace TwoDrive.DataAccess
 
         public IEnumerable<Folder> GetAll()
         {
-            return _context.Folders.ToList();
+            return _context.Folders.Include(f => f.Readers).Include(f => f.Parent).ToList();
         }
 
         public Folder Get(long id)
         {
-            return _context.Folders.FirstOrDefault(
+            return _context.Folders.Include(f => f.Readers).Include(f => f.Parent).FirstOrDefault(
                 f => f.Id == id);
         }
 

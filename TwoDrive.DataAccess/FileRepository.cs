@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TwoDrive.DataAccess.Interface;
@@ -22,12 +23,12 @@ namespace TwoDrive.DataAccess
 
         public IEnumerable<File> GetAll()
         {
-            return _context.Files.ToList();
+            return _context.Files.Include(f => f.Readers).Include(f => f.Parent).ToList();
         }
 
         public File Get(long id)
         {
-            return _context.Files.FirstOrDefault(
+            return _context.Files.Include(f => f.Readers).Include(f => f.Parent).FirstOrDefault(
                 f => f.Id == id);
         }
 
