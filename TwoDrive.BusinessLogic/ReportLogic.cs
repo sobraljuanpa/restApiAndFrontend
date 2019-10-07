@@ -120,7 +120,7 @@ namespace TwoDrive.BusinessLogic
                             where (f.Date > start || f.Date < finish) && f.UserId == user.Id
                             select f).Count();
 
-            return countMod;
+            return countMod / (finish - start).Days;
         }
 
         public int GetUserModifications(string start, string finish, User user)
@@ -132,7 +132,7 @@ namespace TwoDrive.BusinessLogic
                             where (f.Date > startDate || f.Date < finishDate) && f.UserId == user.Id
                             select f).Count();
 
-            return countMod;
+            return countMod / (finish - start).Days;
         }
     }
 }
