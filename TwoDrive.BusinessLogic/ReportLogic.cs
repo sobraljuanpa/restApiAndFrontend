@@ -51,6 +51,9 @@ namespace TwoDrive.BusinessLogic
                 case "modified_asc":
                     files = files.OrderBy(f => f.LastModifiedDate);
                     break;
+                default:
+                    files = files.OrderByDescending(f => f.Name);
+                    break;
             }
 
             return files.ToList();
@@ -91,6 +94,9 @@ namespace TwoDrive.BusinessLogic
                     break;
                 case "modified_asc":
                     files = files.OrderBy(f => f.LastModifiedDate);
+                    break;
+                default:
+                    files = files.OrderByDescending(f => f.Name);
                     break;
             }
 
