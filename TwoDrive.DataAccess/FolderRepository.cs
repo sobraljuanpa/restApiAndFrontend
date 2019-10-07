@@ -22,12 +22,22 @@ namespace TwoDrive.DataAccess
 
         public IEnumerable<Folder> GetAll()
         {
-            return _context.Folders.Include(f => f.Readers).Include(f => f.Parent).ToList();
+            return _context.Folders
+                .Include(f => f.Readers)
+                .Include(f => f.Parent)
+                .Include(f => f.Files)
+                .Include(f => f.Folders)
+                .ToList();
         }
 
         public Folder Get(long id)
         {
-            return _context.Folders.Include(f => f.Readers).Include(f => f.Parent).FirstOrDefault(
+            return _context.Folders
+                .Include(f => f.Readers)
+                .Include(f => f.Parent)
+                .Include(f => f.Files)
+                .Include(f => f.Folders)
+                .FirstOrDefault(
                 f => f.Id == id);
         }
 

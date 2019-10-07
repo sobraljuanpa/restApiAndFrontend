@@ -31,7 +31,6 @@ namespace TwoDrive.Test.BusinessLogic
             userRepository = new Mock<IDataRepository<User>>();
             fileRepository = new Mock<IDataRepository<File>>();
             folderLogic = new FolderLogic(folderRepository.Object, userRepository.Object, fileRepository.Object);
-            
         }
 
         [TestMethod]

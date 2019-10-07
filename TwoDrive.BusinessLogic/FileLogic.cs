@@ -88,7 +88,7 @@ namespace TwoDrive.BusinessLogic
         private void ValidateFormat(File entity)
         {
             NameIsNull(entity.Name);
-            ParentIsNull(entity);
+            if (_folderRepository.Get(entity.Parent.Id) == null) throw new Exception("No existe una carpeta padre para el archivo.");
             try
             {
                 ReadersIsNull(entity.Readers);

@@ -94,7 +94,7 @@ namespace TwoDrive.BusinessLogic.Interface
 
         protected void ParentIsNull(T Entity)
         {
-            if (Entity.Parent == null)
+            if (Entity == null)
                 throw new Exception("No existe una carpeta padre para el archivo.");
         }
 

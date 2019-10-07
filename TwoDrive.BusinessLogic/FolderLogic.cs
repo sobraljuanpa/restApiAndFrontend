@@ -86,6 +86,7 @@ namespace TwoDrive.BusinessLogic
 
         private void FolderNameIsValid(Folder Entity, Folder ParentF)
         {
+            if (ParentF.Folders == null) return;
             foreach (var folder in ParentF.Folders)
             {
                 if(folder.Name == Entity.Name) throw new Exception("El nombre de la carpeta ya existe.");
@@ -94,7 +95,8 @@ namespace TwoDrive.BusinessLogic
 
         private void NotMoveSubFolder(Folder entity, Folder folder)
         {
-            foreach(var f in entity.Folders)
+            if (entity.Folders == null) return;
+            foreach (var f in entity.Folders)
             {
                 if(f.Id == folder.Id) throw new Exception("No puede mover a una subcarpeta.");
             }
@@ -102,7 +104,8 @@ namespace TwoDrive.BusinessLogic
 
         private void ValidateFormat(Folder entity)
         {
-            FolderNameIsValid(entity, entity.Parent);
+            Folder folderParent = base.Get(entity.Parent.Id);
+            FolderNameIsValid(entity, folderParent);
             var regex = new Regex("$-rootFolder");
             if (regex.IsMatch(entity.Name))
             {
@@ -110,7 +113,7 @@ namespace TwoDrive.BusinessLogic
             }
 
             NameIsNull(entity.Name);
-            ParentIsNull(entity);
+            ParentIsNull(folderParent);
             if (entity.Files == null) entity.Files = new List<File>();
             if (entity.Folders == null) entity.Folders = new List<Folder>();
             try
@@ -148,13 +151,19 @@ namespace TwoDrive.BusinessLogic
 
         private void DeleteFolder(Folder folder)
         {
-            foreach (File f in folder.Files)
+            if (folder.Files != null)
             {
-                _fileRepository.Delete(f);
+                foreach (File f in folder.Files)
+                {
+                    _fileRepository.Delete(f);
+                }
             }
-            foreach (Folder f in folder.Folders)
+            if (folder.Folders != null)
             {
-                DeleteFolder(f);
+                foreach (Folder f in folder.Folders)
+                {
+                    DeleteFolder(f);
+                }
             }
             _repository.Delete(folder);
         }

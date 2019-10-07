@@ -69,7 +69,8 @@ namespace TwoDrive.WebApi.Controllers
         {
             try
             {
-                if (_folderLogic.Get(folders.Parent.Id).OwnerId == int.Parse(User.Identity.Name))
+                long ownerId = _folderLogic.Get(folders.Parent.Id).OwnerId;
+                if (ownerId == int.Parse(User.Identity.Name))
                 {
                     var folderAux = _folderLogic.Add(folders);
                     return CreatedAtRoute(
