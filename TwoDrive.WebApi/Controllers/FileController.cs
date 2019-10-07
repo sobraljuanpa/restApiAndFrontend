@@ -180,7 +180,7 @@ namespace TwoDrive.WebApi.Controllers
                 if (_fileLogic.Get(fileId).OwnerId == int.Parse(User.Identity.Name))
                 {
                     _fileLogic.Move(fileId, idFolder);
-                    return NoContent();
+                    return Ok("The file was moved correctly");
                 }
                 else return Unauthorized();
             }
