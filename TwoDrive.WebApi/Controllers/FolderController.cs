@@ -143,7 +143,7 @@ namespace TwoDrive.WebApi.Controllers
             {
                 if (_folderLogic.Get(folderId).OwnerId == int.Parse(User.Identity.Name))
                 {
-                    _folderLogic.Move(idFolder, folderId);
+                    _folderLogic.Move(folderId, idFolder);
                     return Ok("The folder was moved correctly");
                 }
                 else return Unauthorized();
