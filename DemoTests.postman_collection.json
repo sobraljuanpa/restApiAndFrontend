@@ -1,0 +1,741 @@
+{
+	"info": {
+		"_postman_id": "490e9b77-a528-4912-bb0d-be9f28bf5479",
+		"name": "DemoTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LoginAsAdmin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"admin\",\n\t\"password\":\"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/users/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginAsUser1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"user1\",\n\t\"password\":\"user1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/users/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginAsUser2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"user2\",\n\t\"password\":\"user2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/users/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDMxMjMwMCwiZXhwIjoxNTcwMzEzMjAwLCJpYXQiOjE1NzAzMTIzMDB9.iawHrGuECqhZXg2955QlfNnNmMEqUQSGzgZPxsFQriM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"User\",\n\t\"lastName\": \"1\",\n\t\"username\":\"user1\",\n\t\"password\":\"user1\",\n\t\"email\": \"user@user.user\",\n\t\"Role\": \"User\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1NzAzOTM3NDksImV4cCI6MTU3MDM5NDY0OSwiaWF0IjoxNTcwMzkzNzQ5fQ.GZsAxdCgkyv7Ldcy8TBVKHDmpPUGjlgU8CxmVkYoW0Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"User\",\n\t\"lastName\": \"2\",\n\t\"username\":\"user2\",\n\t\"password\":\"user2\",\n\t\"email\": \"user@user.user\",\n\t\"Role\": \"User\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateFileUser1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDM5NDU0MCwiZXhwIjoxNTcwMzk1NDQwLCJpYXQiOjE1NzAzOTQ1NDB9.PIoqlqlZgvAYYb92WMYS51XsP5ph0EaZ9MpgUaqB1AE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"file1Name\",\n\t\"parent\": {\"id\": \"1\"},\n\t\"ownerid\":\"4\",\n\t\"content\":\"file1Content\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/files",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccessFileAdmin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/files/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccessFileUser1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/files/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccessFileUser2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/files/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddUser2AsUser1Friend",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQxMTI5NCwiZXhwIjoxNTcwNDEyMTk0LCJpYXQiOjE1NzA0MTEyOTR9.spOvVRnSv9kW9TPktIQdRRXlJil-BHpLlHShiTR8xZc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/users/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"users",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ShareUser1FileWithUser2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQxMTI5NCwiZXhwIjoxNTcwNDEyMTk0LCJpYXQiOjE1NzA0MTEyOTR9.spOvVRnSv9kW9TPktIQdRRXlJil-BHpLlHShiTR8xZc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/files/1/users/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files",
+						"1",
+						"users",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccessSharedFileUser2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/files/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAnotherFileUser1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"file2Name\",\n\t\"parent\": {\"id\": \"1\"},\n\t\"ownerid\":\"4\",\n\t\"content\":\"file2Content\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/files",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser1RootFolderUser1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/folders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"folders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser1RootFolderAdmin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/folders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"folders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser1RootFolderUser2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/folders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"folders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateFileUser2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjUiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQxMTcyNSwiZXhwIjoxNTcwNDEyNjI1LCJpYXQiOjE1NzA0MTE3MjV9.33NzxKQqaptYPHQRJkYUki2XuOvnom2uQIB-DblY9As",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"file3Name\",\n\t\"parent\": {\"id\": \"2\"},\n\t\"ownerid\":\"5\",\n\t\"content\":\"file3Content\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/files",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSortedFilesAsAdmin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/files/view?fileName=&sortOrder=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files",
+						"view"
+					],
+					"query": [
+						{
+							"key": "fileName",
+							"value": ""
+						},
+						{
+							"key": "sortOrder",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTop10UsersAsAdmin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/files/top10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files",
+						"top10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetActivity",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1NzAzOTg5MzYsImV4cCI6MTU3MDM5OTgzNiwiaWF0IjoxNTcwMzk4OTM2fQ.rl54Fmph-0Qcw6jRkH4euE5dSLjQu10t6JIDd3ug9o8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/users/4/reports?startDate=null&finishDate=null",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"users",
+						"4",
+						"reports"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "null"
+						},
+						{
+							"key": "finishDate",
+							"value": "null"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateFolder1User1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"folder1\",\n\t\"parent\": {\"id\": \"1\"},\n\t\"ownerid\":\"4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/folders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"folders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateFolder2User1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"folder2\",\n\t\"parent\": {\"id\": \"1\"},\n\t\"ownerid\":\"4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/folders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"folders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MoveFolder2IntoFolder1",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/folders/3/folders/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"folders",
+						"3",
+						"folders",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
