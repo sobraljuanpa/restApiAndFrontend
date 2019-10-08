@@ -146,7 +146,15 @@ namespace TwoDrive.Test.BusinessLogic
             userLogic.Update(user,userNull);
         }
 
-       
+        [TestMethod]
+        public void UpdateUser()
+        {
+            User user2 = new User { Id = 2, Email = "f", FirstName = "s0", LastName = "sda", Password = "sd", Role = "User", Username = "pepito" };
+            userRepository.Setup(u => u.Get(user2.Id)).Returns<User>(null);
+            userRepository.Setup(u => u.Get(user.Id)).Returns(user);
+            userLogic.Update(user, user2);
+            userRepository.VerifyAll();
+        }
 
     }
 }
