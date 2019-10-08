@@ -16,12 +16,15 @@ namespace TwoDrive.Test.BusinessLogic
         Mock<IDataRepository<Folder>> folderRepository;
         User userNull;
         User user;
+        Folder folder;
         ILogic<User> userLogic;
 
         [TestInitialize]
         public void SetUp()
         {
-            user = new User { Email = "josepablogoni@gmail.com", FirstName = "Jose Pablo", Username = "josepablogoni", FriendList = new List<User>(), LastName = "Goni", Password = "josepablo", Role = "User" };
+            folder = new Folder { Name = "-rootFolder", Id = 1 };
+            user = new User { Id = 1, Email = "josepablogoni@gmail.com", FirstName = "Jose Pablo", Username = "josepablogoni", FriendList = new List<User>(), LastName = "Goni", Password = "josepablo", Role = "User" };
+            folder.OwnerId = user.Id;
             user = new User();
             userRepository = new Mock<IDataRepository<User>>();
             folderRepository = new Mock<IDataRepository<Folder>>();
@@ -62,6 +65,16 @@ namespace TwoDrive.Test.BusinessLogic
         {
             userRepository.Setup(u => u.GetAll()).Returns<User>(null);
             long id = userLogic.GetUserId(userNull.Username);
+            userRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GetUserRootfoldeId()
+        {
+            IEnumerable<Folder> list = new List<Folder> { folder };
+            folderRepository.Setup(f => f.GetAll()).Returns(list);
+            long id = userLogic.GetUserRootFolderId(user.Username);
+            Assert.AreEqual(id, folder.Id);
             userRepository.VerifyAll();
         }
 
