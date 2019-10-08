@@ -122,5 +122,15 @@ namespace TwoDrive.Test.BusinessLogic
             userRepository.VerifyAll();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void GetUserNull()
+        {
+            userRepository.Setup(u => u.Get(0)).Returns<User>(null);
+            userLogic.Get(0);
+        }
+
+        
+
     }
 }
