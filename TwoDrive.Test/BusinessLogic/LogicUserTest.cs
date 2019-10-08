@@ -104,6 +104,7 @@ namespace TwoDrive.Test.BusinessLogic
             folderRepository.Setup(f => f.GetAll()).Returns(listF);
             var userAux = userLogic.Add(user);
             Assert.AreEqual(userAux, user);
+            userRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -111,6 +112,14 @@ namespace TwoDrive.Test.BusinessLogic
         public void DeleteUserNull()
         {
             userLogic.Delete(userNull);
+        }
+
+        [TestMethod]
+        public void DeleteUser()
+        {
+            userRepository.Setup(u => u.Get(user.Id)).Returns(user);
+            userLogic.Delete(user);
+            userRepository.VerifyAll();
         }
 
     }
