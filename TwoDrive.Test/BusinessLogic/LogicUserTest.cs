@@ -106,5 +106,12 @@ namespace TwoDrive.Test.BusinessLogic
             Assert.AreEqual(userAux, user);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DeleteUserNull()
+        {
+            userLogic.Delete(userNull);
+        }
+
     }
 }
