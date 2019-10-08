@@ -42,7 +42,7 @@ namespace TwoDrive.Test.BusinessLogic
         public void AuthenticateUserNotInSystem()
         {
             userRepository.Setup(u => u.Authenticate(userNull.Username, userNull.Password)).Returns<User>(null);
-            userLogic.Authenticate(user.Username, user.Password);
+            userLogic.Authenticate(userNull.Username, userNull.Password);
             userRepository.VerifyAll();
         }
 
@@ -53,6 +53,15 @@ namespace TwoDrive.Test.BusinessLogic
             userRepository.Setup(u => u.GetAll()).Returns(list);
             long id = userLogic.GetUserId(user.Username);
             Assert.AreEqual(id, user.Id);
+            userRepository.VerifyAll();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void GetUserIdNotInSystem()
+        {
+            userRepository.Setup(u => u.GetAll()).Returns<User>(null);
+            long id = userLogic.GetUserId(userNull.Username);
             userRepository.VerifyAll();
         }
 
