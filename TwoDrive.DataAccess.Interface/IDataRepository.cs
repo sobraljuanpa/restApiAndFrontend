@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using TwoDrive.Domain;
 
-namespace TwoDrive.DataAccess
+namespace TwoDrive.DataAccess.Interface
 {
     public interface IDataRepository<T>
     {
@@ -12,5 +10,6 @@ namespace TwoDrive.DataAccess
         void Add(T entity);
         void Update(T dbEntity, T newEntity);
         void Delete(T entity);
+        User Authenticate(string username, string password);
     }
 }

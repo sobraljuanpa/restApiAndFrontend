@@ -132,7 +132,7 @@ namespace TwoDrive.BusinessLogic
                             where (f.Date > startDate || f.Date < finishDate) && f.UserId == user.Id
                             select f).Count();
 
-            return countMod / (finish - start).Days;
+            return countMod / (finishDate - startDate).Days;
         }
     }
 }
