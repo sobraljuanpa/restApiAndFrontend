@@ -87,5 +87,12 @@ namespace TwoDrive.Test.BusinessLogic
             userRepository.VerifyAll();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void AddUserNull()
+        {
+            userLogic.Add(userNull);
+        }
+
     }
 }
