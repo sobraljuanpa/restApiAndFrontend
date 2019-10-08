@@ -50,21 +50,18 @@ namespace TwoDrive.BusinessLogic
         {
             FolderElementExists(EntityId);
             FolderElementExists(folderId);
-            Folder Entity = _repository.Get(EntityId); //Carpeta que quiero mover
-            Folder folder = _repository.Get(folderId); //Carpeta a donde quiero mover
+            Folder Entity = _repository.Get(EntityId);
+            Folder folder = _repository.Get(folderId);
             NotMoveSubFolder(Entity, folder);
             IsTheSameOwner(Entity, folder);
             IsFolderRoot(EntityId);
-            Folder folderMoved = Entity;
-            Folder folderParent = Entity.Parent; //Padre de carpeta que quiero mover
-            Folder folderDestination = folder; //Carpeta a donde va
-            FoldersNull(folderParent);
-            folderParent.Folders.Remove(Entity); //REMUEVO LA CARPETA DEL PADRE
-            folderDestination.Folders.Add(Entity); //AGREGO LA CARPETA A DONDE QUIERE IR
-            folderMoved.Parent = folderDestination; //ACTUALIZO EL PADRE DE LA CARPETA
-            _repository.Update(Entity.Parent, folderParent);
-            _repository.Update(folder, folderDestination);
-            _repository.Update(Entity, folderMoved);
+            FoldersNull(Entity.Parent);
+            Entity.Parent.Folders.Remove(Entity);
+            folder.Folders.Add(Entity);
+            Entity.Parent = folder;
+            _repository.Update(Entity.Parent, Entity.Parent);
+            _repository.Update(folder, folder);
+            _repository.Update(Entity, Entity);
         }
 
         public void AddFatherFolder(Folder folder)

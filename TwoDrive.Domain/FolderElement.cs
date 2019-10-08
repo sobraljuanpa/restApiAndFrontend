@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TwoDrive.Domain
 {
-    public abstract class FolderElement
+    public abstract class FolderElement 
     {
 
         [Key]
