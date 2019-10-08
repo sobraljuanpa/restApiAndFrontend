@@ -78,5 +78,14 @@ namespace TwoDrive.Test.BusinessLogic
             userRepository.VerifyAll();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void GetUserNotInSystemRootfoldeId()
+        {
+            folderRepository.Setup(f => f.GetAll()).Returns<Folder>(null);
+            long id = userLogic.GetUserRootFolderId(userNull.Username);
+            userRepository.VerifyAll();
+        }
+
     }
 }
