@@ -11,6 +11,8 @@ paths:
     get:
       tags:
         - File
+      summary: 'Returns all files in the system, can be filtered.'
+      description: 'Can take fileName which brings only files that include the parameter. Can take sortOrder, which can be one of these: {name_asc, name_desc, created_asc, created_desc, modified_asc, modified_desc}. Only administrators allowed.'
       parameters:
         - name: fileName
           in: query
@@ -23,11 +25,12 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
     post:
       tags:
         - File
+      summary: 'Adds a new file to the system.'
       requestBody:
         content:
           application/json-patch+json:
@@ -45,13 +48,14 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
   '/api/files/{id}':
     get:
       tags:
         - File
       operationId: GetFile
+      summary: 'Gets the file with the id in the URL. File owner, file readers and administrators can access it.'
       parameters:
         - name: id
           in: path
@@ -62,12 +66,16 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Entity not found in system
   /api/files/view:
     get:
       tags:
         - File
+      summary: 'Returns all owned files owned by the authenticated user in the system, can be filtered'
+      description: 'Can take fileName which brings only files that include the parameter. Can take sortOrder, which can be one of these: {name_asc, name_desc, created_asc, created_desc, modified_asc, modified_desc}.'
       parameters:
         - name: fileName
           in: query
@@ -80,12 +88,13 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
   '/api/files/{fileId}/users/{idUsers}':
     post:
       tags:
         - File
+      summary: 'Adds user as a reader on file.'
       parameters:
         - name: fileId
           in: path
@@ -102,12 +111,15 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User or File not found
   '/api/files/{fileId}':
     put:
       tags:
         - File
+      summary: 'Updates file'
       parameters:
         - name: fileId
           in: path
@@ -132,11 +144,14 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: File not found
     delete:
       tags:
         - File
+      summary: 'Deletes file'
       parameters:
         - name: fileId
           in: path
@@ -147,12 +162,15 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: File not found
   '/api/files/{fileId}/folder/{idFolder}':
     put:
       tags:
         - File
+      summary: 'Moves file into folder'
       parameters:
         - name: fileId
           in: path
@@ -169,12 +187,15 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Not found (File or Folder)
   '/api/files/{fileId}/users/{idReader}':
     delete:
       tags:
         - File
+      summary: 'Removes reader from file'
       parameters:
         - name: fileId
           in: path
@@ -191,20 +212,24 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Not found (file or user)
   /api/folders:
     get:
       tags:
         - Folder
+      summary: 'Gets all folders in the system'
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
     post:
       tags:
         - Folder
+      summary: 'Creates a folder'
       requestBody:
         content:
           application/json-patch+json:
@@ -222,12 +247,14 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
   '/api/folders/{folderId}':
     get:
       tags:
         - Folder
+      summary: 'Returns a certain folder in the system'
+      description: 'Can be accessed by the owner, a reader or the administrator'
       operationId: GetFolder
       parameters:
         - name: folderId
@@ -239,11 +266,14 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: 'Folder not found'
     put:
       tags:
         - Folder
+      summary: 'Updates the given folder'
       parameters:
         - name: folderId
           in: path
@@ -268,11 +298,14 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Folder not found
     delete:
       tags:
         - Folder
+      summary: 'Deletes the given folder'
       parameters:
         - name: folderId
           in: path
@@ -283,12 +316,15 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Folder not found
   '/api/folders/{folderId}/users/{idUsers}':
     post:
       tags:
         - Folder
+      summary: 'Adds given user as reader to given folder'
       parameters:
         - name: folderId
           in: path
@@ -305,12 +341,15 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Folder or user not found
   '/api/folders/{folderId}/folder/{idFolder}':
     put:
       tags:
         - Folder
+      summary: 'Moves first given folder into second given folder'
       parameters:
         - name: folderId
           in: path
@@ -327,12 +366,15 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Either folder not found
   '/api/folders/{folderId}/users/{idReader}':
     delete:
       tags:
         - Folder
+      summary: 'Removes reader from folder'
       parameters:
         - name: folderId
           in: path
@@ -349,8 +391,10 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Folder or user not found
   /api/users/authenticate:
     post:
       tags:
@@ -376,14 +420,16 @@ paths:
           description: Invalid credentials
   /api/users:
     get:
+      summary: 'Gets a list of all users'
       tags:
         - User
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
     post:
+      summary: 'Creates a new user'
       tags:
         - User
       requestBody:
@@ -403,10 +449,11 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
   '/api/users/{id}':
     get:
+      summary: 'Gets the given user'
       tags:
         - User
       operationId: GetUser
@@ -420,9 +467,12 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User not found
     put:
+      summary: 'Updates the given user'
       tags:
         - User
       parameters:
@@ -449,9 +499,12 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User not found
     delete:
+      summary: 'Deletes the given user'
       tags:
         - User
       parameters:
@@ -464,10 +517,13 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User not found
   '/api/users/{idUser}':
     post:
+      summary: 'Adds given user to authenticated user friendList'
       tags:
         - User
       parameters:
@@ -480,9 +536,12 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User not found
     delete:
+      summary: 'Removes given user from authenticated user friendList'
       tags:
         - User
       parameters:
@@ -495,8 +554,10 @@ paths:
       responses:
         '200':
           description: Success
-        '501':
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User not found
 components:
   responses:
     UnauthorizedError:
