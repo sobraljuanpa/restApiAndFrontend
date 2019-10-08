@@ -46,5 +46,15 @@ namespace TwoDrive.Test.BusinessLogic
             userRepository.VerifyAll();
         }
 
+        [TestMethod]
+        public void GetUserIdInSystem()
+        {
+            IEnumerable<User> list = new List<User> { user};
+            userRepository.Setup(u => u.GetAll()).Returns(list);
+            long id = userLogic.GetUserId(user.Username);
+            Assert.AreEqual(id, user.Id);
+            userRepository.VerifyAll();
+        }
+
     }
 }
