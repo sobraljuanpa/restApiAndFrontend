@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TwoDrive.Domain
 {
-    public class Folder : FolderElement
+    public class Folder : FolderElement, ICloneable
     {
         public List<File> Files { get; set; }
 
@@ -26,6 +27,11 @@ namespace TwoDrive.Domain
         public void RemoveFolder(Folder folder)
         {
             Folders.Remove(folder);
+        }
+
+        public Object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
