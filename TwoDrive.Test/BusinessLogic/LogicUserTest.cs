@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using TwoDrive.BusinessLogic;
 using TwoDrive.BusinessLogic.Interface;
@@ -32,6 +33,16 @@ namespace TwoDrive.Test.BusinessLogic
         {
             userRepository.Setup(u => u.Authenticate(user.Username, user.Password)).Returns(user);
             userLogic.Authenticate(user.Username,user.Password);
+            userRepository.VerifyAll();
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void AuthenticateUserNotInSystem()
+        {
+            userRepository.Setup(u => u.Authenticate(userNull.Username, userNull.Password)).Returns<User>(null);
+            userLogic.Authenticate(user.Username, user.Password);
             userRepository.VerifyAll();
         }
 
