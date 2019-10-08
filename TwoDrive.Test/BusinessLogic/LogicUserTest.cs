@@ -130,7 +130,14 @@ namespace TwoDrive.Test.BusinessLogic
             userLogic.Get(0);
         }
 
-        
+        [TestMethod]
+        public void GetUser()
+        {
+            userRepository.Setup(u => u.Get(user.Id)).Returns(user);
+            var userAux = userLogic.Get(user.Id);
+            Assert.AreEqual(userAux, user);
+            userRepository.VerifyAll();
+        }
 
     }
 }
