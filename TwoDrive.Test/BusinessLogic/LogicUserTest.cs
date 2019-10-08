@@ -139,5 +139,14 @@ namespace TwoDrive.Test.BusinessLogic
             userRepository.VerifyAll();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void UpdateUserNotInSystem()
+        {
+            userLogic.Update(user,userNull);
+        }
+
+       
+
     }
 }
