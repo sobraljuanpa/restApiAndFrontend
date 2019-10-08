@@ -22,10 +22,10 @@ namespace TwoDrive.Test.BusinessLogic
         [TestInitialize]
         public void SetUp()
         {
-            folder = new Folder { Name = "-rootFolder", Id = 1 };
+            folder = new Folder { Name = "josepablogoni-rootFolder", Id = 1 };
             user = new User { Id = 1, Email = "josepablogoni@gmail.com", FirstName = "Jose Pablo", Username = "josepablogoni", FriendList = new List<User>(), LastName = "Goni", Password = "josepablo", Role = "User" };
             folder.OwnerId = user.Id;
-            user = new User();
+            userNull = new User();
             userRepository = new Mock<IDataRepository<User>>();
             folderRepository = new Mock<IDataRepository<Folder>>();
             userLogic = new UserLogic(userRepository.Object, folderRepository.Object);
@@ -41,7 +41,6 @@ namespace TwoDrive.Test.BusinessLogic
 
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
         public void AuthenticateUserNotInSystem()
         {
             userRepository.Setup(u => u.Authenticate(userNull.Username, userNull.Password)).Returns<User>(null);
@@ -60,7 +59,7 @@ namespace TwoDrive.Test.BusinessLogic
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void GetUserIdNotInSystem()
         {
             userRepository.Setup(u => u.GetAll()).Returns<User>(null);
@@ -79,7 +78,7 @@ namespace TwoDrive.Test.BusinessLogic
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void GetUserNotInSystemRootfoldeId()
         {
             folderRepository.Setup(f => f.GetAll()).Returns<Folder>(null);
@@ -88,10 +87,23 @@ namespace TwoDrive.Test.BusinessLogic
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(Exception))]
         public void AddUserNull()
         {
             userLogic.Add(userNull);
+        }
+
+        [TestMethod]
+        public void AddUserCorrect()
+        {
+            userRepository.Setup(u => u.Get(user.Id)).Returns(user);
+            IEnumerable<User> list = new List<User> { user };
+            userRepository.Setup(u => u.GetAll()).Returns(list);
+            folderRepository.Setup(f => f.Get(folder.Id)).Returns(folder);
+            IEnumerable<Folder> listF = new List<Folder> { folder };
+            folderRepository.Setup(f => f.GetAll()).Returns(listF);
+            var userAux = userLogic.Add(user);
+            Assert.AreEqual(userAux, user);
         }
 
     }
