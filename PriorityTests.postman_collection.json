@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "72aee250-ce57-4994-8f98-13be2dd2a13e",
+		"name": "PriorityTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LogIn",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"user1\",\n\t\"password\":\"user1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/users/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1NzA1Njk4NTgsImV4cCI6MTU3MDU3MDc1OCwiaWF0IjoxNTcwNTY5ODU4fQ.eiFXiMI2w-y0EWvDZATeDIe4pJSa9XA0FKly6GRTzKo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"User\",\n\t\"lastName\": \"1\",\n\t\"username\":\"user1\",\n\t\"password\":\"user1\",\n\t\"email\": \"user@user.user\",\n\t\"Role\": \"User\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetFolder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDY1NDgwNCwiZXhwIjoxNTcwNjU1NzA0LCJpYXQiOjE1NzA2NTQ4MDR9.IVZ0gpJsdueVw9MuKJsuuQjz50DNsDsX6TbtDeB7xL4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Encoding",
+						"value": "application/gzip",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:57901/api/folders/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"folders",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateFolder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDY1MjUwMSwiZXhwIjoxNTcwNjUzNDAxLCJpYXQiOjE1NzA2NTI1MDF9.b49H7VLUQ7IuNAZETup9qqxfhYXtNSiTxpJ2CH-MmEk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"testFolder2\",\n\t\"parent\": {\"id\": \"1\"},\n\t\"ownerid\":\"4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:57901/api/folders/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"folders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateFile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetFile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDU3MjMwNywiZXhwIjoxNTcwNTczMjA3LCJpYXQiOjE1NzA1NzIzMDd9.8xjLgPQ6cPvWd3jWqHrHV6ttOYoCpNhMg8oUqVVBeR0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/files/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"files",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MoveFolder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDY1MjUwMSwiZXhwIjoxNTcwNjUzNDAxLCJpYXQiOjE1NzA2NTI1MDF9.b49H7VLUQ7IuNAZETup9qqxfhYXtNSiTxpJ2CH-MmEk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:57901/api/folders/2/folder/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57901",
+					"path": [
+						"api",
+						"folders",
+						"2",
+						"folder",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteFolder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReport",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
