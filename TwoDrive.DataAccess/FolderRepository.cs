@@ -32,13 +32,19 @@ namespace TwoDrive.DataAccess
 
         public Folder Get(long id)
         {
-            return _context.Folders
-                .Include(f => f.Readers)
-                .Include(f => f.Parent)
-                .Include(f => f.Files)
-                .Include(f => f.Folders)
-                .FirstOrDefault(
-                f => f.Id == id);
+            var folder =  _context.Folders
+                        .Include(f => f.Readers)
+                        .Include(f => f.Parent)
+                        .Include(f => f.Files)
+                        .Include(f => f.Folders)
+                        .FirstOrDefault(
+                        f => f.Id == id);
+            if(folder.Folders != null)
+                foreach(var fold in folder.Folders)
+                {
+                    this.Get(fold.Id);
+                }
+            return folder;      
         }
 
         public void Add(Folder folder)

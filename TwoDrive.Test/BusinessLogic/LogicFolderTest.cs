@@ -34,7 +34,7 @@ namespace TwoDrive.Test.BusinessLogic
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(Exception))]
         public void AddFolderNullToRoot()
         {
             folderLogic.Add(folderNull);
