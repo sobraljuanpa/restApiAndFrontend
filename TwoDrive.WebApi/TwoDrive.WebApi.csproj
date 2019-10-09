@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20190925004619_TwoDrive.AddedUniqueUsernameConstraint.cs" />
+    <Compile Remove="Migrations\20190925004619_TwoDrive.AddedUniqueUsernameConstraint.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TwoDrive.BusinessLogic.Interface\TwoDrive.BusinessLogic.Interface.csproj" />
+    <ProjectReference Include="..\TwoDrive.BusinessLogic\TwoDrive.BusinessLogic.csproj" />
+    <ProjectReference Include="..\TwoDrive.DataAccess\TwoDrive.DataAccess.csproj" />
+    <ProjectReference Include="..\TwoDrive.Domain\TwoDrive.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

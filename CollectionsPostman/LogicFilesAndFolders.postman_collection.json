@@ -1,0 +1,441 @@
+{
+	"info": {
+		"_postman_id": "c04fc3a3-bf0a-48f6-85eb-2d64a48d93fa",
+		"name": "LogicFilesAndFolders",
+		"description": "Se prueba el sistema completo, dando uso de todos los requerimientos.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LogIn usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Username\": \"JosePabloGoni\",\n\t\"Password\": \"josepablogoni\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:50037/api/users/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"users",
+						"authenticate"
+					]
+				},
+				"description": "Con un usuario ya ingresado por un administrador al sistema, me logeo para entrar al sistema."
+			},
+			"response": []
+		},
+		{
+			"name": "Me traigo el folderRoot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQwNTAxNCwiZXhwIjoxNTcwNDA1OTE0LCJpYXQiOjE1NzA0MDUwMTR9.V46d3uKmbkZcU23Ni28ODDE-kCt5tuecM9lW-XM_49U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:50037/api/folders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"folders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creo un archivo en folderRoot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQwNTAxNCwiZXhwIjoxNTcwNDA1OTE0LCJpYXQiOjE1NzA0MDUwMTR9.V46d3uKmbkZcU23Ni28ODDE-kCt5tuecM9lW-XM_49U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"OwnerId\": \"4\",\n\t\"Name\": \"ArchivoEnRootFolder\",\n\t\"Parent\": {\"id\": \"1\"},\n\t\"Content\": \"Este es un archivo que se encuentra en el root folder\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:50037/api/files",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Traigo el archivo en folderRoot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQwNTAxNCwiZXhwIjoxNTcwNDA1OTE0LCJpYXQiOjE1NzA0MDUwMTR9.V46d3uKmbkZcU23Ni28ODDE-kCt5tuecM9lW-XM_49U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:50037/api/files/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"files",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agrego una carpeta en folderRoot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDU3NDI5NSwiZXhwIjoxNTcwNTc1MTk1LCJpYXQiOjE1NzA1NzQyOTV9.juheFivEADW3d3aI9B27fpJp7Gi1QEOvzMgcede04fU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"OwnerId\": \"4\",\n\t\"Name\": \"Folder1\",\n\t\"Parent\": {\"id\": \"1\"}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:50037/api/folders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"folders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Traigo la carpeta en folderRoot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQwNzcxOCwiZXhwIjoxNTcwNDA4NjE4LCJpYXQiOjE1NzA0MDc3MTh9.X-UFdKmEiK9KB5aonvlqIwbTjzTv2CR5x0BwAK59o5o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:50037/api/folders/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"folders",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agrego un archivo a una subcarpeta de folderRoot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQwNzcxOCwiZXhwIjoxNTcwNDA4NjE4LCJpYXQiOjE1NzA0MDc3MTh9.X-UFdKmEiK9KB5aonvlqIwbTjzTv2CR5x0BwAK59o5o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"OwnerId\": \"4\",\n\t\"Name\": \"ArchivoEnRootFolder\",\n\t\"Parent\": {\"id\": \"2\"},\n\t\"Content\": \"Este es un archivo en una sub carpeta de rootFolder\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:50037/api/files",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Muevo el archivo de subFolder a rootFolder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQwNzcxOCwiZXhwIjoxNTcwNDA4NjE4LCJpYXQiOjE1NzA0MDc3MTh9.X-UFdKmEiK9KB5aonvlqIwbTjzTv2CR5x0BwAK59o5o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:50037/api/files/2/folder/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"files",
+						"2",
+						"folder",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creo una carpeta en la subcarpeta que tenia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQwOTY0NywiZXhwIjoxNTcwNDEwNTQ3LCJpYXQiOjE1NzA0MDk2NDd9.xwfFxzuXktDLoW9E_q2GmTjtTFjIfPqiGSfgRUSeOq0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"OwnerId\": \"4\",\n\t\"Name\": \"Esta es una carpeta en subFolder\",\n\t\"Parent\": {\"id\": \"2\"}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:50037/api/folders/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"folders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Muevo la carpeta que esta en subFolder a rootFolder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjQiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU3MDQxMTI5MywiZXhwIjoxNTcwNDEyMTkzLCJpYXQiOjE1NzA0MTEyOTN9.1h2PmfbWyH4IESJnP37ylOh1pfk4pgpKdUh1F1MR2II",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:50037/api/folders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50037",
+					"path": [
+						"api",
+						"folders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c5a020f9-499e-4266-83ca-aee4b804f11e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fffec390-969b-45a9-b08f-68138a22d46e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

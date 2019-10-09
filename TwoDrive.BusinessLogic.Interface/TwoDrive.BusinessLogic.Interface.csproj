@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TwoDrive.DataAccess.Interface\TwoDrive.DataAccess.Interface.csproj" />
+    <ProjectReference Include="..\TwoDrive.Domain\TwoDrive.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
