@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+
+import { Credentials } from './credentials';
+import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  credentials: Credentials;
 
   constructor(private http: HttpClient) { }
 
@@ -15,4 +18,14 @@ export class AuthenticationService {
       password: pass
     });
   }
+
+  getCredentials(): Credentials {
+    return JSON.parse(localStorage.getItem('credentials'))
+  }
+
+  setCredentials(cred: Credentials) {
+    this.credentials = cred;
+    localStorage.setItem('credentials', JSON.stringify(this.credentials));
+  }
+
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 
+import { Credentials } from '../credentials';
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -14,8 +16,14 @@ export class LoginFormComponent implements OnInit {
 
   onLogin(): void {
     this.authenticationService.logIn(this.username, this.password).subscribe(
-      res => {console.log(res)}
-    );
+      res => {
+        let cred = new Credentials();
+        cred.username = (res as any).username;
+        cred.token = (res as any).token;
+        cred.admin = (res as any).role == 'Admin';
+        this.authenticationService.setCredentials(cred);
+        console.log(this.authenticationService.getCredentials());
+      });
   }
 
   ngOnInit() {
