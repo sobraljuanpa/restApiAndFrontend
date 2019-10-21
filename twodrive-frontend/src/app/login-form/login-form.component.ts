@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../authentication.service';
+import { Router } from "@angular/router";
 
+import { AuthenticationService } from '../authentication.service';
 import { Credentials } from '../credentials';
 
 @Component({
@@ -12,7 +13,11 @@ export class LoginFormComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+
+  navigate() {
+    this.router.navigateByUrl('/');
+  }
 
   onLogin(): void {
     this.authenticationService.logIn(this.username, this.password).subscribe(
@@ -23,7 +28,11 @@ export class LoginFormComponent implements OnInit {
         cred.admin = (res as any).role == 'Admin';
         this.authenticationService.setCredentials(cred);
         console.log(this.authenticationService.getCredentials());
-      });
+      },
+      err => {
+        console.log()
+      },
+      () => this.navigate());
   }
 
   ngOnInit() {
