@@ -15,8 +15,8 @@ export class LoginFormComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
-  navigate() {
-    this.router.navigateByUrl('/');
+  navigate(url: string) {
+    this.router.navigateByUrl(url);
   }
 
   onLogin(): void {
@@ -32,10 +32,13 @@ export class LoginFormComponent implements OnInit {
       err => {
         console.log()
       },
-      () => this.navigate());
+      () => this.navigate('/userhome'));
   }
 
   ngOnInit() {
+    if(this.authenticationService.getCredentials()) {
+      this.navigate('/userhome');
+    }
   }
 
 }
