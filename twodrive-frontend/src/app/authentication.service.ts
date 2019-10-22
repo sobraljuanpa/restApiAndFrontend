@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Credentials } from './credentials';
-import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
