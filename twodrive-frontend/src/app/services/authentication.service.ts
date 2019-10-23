@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { JwtHelperService } from '@auth0/angular-jwt'
+
 import { Credentials } from '../models/credentials';
 
 @Injectable({
@@ -8,6 +10,7 @@ import { Credentials } from '../models/credentials';
 })
 export class AuthenticationService {
   credentials: Credentials;
+  helper = new JwtHelperService();
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +32,11 @@ export class AuthenticationService {
   setCredentials(cred: Credentials) {
     this.credentials = cred;
     localStorage.setItem('credentials', JSON.stringify(this.credentials));
+  }
+
+  isAuthenticated(): boolean {
+    const cred = this.getCredentials();
+    return this.helper.isTokenExpired(cred.token);
   }
 
 }
