@@ -15,7 +15,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   logIn(user: string, pass: string) {
-    return this.http.post('http://localhost:57902/api/users/authenticate', {
+    return this.http.post('http://localhost:52070/api/users/authenticate', {
       username: user,
       password: pass
     });
