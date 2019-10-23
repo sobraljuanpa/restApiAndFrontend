@@ -15,9 +15,9 @@ export class File {
 export class FileAdapter implements Adapter<File> {
     adapt(item: any): File {
         return new File (
-            item.id,
-            item.name,
-            item.content
+            item.Id,
+            item.Name,
+            item.Content
         );
     }
 }

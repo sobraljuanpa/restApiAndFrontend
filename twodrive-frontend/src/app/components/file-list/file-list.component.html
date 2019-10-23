@@ -1,1 +1,6 @@
-<p>file-list works!</p>
+<ul>
+    <li *ngFor="let file of files | async">
+        <h3>{{file.name}}</h3>
+        <p>{{file.content}}</p>
+    </li>
+</ul>

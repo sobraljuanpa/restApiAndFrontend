@@ -22,10 +22,11 @@ export class LoginFormComponent implements OnInit {
   onLogin(): void {
     this.authenticationService.logIn(this.username, this.password).subscribe(
       res => {
+        console.log(res);
         let cred = new Credentials();
-        cred.username = (res as any).username;
-        cred.token = (res as any).token;
-        cred.admin = (res as any).role == 'Admin';
+        cred.username = (res as any).Username;
+        cred.token = (res as any).Token;
+        cred.admin = (res as any).Role == 'Admin';
         this.authenticationService.setCredentials(cred);
         console.log(this.authenticationService.getCredentials());
       },
