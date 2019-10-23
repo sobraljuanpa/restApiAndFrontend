@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Credentials } from './credentials';
+import { Credentials } from '../models/credentials';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,10 @@ export class AuthenticationService {
       username: user,
       password: pass
     });
+  }
+
+  logOut() {
+    this.setCredentials(null);
   }
 
   getCredentials(): Credentials {
