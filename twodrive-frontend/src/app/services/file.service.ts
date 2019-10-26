@@ -17,7 +17,7 @@ export class FileService {
   getOwnedFiles(): Observable<File[]> {
     const url = this.baseUrl + '/view?fileName=&sortOrder=';
 
-    return this.http.get('http://localhost:52070/api/files/view?fileName=&sortOrder=').pipe(
+    return this.http.get('http://localhost:57902/api/files/view?fileName=&sortOrder=').pipe(
       map((data: any[]) => data.map(item => this.adapter.adapt(item))),
     );
   }
