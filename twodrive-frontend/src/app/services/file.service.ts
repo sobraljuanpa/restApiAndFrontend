@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 
 import { File, FileAdapter } from "../models/file";
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -20,5 +20,9 @@ export class FileService {
     return this.http.get('http://localhost:57902/api/files/view?fileName=&sortOrder=').pipe(
       map((data: any[]) => data.map(item => this.adapter.adapt(item))),
     );
+  }
+
+  deleteFile(id: number) {
+    return this.http.delete(`http://localhost:57902/api/files/${id}`);
   }
 }

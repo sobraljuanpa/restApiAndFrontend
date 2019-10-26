@@ -1,7 +1,10 @@
+<p></p>
 <div *ngFor="let file of files | async">
-        <div class="card">
+        <div class="card w-75 mx-auto">
             <div class="card-header">
                     {{file.name}}
+                    <button type="button" class="btn btn-danger" (click)="delete(file.id)" style="float: right; margin-left: 10px;">Delete</button>
+                    <button type="button" class="btn btn-primary" style="float: right">Edit</button>
             </div>
             <div class="card-body">
                     {{file.content}}

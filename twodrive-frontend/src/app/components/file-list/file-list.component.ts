@@ -19,4 +19,10 @@ export class FileListComponent implements OnInit {
     this.files = this.fileService.getOwnedFiles();
   }
 
+  delete(id: number) {
+    this.fileService.deleteFile(id).subscribe(
+      res => this.ngOnInit()
+    );
+  }
+
 }
