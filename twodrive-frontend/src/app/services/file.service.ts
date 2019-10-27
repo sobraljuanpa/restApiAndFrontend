@@ -22,7 +22,20 @@ export class FileService {
     );
   }
 
+  getFile(id: number): Observable<File> {
+    return this.http.get(`http://localhost:57902/api/files/${id}`).pipe(
+      map(item => this.adapter.adapt(item))
+    );
+  }
+
   deleteFile(id: number) {
     return this.http.delete(`http://localhost:57902/api/files/${id}`);
+  }
+
+  updateFile(id: number, fileName: string, fileContent: string){
+    return this.http.put(`http://localhost:57902/api/files/${id}`, {
+      name: fileName,
+      content: fileContent
+    });
   }
 }

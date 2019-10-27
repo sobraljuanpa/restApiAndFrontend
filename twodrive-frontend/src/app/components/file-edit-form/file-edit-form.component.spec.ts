@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileDetailComponent } from './file-detail.component';
+import { FileEditFormComponent } from './file-edit-form.component';
 
-describe('FileDetailComponent', () => {
-  let component: FileDetailComponent;
-  let fixture: ComponentFixture<FileDetailComponent>;
+describe('FileEditFormComponent', () => {
+  let component: FileEditFormComponent;
+  let fixture: ComponentFixture<FileEditFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FileDetailComponent ]
+      declarations: [ FileEditFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FileDetailComponent);
+    fixture = TestBed.createComponent(FileEditFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

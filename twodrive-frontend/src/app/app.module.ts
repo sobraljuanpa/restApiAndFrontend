@@ -10,7 +10,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { FileListComponent } from './components/file-list/file-list.component';
-import { FileDetailComponent } from './components/file-detail/file-detail.component';
+import { FileEditFormComponent } from './components/file-edit-form/file-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { FileDetailComponent } from './components/file-detail/file-detail.compon
     UserNavbarComponent,
     UserHomeComponent,
     FileListComponent,
-    FileDetailComponent
+    FileEditFormComponent
   ],
   imports: [
     BrowserModule,
