@@ -10,7 +10,7 @@ namespace TwoDrive.BusinessLogic
     public class JsonMigration : IMigration
     {
         string _path;
-        public void specifyRoute(string path)
+        public JsonMigration(string path)
         {
             _path = path;
         }
