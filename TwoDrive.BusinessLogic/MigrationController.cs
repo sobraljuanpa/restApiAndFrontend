@@ -53,11 +53,14 @@ namespace TwoDrive.BusinessLogic
                 {
                     foreach (var folder in _migration.GiveMeFolders())
                     {
-                        if (regex.IsMatch(folder.Parent.Name))
+                        if (!regex.IsMatch(folder.Name))
                         {
-                            folder.Parent = FolderRoot;
+                            if (regex.IsMatch(folder.Parent.Name))
+                            {
+                                folder.Parent = FolderRoot;
+                            }
+                            _folderLogic.Add(folder);
                         }
-                        _folderLogic.Add(folder);
                     }
                 }
                 catch (Exception e)
