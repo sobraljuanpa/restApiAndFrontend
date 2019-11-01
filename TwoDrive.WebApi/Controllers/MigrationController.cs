@@ -31,7 +31,7 @@ namespace TwoDrive.WebApi.Controllers
             try
             {
                 var assembly = Assembly.GetExecutingAssembly();
-                var migrationType = assembly.GetType("TwoDrive.BusinessLogic."+type+"Migration");
+                var migrationType = assembly.GetType("TwoDrive.BusinessLogic." + type+"Migration");
                 IMigration migration = (IMigration)Activator.CreateInstance(migrationType, param);
                 IMigrationController controller = new TwoDrive.BusinessLogic.MigrationController(migration, _userLogic, _folderLogic, _fileLogic);
                 controller.SaveUser();

@@ -15,16 +15,6 @@ namespace TwoDrive.BusinessLogic.Interface
         public abstract void Move(long EntityId, long folderId);
         public abstract void Delete(T Entity);
 
-        public class UserTuples
-        {
-            public UserTuples()
-            {
-
-            }
-
-            public long ownerId { get; set; }
-            public int numberOfFiles { get; set; }
-        }
         public T Get(long id)
         {
             FolderElementExists(id);
