@@ -34,6 +34,7 @@ namespace TwoDrive.BusinessLogic
             folderAfter.AddFile(entity);
             _folderRepository.Update(folderBefore, folderAfter);
             _logRepository.Add(new LogItem(entity.OwnerId, DateTime.Now));
+            base.CreateLog(entity.Parent, new LogItem(entity.OwnerId, null), _logRepository);
             return entity;
         } 
 
@@ -44,6 +45,7 @@ namespace TwoDrive.BusinessLogic
             CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
             _logRepository.Add(new LogItem(newEntity.OwnerId, DateTime.Now));
+            base.CreateLog(Entity.Parent, new LogItem(Entity.OwnerId, null), _logRepository);
         }
         public override void Move(long EntityId, long folderId)
         {
@@ -77,6 +79,7 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(Entity.Id);
             _repository.Delete(Entity);
             _logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now));
+            base.CreateLog(Entity.Parent, new LogItem(Entity.OwnerId, null), _logRepository);
         }
 
         private void IsTheSameOwner(File entity, Folder folder)

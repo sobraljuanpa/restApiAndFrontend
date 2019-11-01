@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.Domain;
@@ -51,7 +53,10 @@ namespace TwoDrive.BusinessLogic
             {
                 try
                 {
-                    foreach (var folder in _migration.GiveMeFolders())
+                    List<Folder> folders = _migration.GiveMeFolders();
+                    List<File> files = _migration.GiveMeFiles();
+                    ChangeId(ref folders, ref files, _folderLogic.GetAll().Last().Id + 1, _fileLogic.GetAll().Last().Id + 1);
+                    foreach (var folder in folders)
                     {
                         if (!regex.IsMatch(folder.Name))
                         {
@@ -81,6 +86,24 @@ namespace TwoDrive.BusinessLogic
             catch (Exception e)
             {
                 throw new Exception("The format is not correct: " + e.Message);
+            }
+        }
+
+        private void ChangeId(ref List<Folder> folders,ref List<File> files,long startIdFolder, long startIdFile)
+        {
+            long idFolderActually = folders.First().Id;
+            long idFilesActually = files.First().Id;
+            long variationFile = startIdFile - idFilesActually;
+            long variationFolder = startIdFolder - idFolderActually;
+            foreach(var folder in folders)
+            {
+                if (folder.Parent != null) folder.Parent.Id += variationFolder;
+                folder.Id += variationFolder;
+                foreach(var file in folder.Files)
+                {
+                    file.Id += variationFile;
+                    file.Parent.Id += variationFolder;
+                }
             }
         }
     }

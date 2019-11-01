@@ -134,5 +134,12 @@ namespace TwoDrive.BusinessLogic
 
             return countMod / (finishDate - startDate).Days;
         }
+
+        public int GetUserModificationsFolders(User user)
+        {
+            return (from f in _logRepository.GetAll()
+                    where (f.UserId == user.Id)
+                    select f).Count();
+        }
     }
 }

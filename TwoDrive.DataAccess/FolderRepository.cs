@@ -24,7 +24,7 @@ namespace TwoDrive.DataAccess
         {
             return _context.Folders
                 .Include(f => f.Readers)
-                .Include(f => f.Parent)
+                .Include(f => f.Parent.Id)
                 .Include(f => f.Files)
                 .Include(f => f.Folders)
                 .ToList();

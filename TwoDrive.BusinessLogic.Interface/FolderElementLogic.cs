@@ -56,6 +56,13 @@ namespace TwoDrive.BusinessLogic.Interface
             _repository.Update(Entity, fileUpdate);
         }
 
+        public void CreateLog(Folder parent, LogItem logItem, IDataRepository<LogItem> rLI)
+        {
+            if (parent == null) return;
+            rLI.Add(logItem);
+            CreateLog(parent.Parent, logItem, rLI);
+        }
+
         protected void FolderElementExists(long id)
         {
             if (_repository.Get(id) == null)

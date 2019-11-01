@@ -23,12 +23,12 @@ namespace TwoDrive.DataAccess
 
         public IEnumerable<File> GetAll()
         {
-            return _context.Files.Include(f => f.Readers).Include(f => f.Parent).ToList();
+            return _context.Files.Include(f => f.Readers).Include(f => f.Parent.Id).ToList();
         }
 
         public File Get(long id)
         {
-            return _context.Files.Include(f => f.Readers).Include(f => f.Parent).FirstOrDefault(
+            return _context.Files.Include(f => f.Readers).Include(f => f.Parent.Id).FirstOrDefault(
                 f => f.Id == id);
         }
 

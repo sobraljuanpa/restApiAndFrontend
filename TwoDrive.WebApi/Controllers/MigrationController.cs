@@ -25,7 +25,7 @@ namespace TwoDrive.WebApi.Controllers
 
         //POST: /api/migration/type
         [Authorize(Roles = Role.Admin)]
-        [HttpPost("type")]
+        [HttpPost("{type}")]
         public IActionResult PostMigration(string type, [FromBody] object[] param)
         {
             try
