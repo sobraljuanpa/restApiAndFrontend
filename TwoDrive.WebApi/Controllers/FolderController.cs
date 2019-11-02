@@ -22,13 +22,13 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //GET: /api/folders
-        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                IEnumerable<Folder> folder = _folderLogic.GetAll();
+                var currentUser = _users.Get(int.Parse(User.Identity.Name));
+                IEnumerable<Folder> folder = _folderLogic.GetAllUser(currentUser.Id);
                 return Ok(folder);
             }
             catch (Exception e)
