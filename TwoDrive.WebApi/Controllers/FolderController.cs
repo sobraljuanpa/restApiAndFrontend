@@ -21,14 +21,31 @@ namespace TwoDrive.WebApi.Controllers
             _users = userRepository;
         }
 
-        //GET: /api/folders
+        //GET: /api/folders/all
         [Authorize(Roles = Role.Admin)]
+        [HttpGet("/all")]
+        public IActionResult GetAllFolders()
+        {
+            try
+            {
+                IEnumerable<Folder> folder = _folderLogic.GetAll();
+                return Ok(folder);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        //GET: /api/folders
+        [Authorize(Roles = Role.User)]
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                IEnumerable<Folder> folder = _folderLogic.GetAll();
+                var currentUser = _users.Get(int.Parse(User.Identity.Name));
+                IEnumerable<Folder> folder = _folderLogic.GetAllUser(currentUser.Id);
                 return Ok(folder);
             }
             catch (Exception e)

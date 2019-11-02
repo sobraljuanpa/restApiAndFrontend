@@ -31,6 +31,16 @@ namespace TwoDrive.BusinessLogic.Interface
             return _repository.Get(id);
         }
 
+        public IEnumerable<T> GetAllUser(long userId)
+        {
+            List<T> list = new List<T>();
+            foreach(var entity in this.GetAll())
+            {
+                if (entity.OwnerId == userId) list.Add(entity);
+            }
+            return list;
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _repository.GetAll();
