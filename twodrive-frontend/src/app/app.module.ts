@@ -10,6 +10,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 import { FileListComponent } from './components/file-list/file-list.component';
 import { FileEditFormComponent } from './components/file-edit-form/file-edit-form.component';
+import { FileAddFormComponent } from './components/file-add-form/file-add-form.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FileEditFormComponent } from './components/file-edit-form/file-edit-for
     LoginFormComponent,
     UserNavbarComponent,
     FileListComponent,
-    FileEditFormComponent
+    FileEditFormComponent,
+    FileAddFormComponent
   ],
   imports: [
     BrowserModule,
