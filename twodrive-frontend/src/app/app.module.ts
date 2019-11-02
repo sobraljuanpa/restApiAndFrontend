@@ -8,7 +8,6 @@ import { TokenInterceptor } from "./services/token.interceptor";
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
-import { UserHomeComponent } from './components/user-home/user-home.component';
 import { FileListComponent } from './components/file-list/file-list.component';
 import { FileEditFormComponent } from './components/file-edit-form/file-edit-form.component';
 
@@ -17,7 +16,6 @@ import { FileEditFormComponent } from './components/file-edit-form/file-edit-for
     AppComponent,
     LoginFormComponent,
     UserNavbarComponent,
-    UserHomeComponent,
     FileListComponent,
     FileEditFormComponent
   ],

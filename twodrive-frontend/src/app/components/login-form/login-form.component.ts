@@ -33,12 +33,12 @@ export class LoginFormComponent implements OnInit {
       err => {
         console.log()
       },
-      () => this.navigate('/userhome'));
+      () => location.reload());
   }
 
   ngOnInit() {
     if(this.authenticationService.getCredentials()) {
-      this.navigate('/userhome');
+      this.navigate('/files');
     }
   }
 
