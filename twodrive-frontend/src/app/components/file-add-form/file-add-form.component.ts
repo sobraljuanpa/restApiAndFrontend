@@ -27,7 +27,8 @@ export class FileAddFormComponent implements OnInit {
   }
 
   addFile() {
-    console.log(this.selectedFolder);
+    var userId = JSON.parse(localStorage.getItem("credentials"));
+    this.fileService.addFile(this.fileName, this.fileContent, this.selectedFolder.id, userId.id).subscribe();
   }
 
 }

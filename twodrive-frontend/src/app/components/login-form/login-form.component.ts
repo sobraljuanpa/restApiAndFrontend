@@ -24,6 +24,7 @@ export class LoginFormComponent implements OnInit {
       res => {
         console.log(res);
         let cred = new Credentials();
+        cred.id = (res as any).Id;
         cred.username = (res as any).Username;
         cred.token = (res as any).Token;
         cred.admin = (res as any).Role == 'Admin';

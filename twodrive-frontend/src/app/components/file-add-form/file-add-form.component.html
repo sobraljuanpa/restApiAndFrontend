@@ -19,7 +19,6 @@
                 <option [ngValue]="folder" *ngFor="let folder of userFolders | async">{{folder.name}}</option>
             </select>
             <br>
-            <button type="button" class="btn btn-danger" (click)="addFIle()" style="float: right; margin-left: 10px;">Go back</button>
             <button type="button" class="btn btn-primary" (click)="addFile()" style="float: right">Add file</button>
         </div>
 </div>

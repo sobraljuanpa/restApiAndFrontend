@@ -48,4 +48,13 @@ export class FileService {
       content: fileContent
     });
   }
+
+  addFile(fileName: string, fileContent: string, parentFolder: number, userId: number) {
+    return this.http.post('http://localhost:57902/api/files', {
+      name: fileName,
+      content: fileContent,
+      ownerId: userId,
+      parent: { id: parentFolder }
+    });
+  }
 }
