@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class FileListComponent implements OnInit {
   files: Observable<File[]>; 
+  fileName: string;
   
 
   constructor(
@@ -28,6 +29,10 @@ export class FileListComponent implements OnInit {
       res => this.ngOnInit(),
       err => this.router.navigateByUrl('http://localhost:4200/')
     );
+  }
+
+  onSearch(fileName: string) {
+    this.files = this.fileService.getFilesByName(fileName);
   }
 
 }

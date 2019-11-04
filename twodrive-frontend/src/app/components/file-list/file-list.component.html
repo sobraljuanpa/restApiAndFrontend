@@ -1,4 +1,13 @@
 <p></p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <form>
+        <div class="form-group w-25">
+            <label>File name</label>
+            <input type="text" class="form-control" [(ngModel)]="fileName" name="username">
+        </div>
+        <button type="submit" class="btn btn-primary" name="searchButton" (click)="onSearch(fileName)">Search</button>
+    </form>
+</nav>
 <div *ngFor="let file of files | async">
         <div class="card w-75 mx-auto">
             <div class="card-header">

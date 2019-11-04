@@ -22,6 +22,12 @@ export class FileService {
     );
   }
 
+  getFilesByName(fileName: string): Observable<File[]> {
+    return this.http.get(`http://localhost:57902/api/files/view?fileName=${fileName}&sortOrder=`).pipe(
+      map((data: any[]) => data.map(item => this.adapter.adapt(item))),
+    );
+  }
+
   getFile(id: number): Observable<File> {
     return this.http.get(`http://localhost:57902/api/files/${id}`).pipe(
       map(item => this.adapter.adapt(item))
