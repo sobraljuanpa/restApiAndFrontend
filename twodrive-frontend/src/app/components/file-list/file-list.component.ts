@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class FileListComponent implements OnInit {
   files: Observable<File[]>; 
   fileName: string;
+  sortOrder: string;
   
 
   constructor(
@@ -33,6 +34,23 @@ export class FileListComponent implements OnInit {
 
   onSearch(fileName: string) {
     this.files = this.fileService.getFilesByName(fileName);
+  }
+
+  onSortOrderSelection() {
+    switch(this.sortOrder) {
+      case "Name ascending":
+        this.files = this.fileService.getFilesBySortOrder("name_asc");
+      case "Name descending":
+        this.files = this.fileService.getFilesBySortOrder("name_desc");
+      case "Creation date ascending":
+        this.files = this.fileService.getFilesBySortOrder("created_asc");
+      case "Creation date descending":
+        this.files = this.fileService.getFilesBySortOrder("created_desc");
+      case "Last modification date ascending":
+        this.files = this.fileService.getFilesBySortOrder("modified_asc");
+      case "Last modification date descending":
+        this.files = this.fileService.getFilesBySortOrder("modified_desc");
+    }
   }
 
 }
