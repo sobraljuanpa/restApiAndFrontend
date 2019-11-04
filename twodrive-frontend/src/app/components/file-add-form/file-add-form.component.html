@@ -15,11 +15,11 @@
                     <textarea class="form-control" rows="10" [(ngModel)]="fileContent" name="fileContent"></textarea>
                 </div>
             </form>
-            <select class="form-control"  *ngFor="let folder of userFolders | async">
-                <option>{{folder.name}}</option>
+            <select class="form-control" [(ngModel)]="selectedFolder">
+                <option [ngValue]="folder" *ngFor="let folder of userFolders | async">{{folder.name}}</option>
             </select>
             <br>
-            <button type="button" class="btn btn-danger" (click)="goBack()" style="float: right; margin-left: 10px;">Go back</button>
-            <button type="button" class="btn btn-primary" (click)="saveChanges()" style="float: right">Add file</button>
+            <button type="button" class="btn btn-danger" (click)="addFIle()" style="float: right; margin-left: 10px;">Go back</button>
+            <button type="button" class="btn btn-primary" (click)="addFile()" style="float: right">Add file</button>
         </div>
 </div>

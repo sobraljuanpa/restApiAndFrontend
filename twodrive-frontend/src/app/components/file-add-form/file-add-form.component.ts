@@ -14,6 +14,7 @@ import { Folder } from "../../models/folder";
 export class FileAddFormComponent implements OnInit {
   fileName: string;
   fileContent: string;
+  selectedFolder: Folder;
   userFolders: Observable<Folder[]>;
 
   constructor(
@@ -23,6 +24,10 @@ export class FileAddFormComponent implements OnInit {
 
   ngOnInit() {
     this.userFolders = this.folderService.getOwnedFolders();
+  }
+
+  addFile() {
+    console.log(this.selectedFolder);
   }
 
 }
