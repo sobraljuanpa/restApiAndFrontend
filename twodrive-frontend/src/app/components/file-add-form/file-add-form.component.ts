@@ -5,6 +5,7 @@ import { FileService } from '../../services/file.service';
 import { FolderService } from "../../services/folder.service";
 import { File } from "../../models/file";
 import { Folder } from "../../models/folder";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-file-add-form',
@@ -19,7 +20,8 @@ export class FileAddFormComponent implements OnInit {
 
   constructor(
     private fileService: FileService,
-    private folderService: FolderService
+    private folderService: FolderService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -28,7 +30,11 @@ export class FileAddFormComponent implements OnInit {
 
   addFile() {
     var userId = JSON.parse(localStorage.getItem("credentials"));
-    this.fileService.addFile(this.fileName, this.fileContent, this.selectedFolder.id, userId.id).subscribe();
+    this.fileService.addFile(this.fileName, this.fileContent, this.selectedFolder.id, userId.id).subscribe(
+      res => {
+        this.router.navigateByUrl('/files');
+      }
+    );
   }
 
 }
