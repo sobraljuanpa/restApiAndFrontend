@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.Domain;
 
-namespace TwoDrive.BusinessLogic
+namespace TwoDrive.ImportingStrategy
 {
-    public class JsonMigration : IMigration
+    public class XmlMigration : IMigration
     {
-        string _path;
-        public JsonMigration(string path)
+        private string _path;
+        public XmlMigration(string path)
         {
             _path = path;
         }
@@ -18,13 +18,10 @@ namespace TwoDrive.BusinessLogic
         {
             try
             {
-                Folder rootFolder;
-                using (System.IO.StreamReader jsonStream = System.IO.File.OpenText(_path))
-                {
-                    var json = jsonStream.ReadToEnd();
-                    rootFolder = JsonConvert.DeserializeObject<Folder>(json);
-                }
-                return rootFolder;
+                //, new XmlRootAttribute("Folder")
+                XmlSerializer serializer = new XmlSerializer(typeof(Folder));
+                System.IO.FileStream readerXml = new System.IO.FileStream(_path, System.IO.FileMode.Open);
+                return (Folder)serializer.Deserialize(readerXml);
             }
             catch (Exception)
             {
@@ -38,7 +35,7 @@ namespace TwoDrive.BusinessLogic
             if (folder.Folders == null) return;
             else
             {
-                foreach(var fol in folder.Folders)
+                foreach (var fol in folder.Folders)
                 {
                     GiveFile(fol, ref files);
                 }
@@ -59,7 +56,7 @@ namespace TwoDrive.BusinessLogic
             if (folder.Folders == null) return;
             else
             {
-                foreach(var fol in folder.Folders)
+                foreach (var fol in folder.Folders)
                 {
                     GiveFolder(fol, ref folders);
                 }

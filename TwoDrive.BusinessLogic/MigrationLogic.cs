@@ -7,7 +7,7 @@ using TwoDrive.Domain;
 
 namespace TwoDrive.BusinessLogic
 {
-    public class MigrationController : IMigrationController
+    public class MigrationLogic : IMigrationLogic
     {
         IMigration _migration;
         ILogic<User> _userLogic;
@@ -17,7 +17,7 @@ namespace TwoDrive.BusinessLogic
         Folder FolderRoot = null;
         Regex regex = new Regex("$-rootFolder");
 
-        public MigrationController(IMigration migration, ILogic<User> userLogic, FolderElementLogic<Folder> folderLogic, FolderElementLogic<File> fileLogic)
+        public MigrationLogic(IMigration migration, ILogic<User> userLogic, FolderElementLogic<Folder> folderLogic, FolderElementLogic<File> fileLogic)
         {
             _migration = migration;
             _userLogic = userLogic;

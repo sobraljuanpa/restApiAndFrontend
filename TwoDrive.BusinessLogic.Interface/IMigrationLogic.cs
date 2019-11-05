@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TwoDrive.BusinessLogic.Interface
 {
-    public interface IMigrationController
+    public interface IMigrationLogic
     {
         void SaveUser();
         void SaveAllFolders();
