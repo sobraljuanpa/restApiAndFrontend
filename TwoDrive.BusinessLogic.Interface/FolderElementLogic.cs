@@ -59,7 +59,7 @@ namespace TwoDrive.BusinessLogic.Interface
         {
             if (parent == null) return;
             rLI.Add(logItem);
-            CreateLog(parent.Parent, logItem, rLI);
+            CreateLog(parent.Parent, new LogItem(logItem.UserId,null), rLI);
         }
 
         protected void FolderElementExists(long id)

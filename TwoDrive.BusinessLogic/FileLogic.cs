@@ -33,8 +33,7 @@ namespace TwoDrive.BusinessLogic
             _repository.Add(entity);           
             folderAfter.AddFile(entity);
             _folderRepository.Update(folderBefore, folderAfter);
-            _logRepository.Add(new LogItem(entity.OwnerId, DateTime.Now));
-            base.CreateLog(entity.Parent, new LogItem(entity.OwnerId, null), _logRepository);
+            //base.CreateLog(entity.Parent, new LogItem(entity.OwnerId, null), _logRepository);
             return entity;
         } 
 
@@ -44,8 +43,7 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(Entity.Id);
             CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
-            _logRepository.Add(new LogItem(newEntity.OwnerId, DateTime.Now));
-            base.CreateLog(Entity.Parent, new LogItem(Entity.OwnerId, null), _logRepository);
+            //base.CreateLog(Entity.Parent, new LogItem(Entity.OwnerId, null), _logRepository);
         }
         public override void Move(long EntityId, long folderId)
         {
@@ -66,7 +64,7 @@ namespace TwoDrive.BusinessLogic
             folder.AddFile(Entity);
             _repository.Update(filePrevious, Entity);
             _folderRepository.Update(folderWhereIsIt, folder);
-            _logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now));
+            //_logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now));
         }
 
         public override void Delete(File Entity)

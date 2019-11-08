@@ -34,7 +34,7 @@ namespace TwoDrive.BusinessLogic
                     
                     foreach (var file in files)
                     {
-                        file.Parent = _folderLogic.GetByName(file.Parent.Name, Owner.Id);
+                        file.Parent = _folderLogic.GetByName(GetNameFolder(file.Parent.Id), Owner.Id);
                         file.Id = 0;
                         file.OwnerId = Owner.Id;
                         file.Readers = null;
