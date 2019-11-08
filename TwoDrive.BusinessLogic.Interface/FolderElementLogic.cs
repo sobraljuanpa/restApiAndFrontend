@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
 
@@ -14,6 +15,14 @@ namespace TwoDrive.BusinessLogic.Interface
         public abstract void Update(T Entity, T newEntity);
         public abstract void Move(long EntityId, long folderId);
         public abstract void Delete(T Entity);
+
+        public T GetByName(string nameEntity, long userId)
+        {
+            return (from r in _repository.GetAll()
+                   where r.OwnerId == userId
+                   where r.Name == nameEntity
+                   select r).First();
+        }
 
         public T Get(long id)
         {

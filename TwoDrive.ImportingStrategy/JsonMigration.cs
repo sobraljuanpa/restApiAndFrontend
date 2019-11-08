@@ -34,7 +34,13 @@ namespace TwoDrive.ImportingStrategy
 
         private void GiveFile(Folder folder, ref List<File> files)
         {
-            if (folder.Files != null) files.Concat(folder.Files);
+            if (folder.Files != null)
+            {
+                foreach(var fil in folder.Files)
+                {
+                    files.Add(fil);
+                }
+            }
             if (folder.Folders == null) return;
             else
             {
