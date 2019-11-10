@@ -12,7 +12,7 @@ import { FileListComponent } from './components/file-list/file-list.component';
 import { FileEditFormComponent } from './components/file-edit-form/file-edit-form.component';
 import { FileAddFormComponent } from './components/file-add-form/file-add-form.component';
 import { FolderListComponent } from './components/folder-list/folder-list.component';
-import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 
 @NgModule({
   declarations: [
