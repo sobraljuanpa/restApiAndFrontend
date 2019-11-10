@@ -32,6 +32,12 @@ export class FileService {
     );
   }
 
+  getFilesByNameAdmin(fileName: string): Observable<File[]> {
+    return this.http.get(`http://localhost:57902/api/files?fileName=${fileName}&sortOrder=`).pipe(
+      map((data: any[]) => data.map(item => this.adapter.adapt(item))),
+    );
+  }
+
   getFilesBySortOrder(sortOrder: string): Observable<File[]> {
     return this.http.get(`http://localhost:57902/api/files/view?fileName=&sortOrder=${sortOrder}`).pipe(
       map((data: any[]) => data.map(item => this.adapter.adapt(item))),
