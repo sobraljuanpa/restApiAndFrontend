@@ -13,6 +13,7 @@ import { FileEditFormComponent } from './components/file-edit-form/file-edit-for
 import { FileAddFormComponent } from './components/file-add-form/file-add-form.component';
 import { FolderListComponent } from './components/folder-list/folder-list.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { FileListAdminComponent } from './components/file-list-admin/file-list-admin.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
     FileEditFormComponent,
     FileAddFormComponent,
     FolderListComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    FileListAdminComponent
   ],
   imports: [
     BrowserModule,
