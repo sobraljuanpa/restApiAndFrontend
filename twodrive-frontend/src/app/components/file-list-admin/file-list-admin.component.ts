@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class FileListAdminComponent implements OnInit {
   files: Observable<File[]>;
+  fileName: string;
 
   constructor(
     private fileService: FileService,
@@ -27,6 +28,10 @@ export class FileListAdminComponent implements OnInit {
       res => this.ngOnInit(),
       err => this.router.navigateByUrl('http://localhost:4200/')
     );
+  }
+
+  onSearch(fileName: string) {
+    this.files = this.fileService.getFilesByNameAdmin(fileName);
   }
 
 }
