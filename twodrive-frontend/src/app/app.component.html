@@ -1,4 +1,7 @@
 <div *ngIf="credentials">
     <app-user-navbar></app-user-navbar>
+    <div *ngIf="admin">
+        <app-admin-navbar></app-admin-navbar>
+    </div>
 </div>
 <router-outlet></router-outlet>
