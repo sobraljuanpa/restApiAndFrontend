@@ -18,14 +18,13 @@ namespace TwoDrive.ImportingStrategy
         {
             try
             {
-                //, new XmlRootAttribute("Folder")
                 XmlSerializer serializer = new XmlSerializer(typeof(Folder));
-                System.IO.FileStream readerXml = new System.IO.FileStream(_path, System.IO.FileMode.Open);
-                return (Folder)serializer.Deserialize(readerXml);
+                System.IO.StreamReader reader = new System.IO.StreamReader(_path);
+                return (Folder)serializer.Deserialize(reader);
             }
             catch (Exception)
             {
-                throw new Exception("Impossible deserialize Json.");
+                throw new Exception("Impossible deserialize XML.");
             }
         }
 
