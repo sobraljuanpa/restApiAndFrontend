@@ -84,7 +84,7 @@ namespace TwoDrive.WebApi.Controllers
 
         //GET: /api/users/5/reports
         [Authorize(Roles = Role.Admin)]
-        [HttpGet("{id}/reports")]
+        [HttpGet("{id}/reports/modification")]
         public IActionResult GetModificationFolders(long id)
         {
             try

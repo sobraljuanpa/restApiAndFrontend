@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using TwoDrive.BusinessLogic.Interface;
 using TwoDrive.DataAccess.Interface;
@@ -10,8 +9,8 @@ namespace TwoDrive.BusinessLogic
 {
     public class FileLogic : FolderElementLogic<File>
     {
-        IDataRepository<Folder> _folderRepository;
-        IDataRepository<LogItem> _logRepository;
+        private IDataRepository<Folder> _folderRepository;
+        private IDataRepository<LogItem> _logRepository;
 
         public FileLogic(IDataRepository<File> repository, IDataRepository<Folder> folderRepository, IDataRepository<User> userRepository, IDataRepository<LogItem> logRepository)
         {
@@ -33,7 +32,6 @@ namespace TwoDrive.BusinessLogic
             _repository.Add(entity);           
             folderAfter.AddFile(entity);
             _folderRepository.Update(folderBefore, folderAfter);
-            //base.CreateLog(entity.Parent, new LogItem(entity.OwnerId, null), _logRepository);
             return entity;
         } 
 
@@ -43,7 +41,8 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(Entity.Id);
             CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
-            //base.CreateLog(Entity.Parent, new LogItem(Entity.OwnerId, null), _logRepository);
+            int number = 1 + base.NumberOfFoldersParents(Entity.Parent);
+            _logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now, number));
         }
         public override void Move(long EntityId, long folderId)
         {
@@ -64,7 +63,6 @@ namespace TwoDrive.BusinessLogic
             folder.AddFile(Entity);
             _repository.Update(filePrevious, Entity);
             _folderRepository.Update(folderWhereIsIt, folder);
-            //_logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now));
         }
 
         public override void Delete(File Entity)
@@ -76,8 +74,8 @@ namespace TwoDrive.BusinessLogic
             }
             FolderElementExists(Entity.Id);
             _repository.Delete(Entity);
-            _logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now));
-            base.CreateLog(Entity.Parent, new LogItem(Entity.OwnerId, null), _logRepository);
+            int number = 1 + base.NumberOfFoldersParents(Entity.Parent);
+            _logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now, number));
         }
 
         private void IsTheSameOwner(File entity, Folder folder)

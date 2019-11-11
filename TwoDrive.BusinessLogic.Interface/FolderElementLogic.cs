@@ -55,11 +55,10 @@ namespace TwoDrive.BusinessLogic.Interface
             _repository.Update(Entity, fileUpdate);
         }
 
-        public void CreateLog(Folder parent, LogItem logItem, IDataRepository<LogItem> rLI)
+        public int NumberOfFoldersParents(Folder folder)
         {
-            if (parent == null) return;
-            rLI.Add(logItem);
-            CreateLog(parent.Parent, new LogItem(logItem.UserId,null), rLI);
+            if (folder == null) return 0;
+            return 1 + NumberOfFoldersParents(folder.Parent);
         }
 
         protected void FolderElementExists(long id)
