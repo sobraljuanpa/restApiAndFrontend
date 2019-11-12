@@ -82,6 +82,23 @@ namespace TwoDrive.WebApi.Controllers
             }
         }
 
+        //GET: /api/users/5/reports
+        [Authorize(Roles = Role.Admin)]
+        [HttpGet("{id}/reports/modification")]
+        public IActionResult GetModificationFolders(long id)
+        {
+            try
+            {
+                int count = 0;
+                count = _reportLogic.GetUserModificationsFolders(_userLogic.Get(id));
+                return Ok(count);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
         //GET: /api/users/5
         [HttpGet("{id}", Name = "GetUser")]
         public IActionResult Get(long id)

@@ -9,8 +9,8 @@ namespace TwoDrive.BusinessLogic
 {
     public class UserLogic : ILogic<User>
     {
-        IDataRepository<User> _userRepository;
-        IDataRepository<Folder> _folderRepository;
+        private IDataRepository<User> _userRepository;
+        private IDataRepository<Folder> _folderRepository;
 
         public UserLogic(IDataRepository<User> userRepository, IDataRepository<Folder> folderRepository)
         {

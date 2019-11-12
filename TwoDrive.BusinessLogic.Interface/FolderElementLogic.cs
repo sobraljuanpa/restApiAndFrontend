@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TwoDrive.DataAccess.Interface;
 using TwoDrive.Domain;
 
@@ -15,16 +16,14 @@ namespace TwoDrive.BusinessLogic.Interface
         public abstract void Move(long EntityId, long folderId);
         public abstract void Delete(T Entity);
 
-        public class UserTuples
+        public T GetByName(string nameEntity, long userId)
         {
-            public UserTuples()
-            {
-
-            }
-
-            public long ownerId { get; set; }
-            public int numberOfFiles { get; set; }
+            return (from r in _repository.GetAll()
+                   where r.OwnerId == userId
+                   where r.Name == nameEntity
+                   select r).First();
         }
+
         public T Get(long id)
         {
             FolderElementExists(id);
@@ -64,6 +63,12 @@ namespace TwoDrive.BusinessLogic.Interface
             User user = _userRepository.Get(userId);
             Entity.RemoveReader(user);
             _repository.Update(Entity, fileUpdate);
+        }
+
+        public int NumberOfFoldersParents(Folder folder)
+        {
+            if (folder == null) return 0;
+            return 1 + NumberOfFoldersParents(folder.Parent);
         }
 
         protected void FolderElementExists(long id)
