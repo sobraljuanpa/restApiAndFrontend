@@ -9,27 +9,27 @@ namespace TwoDrive.Domain
     [Serializable()]
     public class User
     {
-        [XmlElementAttribute("id")]
+        [XmlElement("Id")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        [XmlElementAttribute("firstName")]
+        [XmlElement("FirstName")]
         public string FirstName { get; set; }
-        [XmlElementAttribute("lastName")]
+        [XmlElement("LastName")]
         public string LastName { get; set; }
-        [XmlElementAttribute("username")]
+        [XmlElement("Username")]
         public string Username { get; set; }
-        [XmlElementAttribute("password")]
+        [XmlElement("Password")]
         public string Password { get; set; }
-        [XmlElementAttribute("email")]
+        [XmlElement("Email")]
         public string Email { get; set; }
-        [XmlElementAttribute("role")]
+        [XmlElement("Role")]
         public string Role { get; set; }
-        [XmlElementAttribute("token")]
+        [XmlElement("Token")]
         public string Token { get; set; }
-        [XmlElementAttribute("friendList")]
+        [XmlElement("FriendList")]
         public List<User> FriendList { get; set; }
-        [XmlElementAttribute("rootFolder")]
+        [XmlElement("RootFolder")]
         public Folder RootFolder { get; set; }
 
         public void AddToFriendList(User user)

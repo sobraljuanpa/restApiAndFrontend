@@ -9,7 +9,8 @@ namespace TwoDrive.ImportingStrategy
 {
     public class JsonMigration : IMigration
     {
-        string _path;
+        private string _path;
+        private Folder folder = null;
         public JsonMigration(string path)
         {
             _path = path;
@@ -18,13 +19,18 @@ namespace TwoDrive.ImportingStrategy
         {
             try
             {
-                Folder rootFolder;
-                using (System.IO.StreamReader jsonStream = System.IO.File.OpenText(_path))
+                if (folder == null)
                 {
-                    var json = jsonStream.ReadToEnd();
-                    rootFolder = JsonConvert.DeserializeObject<Folder>(json);
+                    Folder rootFolder;
+                    using (System.IO.StreamReader jsonStream = System.IO.File.OpenText(_path))
+                    {
+                        var json = jsonStream.ReadToEnd();
+                        rootFolder = JsonConvert.DeserializeObject<Folder>(json);
+                    }
+                    folder = rootFolder;
+                    return rootFolder;
                 }
-                return rootFolder;
+                else return folder;
             }
             catch (Exception)
             {

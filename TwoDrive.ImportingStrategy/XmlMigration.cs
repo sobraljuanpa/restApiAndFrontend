@@ -10,6 +10,7 @@ namespace TwoDrive.ImportingStrategy
     public class XmlMigration : IMigration
     {
         private string _path;
+        private Folder folder = null;
         public XmlMigration(string path)
         {
             _path = path;
@@ -18,11 +19,18 @@ namespace TwoDrive.ImportingStrategy
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Folder));
-                System.IO.StreamReader reader = new System.IO.StreamReader(_path);
-                return (Folder)serializer.Deserialize(reader);
+                if (folder == null)
+                {
+                    Folder rootFolder;
+                    XmlSerializer serializer = new XmlSerializer(typeof(Folder));
+                    System.IO.StreamReader reader = new System.IO.StreamReader(_path);
+                    rootFolder = (Folder)serializer.Deserialize(reader);
+                    folder = rootFolder;
+                    return rootFolder;
+                }
+                else return folder;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new Exception("Impossible deserialize XML.");
             }
@@ -30,7 +38,13 @@ namespace TwoDrive.ImportingStrategy
 
         private void GiveFile(Folder folder, ref List<File> files)
         {
-            if (folder.Files != null) files.Concat(folder.Files);
+            if (folder.Files != null)
+            {
+                foreach (var fil in folder.Files)
+                {
+                    files.Add(fil);
+                }
+            }
             if (folder.Folders == null) return;
             else
             {

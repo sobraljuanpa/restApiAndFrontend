@@ -1,66 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Folder>
-   <files>
-      <file>
-         <content>Este es un archivo que se encuentra en el root folder</content>
-         <creationDate>2019-10-30T09:23:15.5504079-03:00</creationDate>
-         <lastModifiedDate>2019-10-30T09:23:15.5500328-03:00</lastModifiedDate>
-         <id>1</id>
-         <ownerId>4</ownerId>
-         <name>ArchivoEnRootFolder</name>
-         <parent>
-            <id>1</id>
-         </parent>
-      </file>
-   </files>
-   <folders>
-      <Folder>
-         <files>
-            <file>
-               <content>Este es un archivo que se encuentra en una subcarpeta de root folder</content>
-               <id>2</id>
-               <ownerId>4</ownerId>
-               <name>ArchivoEnFolder1</name>
-               <parent>
-                  <id>2</id>
-               </parent>
-            </file>
-         </files>
-         <folders/>
-         <id>2</id>
-         <ownerId>4</ownerId>
-         <name>Folder1</name>
-         <parent>
-            <id>1</id>
-         </parent>
-      </Folder>
-   </folders>
-   <id>1</id>
-   <ownerId>4</ownerId>
-   <name>JosePabloGoni-rootFolder</name>
-   <parent/>
-   <readers>
-      <user>
-         <id>4</id>
-         <firstName>José Pablo</firstName>
-         <lastName>Goñi Estefan</lastName>
-         <username>JosePabloGoni</username>
-         <password>Josepa</password>
-         <email>josepablogoni@gmail.com</email>
-         <role>User</role>
-         <token/>
-         <friendList/>
-         <rootFolder>
-            <Folder>
-               <files/>
-               <folders/>
-               <id>1</id>
-               <ownerId>4</ownerId>
-               <name>JosePabloGoni-rootFolder</name>
-               <parent/>
-               <readers/>
-            </Folder>
-         </rootFolder>
-      </user>
-   </readers>
+   <Files>
+      <Content>Este es un archivo que se encuentra en el root folder</Content>
+      <CreationDate>2019-10-30T09:23:15.5504079-03:00</CreationDate>
+      <LastModifiedDate>2019-10-30T09:23:15.5500328-03:00</LastModifiedDate>
+      <Id>1</Id>
+      <OwnerId>4</OwnerId>
+      <Name>ArchivoEnRootFolder</Name>
+      <Parent>
+         <Id>1</Id>
+      </Parent>
+   </Files>
+   <Folders>
+      <Files>
+         <Content>Este es un archivo que se encuentra en una subcarpeta de root folder</Content>
+         <Id>2</Id>
+         <OwnerId>4</OwnerId>
+         <Name>ArchivoEnFolder1</Name>
+         <Parent>
+            <Id>2</Id>
+         </Parent>
+      </Files>
+      <Folders/>
+      <Id>2</Id>
+      <OwnerId>4</OwnerId>
+      <Name>Folder1</Name>
+      <Parent>
+         <Id>1</Id>
+      </Parent>
+   </Folders>
+   <Id>1</Id>
+   <OwnerId>4</OwnerId>
+   <Name>JosePabloGoni-rootFolder</Name>
+   <Parent/>
+   <Readers>
+      <Id>4</Id>
+      <FirstName>José Pablo</FirstName>
+      <LastName>Goñi Estefan</LastName>
+      <Username>JosePabloGoni</Username>
+      <Password>Josepa</Password>
+      <Email>josepablogoni@gmail.com</Email>
+      <Role>User</Role>
+      <Token/>
+      <FriendList/>
+      <RootFolder>
+         <Folder>
+            <Files/>
+            <Folders/>
+            <Id>1</Id>
+            <OwnerId>4</OwnerId>
+            <Name>JosePabloGoni-rootFolder</Name>
+            <Parent/>
+            <Readers/>
+         </Folder>
+      </RootFolder>
+   </Readers>
 </Folder>

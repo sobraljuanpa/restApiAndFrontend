@@ -58,17 +58,20 @@ namespace TwoDrive.BusinessLogic
                     files = _migration.GiveMeFiles();
                     foreach (var folder in folders)
                     {
-                        if (!folder.Name.Contains(nameRoot))
+                        if (folder.Id != 0)
                         {
-                            var tuple = Tuple.Create<string, long>(folder.Name, folder.Id);
-                            mapName.Add(tuple);
-                            folder.Parent = _folderLogic.GetByName(GetNameFolder(folder.Parent.Id), Owner.Id);
-                            folder.Id = 0;
-                            folder.Files = null;
-                            folder.Folders = null;
-                            folder.Readers = null;
-                            folder.OwnerId = Owner.Id;
-                            _folderLogic.Add(folder);
+                            if (!folder.Name.Contains(nameRoot))
+                            {
+                                var tuple = Tuple.Create<string, long>(folder.Name, folder.Id);
+                                mapName.Add(tuple);
+                                folder.Parent = _folderLogic.GetByName(GetNameFolder(folder.Parent.Id), Owner.Id);
+                                folder.Id = 0;
+                                folder.Files = null;
+                                folder.Folders = null;
+                                folder.Readers = null;
+                                folder.OwnerId = Owner.Id;
+                                _folderLogic.Add(folder);
+                            }
                         }
                     }
                 }
@@ -96,6 +99,7 @@ namespace TwoDrive.BusinessLogic
                 var userMigration = _migration.GiveMeUser();
                 long idMigration = userMigration.RootFolder.Id;
                 userMigration.RootFolder = null;
+                userMigration.FriendList = null;
                 userMigration.Id = 0;
                 var user = _userLogic.Add(userMigration);
                 user.Id = _userLogic.GetUserId(user.Username);
