@@ -9,18 +9,18 @@ namespace TwoDrive.Domain
     [Serializable()]
     public abstract class FolderElement 
     {
-        [XmlElementAttribute("Id")]
+        [XmlElementAttribute("id")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        [XmlElementAttribute("OwnerId")]
+        [XmlElementAttribute("ownerId")]
         [ForeignKey("User")]
         public long OwnerId { get; set; }
-        [XmlElementAttribute("Name")]
+        [XmlElementAttribute("name")]
         public string Name { get; set; }
-        [XmlElementAttribute("Parent")]
+        [XmlElementAttribute("parent")]
         public Folder Parent { get; set; }
-        [XmlElementAttribute("Readers")]
+        [XmlElementAttribute("readers")]
         public List<User> Readers { get; set; }
 
         public void AddReader(User user)

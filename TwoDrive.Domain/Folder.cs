@@ -7,9 +7,9 @@ namespace TwoDrive.Domain
     [Serializable()]
     public class Folder : FolderElement
     {
-        [XmlArrayItem("Files")]
+        [XmlArrayItem("files")]
         public List<File> Files { get; set; }
-        [XmlArrayItem("Folders")]
+        [XmlArrayItem("folders")]
         public List<Folder> Folders { get; set; }
 
         public void AddFile(File file)

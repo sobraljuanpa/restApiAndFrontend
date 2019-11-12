@@ -6,11 +6,11 @@ namespace TwoDrive.Domain
     [Serializable()]
     public class File : FolderElement
     {
-        [XmlElementAttribute("Content")]
+        [XmlElementAttribute("content")]
         public string Content { get; set; }
-        [XmlElementAttribute("CreationDate")]
+        [XmlElementAttribute("creationDate")]
         public DateTime CreationDate { get; set; }
-        [XmlElementAttribute("LastModifiedDate")]
+        [XmlElementAttribute("lastModifiedDate")]
         public DateTime LastModifiedDate { get; set; }
     }
 }

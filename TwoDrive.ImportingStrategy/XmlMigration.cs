@@ -22,7 +22,7 @@ namespace TwoDrive.ImportingStrategy
                 System.IO.StreamReader reader = new System.IO.StreamReader(_path);
                 return (Folder)serializer.Deserialize(reader);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new Exception("Impossible deserialize XML.");
             }
