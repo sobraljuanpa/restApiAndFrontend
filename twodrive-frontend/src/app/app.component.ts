@@ -10,14 +10,10 @@ import { Credentials } from './models/credentials';
 export class AppComponent implements OnInit{
   title = 'twodrive-frontend';
   credentials: Credentials;
-  admin: boolean;
 
   constructor(private authService: AuthenticationService) {}
 
   ngOnInit() {
     this.credentials = this.authService.getCredentials();
-    if(this.credentials){
-      this.admin = this.credentials.admin;
-    }
   }
 }
