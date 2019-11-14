@@ -9,11 +9,12 @@ import { Folder, FolderAdapter } from "../models/folder";
   providedIn: 'root'
 })
 export class FolderService {
+  private baseUrl = 'http://localhost:57902/api/folders';
 
   constructor(private http: HttpClient, private adapter: FolderAdapter) { }
 
   getOwnedFolders(): Observable<Folder[]> {
-    return this.http.get('http://localhost:57902/api/folders').pipe(
+    return this.http.get(`${this.baseUrl}`).pipe(
       map((data: any[]) => data.map(item => this.adapter.adapt(item)))
     );
   }
