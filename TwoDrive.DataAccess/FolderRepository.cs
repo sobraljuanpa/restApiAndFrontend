@@ -60,8 +60,7 @@ namespace TwoDrive.DataAccess
             oldFolder.Name = newFolder.Name;
             oldFolder.OwnerId = newFolder.OwnerId;
             oldFolder.Parent = newFolder.Parent;
-            oldFolder.Readers = newFolder.Readers;
-
+            oldFolder.Readers.Concat(newFolder.Readers);
             _context.SaveChanges();
         }
 

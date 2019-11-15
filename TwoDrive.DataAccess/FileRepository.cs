@@ -46,8 +46,7 @@ namespace TwoDrive.DataAccess
             oldFile.Name = newFile.Name;
             oldFile.OwnerId = newFile.OwnerId;
             oldFile.Parent = newFile.Parent;
-            oldFile.Readers = newFile.Readers;
-
+            oldFile.Readers.Concat(newFile.Readers);
             _context.SaveChanges();
         }
 

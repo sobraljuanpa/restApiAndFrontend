@@ -58,6 +58,22 @@ namespace TwoDrive.WebApi.Controllers
             }
         }
 
+        //GET: /api/files/shared
+        [HttpGet("shared")]
+        public IActionResult GetFilesShared()
+        {
+            try
+            {
+                var currentUser = int.Parse(User.Identity.Name);
+                List<File> files = _fileLogic.FilesShared(currentUser);
+                return Ok(files);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
         //GET: /api/files/5
         [HttpGet("{id}", Name = "GetFile")]
         public IActionResult Get(long id)
