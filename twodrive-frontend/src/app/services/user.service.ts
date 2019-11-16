@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
-import { map, last } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { UserAdapter, User } from '../models/user';
 
@@ -17,7 +17,7 @@ private baseUrl = 'http://localhost:57902/api/users';
 
   getUsers(): Observable<User[]>{
     return this.http.get(`${this.baseUrl}`).pipe(
-      map((data: any[]) => data.map(item => this.adapter.adapt(item)))
+      map((data: any[]) => data.map(item => this.adapter.adapt(item))),
     );
   }
 
