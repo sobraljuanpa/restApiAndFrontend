@@ -14,6 +14,7 @@ import { FileAddFormComponent } from './components/file-add-form/file-add-form.c
 import { FolderListComponent } from './components/folder-list/folder-list.component';
 import { FileListAdminComponent } from './components/file-list-admin/file-list-admin.component';
 import { UserAddFormComponent } from './components/user-add-form/user-add-form.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserAddFormComponent } from './components/user-add-form/user-add-form.c
     FileAddFormComponent,
     FolderListComponent,
     FileListAdminComponent,
-    UserAddFormComponent
+    UserAddFormComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

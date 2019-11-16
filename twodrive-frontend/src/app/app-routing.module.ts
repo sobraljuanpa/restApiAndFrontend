@@ -7,6 +7,7 @@ import { FileAddFormComponent } from './components/file-add-form/file-add-form.c
 import { FolderListComponent } from './components/folder-list/folder-list.component';
 import { FileListAdminComponent } from './components/file-list-admin/file-list-admin.component';
 import { UserAddFormComponent } from './components/user-add-form/user-add-form.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'files/edit/:id', component: FileEditFormComponent },
   { path: 'folders', component: FolderListComponent },
   { path: 'admin/files', component: FileListAdminComponent },
-  { path: 'users/add', component: UserAddFormComponent }
+  { path: 'users/add', component: UserAddFormComponent },
+  { path: 'users', component: UserListComponent }
 ];
 
 @NgModule({
