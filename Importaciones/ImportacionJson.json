@@ -1,0 +1,56 @@
+{
+    "files": [
+	      {"content": "Este es un archivo que se encuentra en el root folder",
+    	       "creationDate": "2019-10-30T09:23:15.5504079-03:00",
+    	       "lastModifiedDate": "2019-10-30T09:23:15.5500328-03:00",
+    	       "id": 1,
+    	       "ownerId": 4,
+    	       "name": "ArchivoEnRootFolder",
+    	       "parent": {"id": "1"}
+	      }
+	     ],
+    "folders": 
+	     [
+	      {
+		"files": [
+	      		  {"content": "Este es un archivo que se encuentra en una subcarpeta de root folder",
+    			   "id": 2,
+    			   "ownerId": 4,
+    			   "name": "ArchivoEnFolder1",
+    	       		   "parent": {"id": "2"}
+	      		  }
+	     		 ],
+    	 	"folders": [],
+    		"id": 2,
+    		"ownerId": 4,
+    		"name": "Folder1",
+    		"parent": {"id": "1"}
+	       }
+             ],
+    "id": 1,
+    "ownerId": 4,
+    "name": "JosePabloGoni-rootFolder",
+    "parent": null,
+    "readers": [
+		{
+		 "id": 4,
+    		 "firstName": "José Pablo",
+    		 "lastName": "Goñi Estefan",
+    		 "username": "JosePabloGoni",
+    		 "password": "Josepa",
+    		 "email": "josepablogoni@gmail.com",
+    		 "role": "User",
+    		 "token": null,
+    		 "friendList": [],
+    		 "rootFolder": {
+        	 	"files": [],
+        	 	"folders": [],
+        		"id": 1,
+        		"ownerId": 4,
+        		"name": "JosePabloGoni-rootFolder",
+        		"parent": null,
+        		"readers": []
+			}
+		}
+	       ]
+}

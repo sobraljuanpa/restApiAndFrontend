@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TwoDrive.BusinessLogic.Interface\TwoDrive.BusinessLogic.Interface.csproj" />
-    <ProjectReference Include="..\TwoDrive.Domain\TwoDrive.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,8 +9,8 @@ namespace TwoDrive.BusinessLogic
 {
     public class ReportLogic : IReport<File>
     {
-        IDataRepository<File> _repository;
-        IDataRepository<LogItem> _logRepository;
+        private IDataRepository<File> _repository;
+        private IDataRepository<LogItem> _logRepository;
         public ReportLogic(IDataRepository<File> repository, IDataRepository<LogItem> logRepository)
         {
             _repository = repository;
@@ -133,6 +133,19 @@ namespace TwoDrive.BusinessLogic
                             select f).Count();
 
             return countMod / (finishDate - startDate).Days;
+        }
+
+        public int GetUserModificationsFolders(User user)
+        {
+            var list = (from f in _logRepository.GetAll()
+                        where (f.UserId == user.Id)
+                        select f).ToList();
+            int count = 0;
+            foreach(var elem in list)
+            {
+                count += elem.Count;
+            }
+            return count;
         }
     }
 }
