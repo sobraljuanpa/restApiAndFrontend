@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Folder } from "src/app/models/folder";
 import { Observable } from 'rxjs';
 import { FolderService } from 'src/app/services/folder.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-folder-add-form',
@@ -15,7 +16,8 @@ export class FolderAddFormComponent implements OnInit {
   userFolders: Observable<Folder[]>;
 
   constructor(
-    private folderService: FolderService
+    private folderService: FolderService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -23,8 +25,12 @@ export class FolderAddFormComponent implements OnInit {
   }
 
   addFolder() {
-    console.log(this.folderName);
-    console.log(this.selectedFolder);
+    var userId = JSON.parse(localStorage.getItem("credentials")).id;
+    this.folderService.addFolder(userId, this.folderName, this.selectedFolder.id).subscribe(
+      res => {
+        this.router.navigateByUrl('/folders');
+      }
+    );
   }
 
 }
