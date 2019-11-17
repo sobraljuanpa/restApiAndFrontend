@@ -71,14 +71,14 @@ namespace TwoDrive.DataAccess
 
         public void Update(User oldUser, User newUser)
         {
-            oldUser.Role = newUser.Role;
-            oldUser.FirstName = newUser.FirstName;
-            oldUser.LastName = newUser.LastName;
-            oldUser.Email = newUser.Email;
-            oldUser.Username = newUser.Username;
-            oldUser.Password = newUser.Password;
-            oldUser.FriendList = newUser.FriendList;
-            oldUser.RootFolder = newUser.RootFolder;
+            if(newUser.Role != null) oldUser.Role = newUser.Role;
+            if (newUser.FirstName != null) oldUser.FirstName = newUser.FirstName;
+            if (newUser.LastName != null) oldUser.LastName = newUser.LastName;
+            if (newUser.Email != null) oldUser.Email = newUser.Email;
+            if (newUser.Username != null) oldUser.Username = newUser.Username;
+            if (newUser.Password != null) oldUser.Password = newUser.Password;
+            if (newUser.FriendList != null) oldUser.FriendList = newUser.FriendList;
+            if (newUser.RootFolder != null) oldUser.RootFolder = newUser.RootFolder;
 
             _context.SaveChanges();
         }
