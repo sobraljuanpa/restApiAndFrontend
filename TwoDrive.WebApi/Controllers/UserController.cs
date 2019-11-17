@@ -67,7 +67,7 @@ namespace TwoDrive.WebApi.Controllers
                     var finish = DateTime.Parse(finishDate);
                     count = _reportLogic.GetUserModifications(start, finish, _userLogic.Get(id));
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     string start = null;
                     string finish = null;
@@ -206,6 +206,22 @@ namespace TwoDrive.WebApi.Controllers
                 User userFriend = _userLogic.Get(idUser);
                 _userLogic.RemoveFriend(user, userFriend);
                 return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpGet("friends")]
+        public IActionResult GetFriend()
+        {
+            try
+            {
+                var id = int.Parse(User.Identity.Name);
+                User user = _userLogic.Get(id);
+                List<User> friends = user.FriendList;
+                return Ok(friends);
             }
             catch (Exception e)
             {

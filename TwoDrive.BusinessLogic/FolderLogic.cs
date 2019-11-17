@@ -177,5 +177,10 @@ namespace TwoDrive.BusinessLogic
             }
             _repository.Delete(folder);
         }
+
+        public override List<File> FilesShared(long userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
