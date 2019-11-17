@@ -33,7 +33,6 @@ namespace TwoDrive.WebApi.Controllers
                 var assembly = Assembly.LoadFrom(@"..\TwoDrive.ImportingStrategy.dll");
                 var migrationType = assembly.GetType("TwoDrive.ImportingStrategy." + type + "Migration");
                 IMigration migration = (IMigration)Activator.CreateInstance(migrationType, param);
-                //IMigration migration = new XmlMigration("C:\\Users\\PC\\Desktop\\ImportacionXml.xml");
                 IMigrationLogic controller = new TwoDrive.BusinessLogic.MigrationLogic(migration, _userLogic, _folderLogic, _fileLogic);
                 controller.SaveUser();
                 controller.SaveAllFolders();

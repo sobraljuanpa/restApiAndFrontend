@@ -13,8 +13,13 @@
                 <div class="form-group w-75 mx-auto">
                     <label>File content</label><br>
                     <textarea class="form-control" rows="10" [(ngModel)]="fileContent" name="fileContent"></textarea>
+                    <br>
+                    <select class="form-control" [(ngModel)]="selectedFolder" name="selectedFolder">
+                        <option [ngValue]="folder" *ngFor="let folder of userFolders | async">{{folder.name}}</option>
+                    </select>
                 </div>
             </form>
+            <br>
             <button type="button" class="btn btn-danger" (click)="goBack()" style="float: right; margin-left: 10px;">Go back</button>
             <button type="button" class="btn btn-primary" (click)="saveChanges()" style="float: right">Save changes</button>
         </div>

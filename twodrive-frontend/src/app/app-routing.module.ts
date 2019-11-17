@@ -10,6 +10,7 @@ import { UserAddFormComponent } from './components/user-add-form/user-add-form.c
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserEditFormComponent } from './components/user-edit-form/user-edit-form.component';
 import { FolderAddFormComponent } from './components/folder-add-form/folder-add-form.component';
+import { AdminImportComponent } from './components/admin-import/admin-import.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'admin/files', component: FileListAdminComponent },
   { path: 'users/add', component: UserAddFormComponent },
   { path: 'users/edit/:id', component: UserEditFormComponent },
-  { path: 'users', component: UserListComponent }
+  { path: 'users', component: UserListComponent },
+  { path: 'import', component: AdminImportComponent }
 ];
 
 @NgModule({
