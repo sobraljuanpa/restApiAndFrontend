@@ -21,6 +21,31 @@ private baseUrl = 'http://localhost:57902/api/users';
     );
   }
 
+  getUser(id: number): Observable<User> {
+    return this.http.get(`${this.baseUrl}/${id}`).pipe(
+      map(item => this.adapter.adapt(item))
+    );
+  }
+
+  updateUser(
+    id: number,
+    firstName: string,
+    lastName: string,
+    username: string,
+    password: string,
+    email: string,
+    role: string
+  ){
+    return this.http.put(`${this.baseUrl}/${id}`, {
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      password: password,
+      email: email,
+      role: role
+    });
+  }
+
   addUser(
     firstName: string,
     lastName: string,
