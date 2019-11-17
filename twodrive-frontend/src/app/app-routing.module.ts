@@ -9,6 +9,7 @@ import { FileListAdminComponent } from './components/file-list-admin/file-list-a
 import { UserAddFormComponent } from './components/user-add-form/user-add-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserEditFormComponent } from './components/user-edit-form/user-edit-form.component';
+import { FolderAddFormComponent } from './components/folder-add-form/folder-add-form.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'files/add', component: FileAddFormComponent },
   { path: 'files/edit/:id', component: FileEditFormComponent },
   { path: 'folders', component: FolderListComponent },
+  { path: 'folders/add', component: FolderAddFormComponent },
   { path: 'admin/files', component: FileListAdminComponent },
   { path: 'users/add', component: UserAddFormComponent },
   { path: 'users/edit/:id', component: UserEditFormComponent },
