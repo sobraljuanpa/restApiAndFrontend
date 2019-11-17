@@ -132,5 +132,60 @@ namespace TwoDrive.BusinessLogic
             var folder = _folderRepository.Get(Id);
             return folder;
         }
+
+        private void ParentsFolders(Folder folder, ref List<Folder> folders)
+        {
+            if (folder == null) return;
+            folders.Add(folder);
+            ParentsFolders(folder.Parent, ref folders);
+        }
+
+        public override List<File> FilesShared(long userId)
+        {
+            List<File> files = new List<File>();
+            List<Folder> folderShared = new List<Folder>();
+            foreach (var folder in _folderRepository.GetAll())
+            {
+                if(folder.Readers.Count > 0)
+                {
+                    foreach(var user in folder.Readers)
+                    {
+                        if (user.Id == userId)
+                            if(!folderShared.Contains(folder))
+                                folderShared.Add(folder);
+                    }
+                }
+            }
+            List<Folder> parentFolders = new List<Folder>();
+            bool exist = false;
+            foreach (var file in _repository.GetAll())
+            {
+                this.ParentsFolders(file.Parent, ref parentFolders);
+                foreach(var fol in parentFolders)
+                {
+                    if (folderShared.Contains(fol)) exist = true;
+                }
+                if (exist)
+                {
+                    if (!files.Contains(file))
+                        files.Add(file);
+                }
+                else
+                {
+                    if (file.Readers.Count > 0)
+                    {
+                        foreach (var user in file.Readers)
+                        {
+                            if (user.Id == user.Id)
+                                if(!files.Contains(file))
+                                    files.Add(file);
+                        }
+                    }
+                }
+                exist = false;
+                parentFolders.RemoveAll(x => x.Id != 0);
+            }
+            return files;
+        }
     }
 }

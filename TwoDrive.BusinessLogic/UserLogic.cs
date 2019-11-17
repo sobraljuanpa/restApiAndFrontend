@@ -87,9 +87,10 @@ namespace TwoDrive.BusinessLogic
 
         public void AddFriend(User user, User userFriend)
         {
+            User newUser = user;
             ValidateUserInSystem(userFriend.Id);
-            user.AddToFriendList(userFriend);
-            _userRepository.Update(_userRepository.Get(user.Id), user);
+            newUser.AddToFriendList(userFriend);
+            _userRepository.Update(user, newUser);
         }
 
         public void RemoveFriend(User user, User userFriend)
