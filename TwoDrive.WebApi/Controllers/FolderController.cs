@@ -20,7 +20,7 @@ namespace TwoDrive.WebApi.Controllers
             _folderLogic = folderLogic;
             _users = userRepository;
         }
-
+        
         //GET: /api/folders/all
         [Authorize(Roles = Role.Admin)]
         [HttpGet("/all")]
@@ -57,9 +57,7 @@ namespace TwoDrive.WebApi.Controllers
             }
         }
 
-
         //GET: /api/folders
-        [Authorize(Roles = Role.User)]
         [HttpGet]
         public IActionResult Get()
         {

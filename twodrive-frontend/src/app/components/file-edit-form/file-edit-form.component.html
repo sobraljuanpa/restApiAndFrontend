@@ -1,0 +1,21 @@
+<div *ngIf="file" class="card w-75 mx-auto">
+        <div class="card-header">
+            <form>
+                <div class="form-group w-75 mx-auto">
+                    <label>File name</label>
+                    <input type="text" class="form-control" [(ngModel)]="fileName" value="fileName" name="fileName">
+                    <!--input type="text" class="form-control" [(ngModel)]="username" placeholder="username" name="username"-->
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group w-75 mx-auto">
+                    <label>File content</label><br>
+                    <textarea class="form-control" rows="10" [(ngModel)]="fileContent" name="fileContent"></textarea>
+                </div>
+            </form>
+            <button type="button" class="btn btn-danger" (click)="goBack()" style="float: right; margin-left: 10px;">Go back</button>
+            <button type="button" class="btn btn-primary" (click)="saveChanges()" style="float: right">Save changes</button>
+        </div>
+</div>

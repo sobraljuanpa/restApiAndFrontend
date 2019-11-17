@@ -1,0 +1,12 @@
+<p></p>
+<div *ngFor="let folder of folders | async">
+        <div class="card w-75 mx-auto">
+            <div class="card-header">
+                    {{folder.name}}
+            </div>
+            <div class="card-body">
+                    {{folder.id}}
+            </div>
+        </div>
+        <p></p>
+</div>
