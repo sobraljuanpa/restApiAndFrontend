@@ -18,4 +18,12 @@ export class FolderService {
       map((data: any[]) => data.map(item => this.adapter.adapt(item)))
     );
   }
+
+  addFolder(ownerId: number, folderName: string, parentId: number) {
+    return this.http.post(`${this.baseUrl}`,{
+      name: folderName,
+      parent: { id: parentId },
+      ownerid: ownerId
+    });
+  }
 }
