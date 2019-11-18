@@ -11,10 +11,12 @@ namespace TwoDrive.BusinessLogic
     {
         private IDataRepository<File> _repository;
         private IDataRepository<LogItem> _logRepository;
-        public ReportLogic(IDataRepository<File> repository, IDataRepository<LogItem> logRepository)
+        private IDataRepository<User> _userRepository;
+        public ReportLogic(IDataRepository<File> repository, IDataRepository<LogItem> logRepository, IDataRepository<User> userRepository)
         {
             _repository = repository;
             _logRepository = logRepository;
+            _userRepository = userRepository;
         }
 
         public List<File> GetAllSortedFiles(string sortOrder = null, string fileName = null)
@@ -103,7 +105,7 @@ namespace TwoDrive.BusinessLogic
             return files.ToList();
         }
 
-        public IEnumerable<(long, int)> GetTop10FileOwners()
+        public List<User> GetTop10FileOwners()
         {
             var tuples = from f in _repository.GetAll()
                          group f by f.OwnerId into fileGroups
@@ -111,7 +113,13 @@ namespace TwoDrive.BusinessLogic
             tuples = tuples.OrderByDescending(
                 t => t.Item2).Distinct().Take(10).ToList();
 
-            return tuples;
+            var userList = new List<User>();
+
+            foreach(var t in tuples){
+                userList.Add(_userRepository.Get(t.Item2));
+            }
+
+            return userList;
         }
 
         public int GetUserModifications(DateTime start, DateTime finish, User user)
