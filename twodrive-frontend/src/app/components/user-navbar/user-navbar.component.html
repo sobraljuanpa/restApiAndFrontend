@@ -56,6 +56,14 @@
                 </div>
             </div>
         </li>
+        <li *ngIf="admin" class="nav-item">
+            <div class="dropdown">
+                <button class="dropdown-item" type="button"
+                    aria-haspopup="true" aria-expanded="false" routerLink="/import">
+                    Import
+                </button>
+            </div>
+        </li>
 
     </ul>
     <button type="button" class="btn btn-danger" (click)="logOut()">Log out</button>

@@ -1,9 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
+import { Observable } from "rxjs";
 
-import { FileService } from 'src/app/services/file.service';
+import { FileService } from '../../services/file.service';
 import { File } from '../../models/file';
+import { Folder } from "../../models/folder";
 import { ActivatedRoute } from '@angular/router';
+import { FolderService } from "../../services/folder.service";
 
 @Component({
   selector: 'app-file-edit-form',
@@ -14,15 +17,19 @@ export class FileEditFormComponent implements OnInit {
   @Input() file: File;
   fileName: string;
   fileContent: string;
+  userFolders: Observable<Folder[]>;
+  selectedFolder: Folder;
 
   constructor(
     private fileService: FileService,
+    private folderService: FolderService,
     private route: ActivatedRoute,
     private location: Location
   ) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
+    this.userFolders = this.folderService.getOwnedFolders();
     this.fileService.getFile(id).subscribe(
       file => {
         this.file = file
@@ -39,7 +46,9 @@ export class FileEditFormComponent implements OnInit {
   saveChanges() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.fileService.updateFile(id, this.fileName, this.fileContent).subscribe(
-      res => this.goBack()
+      res => this.fileService.moveFile(id,this.selectedFolder.id).subscribe(
+        res => this.goBack()
+      )
     );
   }
 

@@ -68,4 +68,8 @@ export class FileService {
       parent: { id: parentFolder }
     });
   }
+
+  moveFile(idFile: number, idFolder: number){
+    return this.http.put(`${this.baseUrl}/${idFile}/folder/${idFolder}`, null);
+  }
 }

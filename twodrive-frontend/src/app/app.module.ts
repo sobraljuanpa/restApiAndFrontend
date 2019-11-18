@@ -18,6 +18,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { UserEditFormComponent } from './components/user-edit-form/user-edit-form.component';
 import { FolderAddFormComponent } from './components/folder-add-form/folder-add-form.component';
 import { UserListTop10Component } from './components/user-list-top10/user-list-top10.component';
+import { AdminImportComponent } from './components/admin-import/admin-import.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UserListTop10Component } from './components/user-list-top10/user-list-t
     UserListComponent,
     UserEditFormComponent,
     FolderAddFormComponent,
-    UserListTop10Component
+    UserListTop10Component,
+    AdminImportComponent
   ],
   imports: [
     BrowserModule,

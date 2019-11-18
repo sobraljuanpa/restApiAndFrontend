@@ -47,7 +47,7 @@ namespace TwoDrive.BusinessLogic
         public override void Move(long EntityId, long folderId)
         {
             FolderElementExists(EntityId);
-            FolderElementExists(folderId);
+            if (_folderRepository.Get(folderId) == null) throw new Exception("El elemento no existe.");
             File Entity = _repository.Get(EntityId);
             Folder folder = _folderRepository.Get(folderId);
             IsTheSameOwner(Entity, folder);
