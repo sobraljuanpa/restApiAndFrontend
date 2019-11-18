@@ -3,7 +3,6 @@ import { Observable } from "rxjs";
 
 import { FileService } from '../../services/file.service';
 import { FolderService } from "../../services/folder.service";
-import { File } from "../../models/file";
 import { Folder } from "../../models/folder";
 import { Router } from '@angular/router';
 
