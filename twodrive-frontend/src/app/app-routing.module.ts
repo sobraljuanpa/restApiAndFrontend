@@ -12,6 +12,7 @@ import { UserEditFormComponent } from './components/user-edit-form/user-edit-for
 import { FolderAddFormComponent } from './components/folder-add-form/folder-add-form.component';
 import { UserListTop10Component } from './components/user-list-top10/user-list-top10.component';
 import { AdminImportComponent } from './components/admin-import/admin-import.component';
+import { UserModificationsComponent } from './components/user-modifications/user-modifications.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'users/add', component: UserAddFormComponent },
   { path: 'users/top10', component: UserListTop10Component },
   { path: 'users/edit/:id', component: UserEditFormComponent },
+  { path: 'users/modifications', component: UserModificationsComponent },
   { path: 'users', component: UserListComponent },
   { path: 'import', component: AdminImportComponent }
 ];
