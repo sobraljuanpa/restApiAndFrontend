@@ -116,7 +116,7 @@ namespace TwoDrive.BusinessLogic
             var userList = new List<User>();
 
             foreach(var t in tuples){
-                userList.Add(_userRepository.Get(t.Item2));
+                userList.Add(_userRepository.Get(t.Key));
             }
 
             return userList;
