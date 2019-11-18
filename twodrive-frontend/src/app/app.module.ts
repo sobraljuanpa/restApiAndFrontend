@@ -17,6 +17,7 @@ import { UserAddFormComponent } from './components/user-add-form/user-add-form.c
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserEditFormComponent } from './components/user-edit-form/user-edit-form.component';
 import { FolderAddFormComponent } from './components/folder-add-form/folder-add-form.component';
+import { UserListTop10Component } from './components/user-list-top10/user-list-top10.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FolderAddFormComponent } from './components/folder-add-form/folder-add-
     UserAddFormComponent,
     UserListComponent,
     UserEditFormComponent,
-    FolderAddFormComponent
+    FolderAddFormComponent,
+    UserListTop10Component
   ],
   imports: [
     BrowserModule,
