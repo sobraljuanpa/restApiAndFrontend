@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { Credentials } from '../../models/credentials';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-login-form',
@@ -13,7 +14,11 @@ export class LoginFormComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private alertService: AlertService
+  ) { }
 
   navigate(url: string) {
     this.router.navigateByUrl(url);
@@ -30,9 +35,10 @@ export class LoginFormComponent implements OnInit {
         cred.admin = (res as any).Role == 'Admin';
         this.authenticationService.setCredentials(cred);
         console.log(this.authenticationService.getCredentials());
+        this.alertService.success("Login successfully!")
       },
       err => {
-        console.log()
+        this.alertService.warning("Username or password incorrectly");
       },
       () => location.reload());
   }
