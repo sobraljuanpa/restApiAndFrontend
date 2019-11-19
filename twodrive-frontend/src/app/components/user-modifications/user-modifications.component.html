@@ -1,1 +1,19 @@
-<p>user-modifications works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="navbar-nav mr-auto">
+        <li>
+            Select a user to see his activity last week
+        </li>
+        <li>
+            <select style="margin-left: 10px;" name="selectedUser" [(ngModel)]="selectedUser" (change)="onUserSelection()">
+                <option [ngValue]="user" *ngFor="let user of users | async">{{user.username}}</option>
+            </select>
+        </li>
+    </ul>
+</nav>
+<div *ngIf="selectedUser">
+    <div class="card w-75 mx-auto">
+        <div class="card-header">
+            {{selectedUser.username}} has modified {{modificationNumber}} files in the last week.
+        </div>
+    </div>
+</div>

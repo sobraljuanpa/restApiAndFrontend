@@ -21,6 +21,10 @@ private baseUrl = 'http://localhost:57902/api/users';
     );
   }
 
+  getModifications(id: number) {
+    return this.http.get(`${this.baseUrl}/${id}/reports?startDate=&finishDate=`);
+  }
+
   getTop10Users(): Observable<User[]>{
     return this.http.get("http://localhost:57902/api/files/top10").pipe(
       map((data: any[]) => data.map(item => this.adapter.adapt(item))),

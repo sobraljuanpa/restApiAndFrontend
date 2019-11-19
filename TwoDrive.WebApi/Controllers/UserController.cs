@@ -67,7 +67,7 @@ namespace TwoDrive.WebApi.Controllers
                     var finish = DateTime.Parse(finishDate);
                     count = _reportLogic.GetUserModifications(start, finish, _userLogic.Get(id));
                 }
-                catch(Exception)
+                catch(Exception a)
                 {
                     string start = null;
                     string finish = null;
