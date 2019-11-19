@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Location } from '@angular/common';
 import { MigrationService } from '../../services/migration.service';
 import { AlertService } from 'ngx-alerts';
@@ -12,6 +11,7 @@ import { AlertService } from 'ngx-alerts';
 export class AdminImportComponent implements OnInit {
   selectedType: string;
   path: string;
+  array: string[];
   typeImport: string[] = ['Xml','Json'];
 
   constructor(
@@ -24,8 +24,8 @@ export class AdminImportComponent implements OnInit {
   }
 
   importFile(){
-    console.log("["+this.path+"]");
-    this.migrationService.addMigration(this.selectedType, "["+this.path+"]").subscribe(
+    this.array = [this.path];
+    this.migrationService.addMigration(this.selectedType, this.array).subscribe(
       res => {
         this.alertService.success("Importing successfully!")
         this.location.back();
