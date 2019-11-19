@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TwoDrive.Domain;
 
-namespace TwoDrive.BusinessLogic.Interface
+namespace TwoDrive.ImportingStrategy
 {
     public interface IMigration
     {

@@ -9,7 +9,8 @@ export class MigrationService {
 
   constructor(private http: HttpClient) { }
 
-  addMigration(type:string, path:string){
-    return this.http.post(`${this.baseUrl}/${type}`,{path})
+  addMigration(type:string, path:string[]){
+    debugger;
+    return this.http.post(`${this.baseUrl}/${type}`, path)
   }
 }

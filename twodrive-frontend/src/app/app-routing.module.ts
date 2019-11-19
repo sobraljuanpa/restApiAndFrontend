@@ -13,6 +13,7 @@ import { FolderAddFormComponent } from './components/folder-add-form/folder-add-
 import { UserListTop10Component } from './components/user-list-top10/user-list-top10.component';
 import { AdminImportComponent } from './components/admin-import/admin-import.component';
 import { UserModificationsComponent } from './components/user-modifications/user-modifications.component';
+import { UserFriendComponent } from './components/user-friend/user-friend.component';
 
 
 const routes: Routes = [
@@ -28,10 +29,12 @@ const routes: Routes = [
   { path: 'users/edit/:id', component: UserEditFormComponent },
   { path: 'users/modifications', component: UserModificationsComponent },
   { path: 'users', component: UserListComponent },
-  { path: 'import', component: AdminImportComponent }
+  { path: 'import', component: AdminImportComponent },
+  { path: 'user/friend', component: UserFriendComponent }
 ];
 
 @NgModule({
+  
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

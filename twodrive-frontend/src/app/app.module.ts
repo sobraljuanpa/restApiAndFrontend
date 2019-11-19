@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { AlertModule } from 'ngx-alerts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from "./services/token.interceptor";
@@ -19,7 +21,7 @@ import { UserEditFormComponent } from './components/user-edit-form/user-edit-for
 import { FolderAddFormComponent } from './components/folder-add-form/folder-add-form.component';
 import { UserListTop10Component } from './components/user-list-top10/user-list-top10.component';
 import { AdminImportComponent } from './components/admin-import/admin-import.component';
-import { UserModificationsComponent } from './components/user-modifications/user-modifications.component';
+import { UserFriendComponent } from './components/user-friend/user-friend.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +39,13 @@ import { UserModificationsComponent } from './components/user-modifications/user
     FolderAddFormComponent,
     UserListTop10Component,
     AdminImportComponent,
-    UserModificationsComponent
+    UserFriendComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
+    AlertModule.forRoot({maxMessages: 5, timeout: 5000, position: 'left'}),
     HttpClientModule,
     AppRoutingModule
   ],

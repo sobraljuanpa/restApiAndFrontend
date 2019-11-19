@@ -37,6 +37,16 @@ private baseUrl = 'http://localhost:57902/api/users';
     );
   }
 
+  getUsersFriends(): Observable<User[]> {
+    return this.http.get(`${this.baseUrl}/friends`).pipe(
+      map((data: any[]) => data.map(item => this.adapter.adapt(item))),
+    )
+  }
+
+  DeleteFriend(id:Number){
+    return this.http.get(`${this.baseUrl}/${id}`);
+  }
+
   updateUser(
     id: number,
     firstName: string,

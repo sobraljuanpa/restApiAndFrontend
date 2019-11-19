@@ -3,9 +3,9 @@ import { Observable } from "rxjs";
 
 import { FileService } from '../../services/file.service';
 import { FolderService } from "../../services/folder.service";
-import { File } from "../../models/file";
 import { Folder } from "../../models/folder";
 import { Router } from '@angular/router';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-file-add-form',
@@ -21,7 +21,8 @@ export class FileAddFormComponent implements OnInit {
   constructor(
     private fileService: FileService,
     private folderService: FolderService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -32,7 +33,11 @@ export class FileAddFormComponent implements OnInit {
     var userId = JSON.parse(localStorage.getItem("credentials"));
     this.fileService.addFile(this.fileName, this.fileContent, this.selectedFolder.id, userId.id).subscribe(
       res => {
+        this.alertService.success("File added successfully!")
         this.router.navigateByUrl('/files');
+      },
+      err => {
+        this.alertService.danger("Sorry, something went wrong.")
       }
     );
   }

@@ -4,6 +4,7 @@ import { map } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 
 import { Folder, FolderAdapter } from "../models/folder";
+import { File, FileAdapter } from "../models/file";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { Folder, FolderAdapter } from "../models/folder";
 export class FolderService {
   private baseUrl = 'http://localhost:57902/api/folders';
 
-  constructor(private http: HttpClient, private adapter: FolderAdapter) { }
+  constructor(private http: HttpClient, private adapter: FolderAdapter, private fileAdapter: FileAdapter) { }
 
   getOwnedFolders(): Observable<Folder[]> {
     return this.http.get(`${this.baseUrl}`).pipe(
@@ -25,5 +26,11 @@ export class FolderService {
       parent: { id: parentId },
       ownerid: ownerId
     });
+  }
+
+  getFiles(idFolder: Number): Observable<File[]> {
+    return this.http.get(`${this.baseUrl}/${idFolder}/files`).pipe(
+      map((data: any[]) => data.map(item => this.fileAdapter.adapt(item)))
+    )
   }
 }

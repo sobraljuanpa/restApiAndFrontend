@@ -4,6 +4,7 @@ import { File } from '../../models/file';
 import { FileService } from '../../services/file.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-file-list',
@@ -18,7 +19,8 @@ export class FileListComponent implements OnInit {
 
   constructor(
     private fileService: FileService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -27,8 +29,14 @@ export class FileListComponent implements OnInit {
 
   delete(id: number) {
     this.fileService.deleteFile(id).subscribe(
-      res => this.ngOnInit(),
-      err => this.router.navigateByUrl('http://localhost:4200/')
+      res => {
+        this.alertService.success("Remove successfuly!");
+        this.ngOnInit();
+      },
+      err => {
+        this.alertService.danger("Sorry, something went wrong.")
+        this.router.navigateByUrl('http://localhost:4200/')
+      }
     );
   }
 
