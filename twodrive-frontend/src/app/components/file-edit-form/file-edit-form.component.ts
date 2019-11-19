@@ -7,6 +7,7 @@ import { File } from '../../models/file';
 import { Folder } from "../../models/folder";
 import { ActivatedRoute } from '@angular/router';
 import { FolderService } from "../../services/folder.service";
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-file-edit-form',
@@ -24,7 +25,8 @@ export class FileEditFormComponent implements OnInit {
     private fileService: FileService,
     private folderService: FolderService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -47,7 +49,13 @@ export class FileEditFormComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.fileService.updateFile(id, this.fileName, this.fileContent).subscribe(
       res => this.fileService.moveFile(id,this.selectedFolder.id).subscribe(
-        res => this.goBack()
+        res => {
+          this.alertService.success("File edit successfully!")
+          this.goBack();
+        },
+        err=>{
+          this.alertService.danger("Sorry, something went wrong.")
+        }
       )
     );
   }

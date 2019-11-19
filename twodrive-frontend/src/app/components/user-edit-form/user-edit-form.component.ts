@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-user-edit-form',
@@ -22,7 +23,8 @@ export class UserEditFormComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -36,6 +38,9 @@ export class UserEditFormComponent implements OnInit {
         this.password = this.user.password;
         this.email = this.user.email;
         this.role = this.user.role;
+      },
+      err => {
+        this.alertService.danger("Sorry, something went wrong.");
       }
     )
   }
@@ -55,9 +60,14 @@ export class UserEditFormComponent implements OnInit {
       this.email,
       this.role
     ).subscribe(
-      res => this.goBack()
+      res => {
+        this.alertService.success("Edit user successfully!");
+        this.goBack();
+      },
+      err => {
+        this.alertService.danger("Sorry, something went wrong.")
+      }
     );
-    console.log(id);
   }
 
 }

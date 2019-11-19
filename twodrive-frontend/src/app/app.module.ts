@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { AlertModule } from 'ngx-alerts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from "./services/token.interceptor";
@@ -40,6 +42,8 @@ import { AdminImportComponent } from './components/admin-import/admin-import.com
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
+    AlertModule.forRoot({maxMessages: 5, timeout: 5000, position: 'left'}),
     HttpClientModule,
     AppRoutingModule
   ],
