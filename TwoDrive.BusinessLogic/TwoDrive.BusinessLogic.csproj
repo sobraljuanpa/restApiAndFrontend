@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TwoDrive.BusinessLogic.Interface\TwoDrive.BusinessLogic.Interface.csproj" />
     <ProjectReference Include="..\TwoDrive.Domain\TwoDrive.Domain.csproj" />
+    <ProjectReference Include="..\TwoDrive.ImportingStrategy\TwoDrive.ImportingStrategy.csproj" />
   </ItemGroup>
 
 </Project>
