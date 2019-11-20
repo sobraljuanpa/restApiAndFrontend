@@ -11,11 +11,13 @@ namespace TwoDrive.BusinessLogic
     {
         private IDataRepository<User> _userRepository;
         private IDataRepository<Folder> _folderRepository;
+        private IDataRepository<File> _fileRepository;
 
-        public UserLogic(IDataRepository<User> userRepository, IDataRepository<Folder> folderRepository)
+        public UserLogic(IDataRepository<User> userRepository, IDataRepository<Folder> folderRepository, IDataRepository<File> fileRespoitory)
         {
             _userRepository = userRepository;
             _folderRepository = folderRepository;
+            _fileRepository = fileRespoitory;
         }
 
         public User Authenticate(string username, string password)
@@ -62,7 +64,16 @@ namespace TwoDrive.BusinessLogic
         public void Delete(User Entity)
         {
             ValidateUserInSystem(Entity.Id);
+            List<File> list = (from f in _fileRepository.GetAll()
+                       where f.OwnerId == Entity.Id
+                       select f).ToList();
+            foreach (var file in list) _fileRepository.Delete(file);
+            List<Folder> listFolder = (from fold in _folderRepository.GetAll()
+                               where fold.OwnerId == Entity.Id
+                               select fold).ToList();
+            foreach (var folder in listFolder) _folderRepository.Delete(folder);
             _userRepository.Delete(Entity);
+
         }
 
         public User Get(long id)
