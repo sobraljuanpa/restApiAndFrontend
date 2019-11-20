@@ -24,6 +24,7 @@ import { AdminImportComponent } from './components/admin-import/admin-import.com
 import { UserFriendComponent } from './components/user-friend/user-friend.component';
 import { UserModificationsComponent } from "./components/user-modifications/user-modifications.component";
 import { UserAddFriendComponent } from './components/user-add-friend/user-add-friend.component';
+import { FileSharedComponent } from './components/file-shared/file-shared.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { UserAddFriendComponent } from './components/user-add-friend/user-add-fr
     AdminImportComponent,
     UserModificationsComponent,
     UserFriendComponent,
-    UserAddFriendComponent
+    UserAddFriendComponent,
+    FileSharedComponent
   ],
   imports: [
     BrowserModule,

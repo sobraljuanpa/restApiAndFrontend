@@ -1,0 +1,12 @@
+<br>
+<div *ngFor="let file of files | async">
+    <div class="card w-75 mx-auto">
+        <div class="card-header">
+            {{file.name}}
+        </div>
+        <div class="card-body">
+            {{file.content}}
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-danger" (click)="Back()" style="float: right; margin-left: 10px;">Go back</button>

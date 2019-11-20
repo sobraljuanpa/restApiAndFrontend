@@ -196,7 +196,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //POST: /api/Users/5
-        [HttpDelete("{idUser}")]
+        [HttpDelete("friend/{idUser}")]
         public IActionResult DeleteFriend(long idUser)
         {
             try

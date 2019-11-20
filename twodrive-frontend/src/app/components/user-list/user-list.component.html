@@ -3,7 +3,7 @@
     <div class="card w-75 mx-auto">
         <div class="card-header">
             {{user.username}}
-            <button type="button" class="btn btn-danger" style="float: right; margin-left: 10px;">Delete</button>
+            <button type="button" class="btn btn-danger" style="float: right; margin-left: 10px;" (click)="Delete(user.id)">Delete</button>
             <button routerLink="/users/edit/{{user.id}}" type="button" class="btn btn-primary" style="float: right">Edit</button>
         </div>
         <div class="card-body">

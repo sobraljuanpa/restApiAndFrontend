@@ -44,7 +44,11 @@ private baseUrl = 'http://localhost:57902/api/users';
   }
 
   DeleteFriend(id:Number){
-    return this.http.get(`${this.baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}/friend/${id}`);
+  }
+
+  DeleteUser(id: Number){
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
   updateUser(

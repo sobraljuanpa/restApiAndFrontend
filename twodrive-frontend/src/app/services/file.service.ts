@@ -19,6 +19,12 @@ export class FileService {
     );
   }
 
+  getSharedFiles(): Observable<File[]> {
+    return this.http.get(`${this.baseUrl}/shared`).pipe(
+      map((data: any[]) => data.map(item => this.adapter.adapt(item))),
+    );
+  }
+
   getOwnedFiles(): Observable<File[]> {
     return this.http.get(`${this.baseUrl}/view?fileName=&sortOrder=`).pipe(
       map((data: any[]) => data.map(item => this.adapter.adapt(item))),
