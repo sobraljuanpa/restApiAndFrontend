@@ -38,7 +38,6 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //GET: /api/users
-        [Authorize(Roles = Role.Admin)]//solo dejo que los admins accedan a todos los usuarios
         [HttpGet]
         public IActionResult Get()
         {

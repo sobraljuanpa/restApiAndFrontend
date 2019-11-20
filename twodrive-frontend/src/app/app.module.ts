@@ -23,6 +23,7 @@ import { UserListTop10Component } from './components/user-list-top10/user-list-t
 import { AdminImportComponent } from './components/admin-import/admin-import.component';
 import { UserFriendComponent } from './components/user-friend/user-friend.component';
 import { UserModificationsComponent } from "./components/user-modifications/user-modifications.component";
+import { UserAddFriendComponent } from './components/user-add-friend/user-add-friend.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { UserModificationsComponent } from "./components/user-modifications/user
     UserListTop10Component,
     AdminImportComponent,
     UserModificationsComponent,
-    UserFriendComponent
+    UserFriendComponent,
+    UserAddFriendComponent
   ],
   imports: [
     BrowserModule,

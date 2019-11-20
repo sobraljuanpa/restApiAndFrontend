@@ -87,4 +87,8 @@ private baseUrl = 'http://localhost:57902/api/users';
       role: role
     });
   }
+
+  addFriend(id: number) {
+    return this.http.post(`${this.baseUrl}/${id}`,{});
+  }
 }
