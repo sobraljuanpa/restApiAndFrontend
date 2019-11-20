@@ -31,6 +31,12 @@
         <div class="card-body">
             {{file.content}}
         </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-info" (click)="shareFile(file.id, selectedUser.id)" style="float: left">Share with</button>
+            <select class="form-control w-50 mx-auto" [(ngModel)]="selectedUser">
+                <option [ngValue]="user" *ngFor="let user of friends | async">{{user.username}}</option>
+            </select>
+        </div>
     </div>
     <p></p>
 </div>

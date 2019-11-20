@@ -72,4 +72,8 @@ export class FileService {
   moveFile(idFile: number, idFolder: number){
     return this.http.put(`${this.baseUrl}/${idFile}/folder/${idFolder}`, null);
   }
+
+  shareFile(fileId: number, userId: number) {
+    return this.http.post(`${this.baseUrl}/${fileId}/users/${userId}`,{});
+  }
 }

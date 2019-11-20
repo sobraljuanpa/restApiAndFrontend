@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { File } from '../../models/file';
-import { FileService } from '../../services/file.service';
+import { FileService } from 'src/app/services/file.service';
+import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertService } from 'ngx-alerts';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-file-list',
@@ -15,16 +17,20 @@ export class FileListComponent implements OnInit {
   files: Observable<File[]>; 
   fileName: string;
   sortOrder: string;
+  friends: Observable<User[]>;
+  selectedUser: User;
   
 
   constructor(
     private fileService: FileService,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
       this.files = this.fileService.getOwnedFiles();
+      this.friends = this.userService.getUsersFriends();
   }
 
   delete(id: number) {
@@ -59,6 +65,10 @@ export class FileListComponent implements OnInit {
       case "Last modification date descending":
         this.files = this.fileService.getFilesBySortOrder("modified_desc");
     }
+  }
+
+  shareFile(fileId: number, userId: number) {
+    this.fileService.shareFile(fileId, userId).subscribe();
   }
 
 }
