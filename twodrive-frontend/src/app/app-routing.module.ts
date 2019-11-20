@@ -15,6 +15,8 @@ import { AdminImportComponent } from './components/admin-import/admin-import.com
 import { UserModificationsComponent } from './components/user-modifications/user-modifications.component';
 import { UserFriendComponent } from './components/user-friend/user-friend.component';
 import { UserAddFriendComponent } from './components/user-add-friend/user-add-friend.component';
+import { FileSharedComponent } from './components/file-shared/file-shared.component';
+
 
 
 const routes: Routes = [
@@ -32,7 +34,8 @@ const routes: Routes = [
   { path: 'users', component: UserListComponent },
   { path: 'import', component: AdminImportComponent },
   { path: 'friends/add', component: UserAddFriendComponent },
-  { path: 'user/friend', component: UserFriendComponent }
+  { path: 'user/friend', component: UserFriendComponent },
+  { path: 'files/shared', component: FileSharedComponent }
 ];
 
 @NgModule({
