@@ -38,7 +38,6 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //GET: /api/users
-        [Authorize(Roles = Role.Admin)]//solo dejo que los admins accedan a todos los usuarios
         [HttpGet]
         public IActionResult Get()
         {
@@ -67,13 +66,30 @@ namespace TwoDrive.WebApi.Controllers
                     var finish = DateTime.Parse(finishDate);
                     count = _reportLogic.GetUserModifications(start, finish, _userLogic.Get(id));
                 }
-                catch(Exception e)
+                catch(Exception a)
                 {
                     string start = null;
                     string finish = null;
                     count = _reportLogic.GetUserModifications(start, finish, _userLogic.Get(id));
                 }
                 
+                return Ok(count);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        //GET: /api/users/5/reports
+        [Authorize(Roles = Role.Admin)]
+        [HttpGet("{id}/reports/modification")]
+        public IActionResult GetModificationFolders(long id)
+        {
+            try
+            {
+                int count = 0;
+                count = _reportLogic.GetUserModificationsFolders(_userLogic.Get(id));
                 return Ok(count);
             }
             catch (Exception e)
@@ -180,7 +196,7 @@ namespace TwoDrive.WebApi.Controllers
         }
 
         //POST: /api/Users/5
-        [HttpDelete("{idUser}")]
+        [HttpDelete("friend/{idUser}")]
         public IActionResult DeleteFriend(long idUser)
         {
             try
@@ -189,6 +205,22 @@ namespace TwoDrive.WebApi.Controllers
                 User userFriend = _userLogic.Get(idUser);
                 _userLogic.RemoveFriend(user, userFriend);
                 return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpGet("friends")]
+        public IActionResult GetFriend()
+        {
+            try
+            {
+                var id = int.Parse(User.Identity.Name);
+                User user = _userLogic.Get(id);
+                List<User> friends = user.FriendList;
+                return Ok(friends);
             }
             catch (Exception e)
             {

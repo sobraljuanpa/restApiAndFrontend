@@ -43,11 +43,10 @@ namespace TwoDrive.DataAccess
             oldFile.Content = newFile.Content;
             oldFile.CreationDate = newFile.CreationDate;
             oldFile.LastModifiedDate = DateTime.Now;
-            oldFile.Name = newFile.Name;
-            oldFile.OwnerId = newFile.OwnerId;
-            oldFile.Parent = newFile.Parent;
-            oldFile.Readers = newFile.Readers;
-
+            if (newFile.Name != null) oldFile.Name = newFile.Name;
+            if (newFile.OwnerId != 0) oldFile.OwnerId = newFile.OwnerId;
+            if (newFile.Parent != null) oldFile.Parent = newFile.Parent;
+            if (newFile.Readers != null) oldFile.Readers.Concat(newFile.Readers);
             _context.SaveChanges();
         }
 

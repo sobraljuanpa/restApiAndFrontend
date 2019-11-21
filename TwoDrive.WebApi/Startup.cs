@@ -13,6 +13,9 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Newtonsoft.Json;
+using System.Buffers;
 
 namespace TwoDrive.WebApi
 {
@@ -39,7 +42,15 @@ namespace TwoDrive.WebApi
             services.AddScoped<IReport<File>, ReportLogic>(); 
             services.AddScoped<FolderElementLogic<File>, FileLogic>();
             services.AddScoped<FolderElementLogic<Folder>, FolderLogic>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+            {
+                options.OutputFormatters.Clear();
+                options.OutputFormatters.Add(new JsonOutputFormatter(new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                }, ArrayPool<char>.Shared));
+            }
+            ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             //esto es lo de autenticacion
             var key = Encoding.ASCII.GetBytes("Ahora este es nuestro secreto.");
@@ -65,6 +76,8 @@ namespace TwoDrive.WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TwoDrive API", Version = "v1" });
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

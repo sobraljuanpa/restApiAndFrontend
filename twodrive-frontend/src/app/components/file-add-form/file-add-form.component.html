@@ -1,0 +1,23 @@
+<div class="card w-75 mx-auto">
+        <div class="card-header">
+            <form>
+                <div class="form-group w-75 mx-auto">
+                    <label>File name</label>
+                    <input type="text" class="form-control" [(ngModel)]="fileName" value="fileName" name="fileName">
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group w-75 mx-auto">
+                    <label>File content</label><br>
+                    <textarea class="form-control" rows="10" [(ngModel)]="fileContent" name="fileContent"></textarea>
+                </div>
+            </form>
+            <select class="form-control" [(ngModel)]="selectedFolder">
+                <option [ngValue]="folder" *ngFor="let folder of userFolders | async">{{folder.name}}</option>
+            </select>
+            <br>
+            <button type="button" class="btn btn-primary" (click)="addFile()" style="float: right">Add file</button>
+        </div>
+</div>

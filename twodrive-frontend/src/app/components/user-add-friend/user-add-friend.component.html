@@ -1,0 +1,19 @@
+<br>
+<div *ngFor="let user of users | async">
+    <div class="card w-75 mx-auto">
+        <div class="card-header">
+            {{user.username}}
+            <button type="button" (click)="addFriend(user.id)" class="btn btn-primary" style="float: right">Add</button>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>First name: {{user.firstName}}</li>
+                <li>Last name: {{user.lastName}}</li>
+                <li>Username: {{user.username}}</li>
+                <li>Email: {{user.email}}</li>
+                <li>Role: {{user.role}}</li>
+            </ul>
+        </div>
+    </div>
+    <p></p>
+</div>

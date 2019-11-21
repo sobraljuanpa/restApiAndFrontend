@@ -69,7 +69,9 @@ namespace TwoDrive.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date");
+                    b.Property<int>("Count");
+
+                    b.Property<DateTime?>("Date");
 
                     b.Property<long>("UserId");
 

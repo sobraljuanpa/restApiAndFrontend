@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace TwoDrive.Domain
 {
+    [Serializable()]
     public class Folder : FolderElement
     {
+        [XmlElement("Files")]
         public List<File> Files { get; set; }
-
+        [XmlElement("Folders")]
         public List<Folder> Folders { get; set; }
 
         public void AddFile(File file)

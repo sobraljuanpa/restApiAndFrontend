@@ -1,0 +1,27 @@
+<div *ngIf="show; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+        <div *ngFor="let folder of folders | async" style = "margin-top: 10px;">
+                <div class="card w-75 mx-auto">
+                        <div class="card-header">
+                                {{folder.name}}
+                                <button type="button" (click)="getFiles(folder.id)" class="btn btn-outline-primary">Look files</button>
+                        </div>
+                </div>
+        </div>
+</ng-template>
+<ng-template #elseBlock>
+        <div *ngFor="let file of files | async" style = "margin-top: 10px;">
+                <div class="card w-75 mx-auto">
+                        <div class="card-header">
+                                {{file.name}}
+                        </div>
+                        <div class="card-body">
+                                {{file.content}}
+                        </div>
+                </div> 
+        </div>
+        <div class="card w-75 mx-auto margin-top: 10px">
+                <button type="button" (click)="back()" class="btn btn-outline-primary">Back</button>
+        </div>
+</ng-template>
+                

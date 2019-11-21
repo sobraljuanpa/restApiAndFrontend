@@ -9,12 +9,14 @@ namespace TwoDrive.BusinessLogic
 {
     public class FolderLogic : FolderElementLogic<Folder>
     {
-        IDataRepository<File> _fileRepository;
-        public FolderLogic(IDataRepository<Folder> repository, IDataRepository<User> userRepository, IDataRepository<File> fileRepository)
+        private IDataRepository<File> _fileRepository;
+        private IDataRepository<LogItem> _logRepository;
+        public FolderLogic(IDataRepository<Folder> repository, IDataRepository<User> userRepository, IDataRepository<File> fileRepository, IDataRepository<LogItem> logRepository)
         {
             base._repository = repository;
             base._userRepository = userRepository;
             _fileRepository = fileRepository;
+            _logRepository = logRepository;
         }
         public override Folder Add(Folder entity)
         {
@@ -26,6 +28,8 @@ namespace TwoDrive.BusinessLogic
             _repository.Add(entity);
             folderAfter.AddFolder(entity);
             _repository.Update(folderBefore, folderAfter);
+            int number = 1 + base.NumberOfFoldersParents(entity.Parent);
+            _logRepository.Add(new LogItem(entity.OwnerId, DateTime.Now, number));
             return entity;
         }
 
@@ -34,6 +38,8 @@ namespace TwoDrive.BusinessLogic
             FolderElementExists(Entity.Id);
             CopyEntity(Entity, newEntity);
             _repository.Update(Entity, newEntity);
+            int number = 1 + base.NumberOfFoldersParents(Entity.Parent);
+            _logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now, number));
         }
 
         public override void Delete(Folder entity)
@@ -45,6 +51,8 @@ namespace TwoDrive.BusinessLogic
             }
             FolderElementExists(entity.Id);
             DeleteFolder(entity);
+            int number = 1 + base.NumberOfFoldersParents(entity.Parent);
+            _logRepository.Add(new LogItem(entity.OwnerId, DateTime.Now, number));
         }
         public override void Move(long EntityId, long folderId)
         {
@@ -62,6 +70,8 @@ namespace TwoDrive.BusinessLogic
             _repository.Update(Entity.Parent, Entity.Parent);
             _repository.Update(folder, folder);
             _repository.Update(Entity, Entity);
+            int number = 1 + base.NumberOfFoldersParents(Entity.Parent);
+            _logRepository.Add(new LogItem(Entity.OwnerId, DateTime.Now, number));
         }
 
         public void AddFatherFolder(Folder folder)
@@ -166,6 +176,11 @@ namespace TwoDrive.BusinessLogic
                 }
             }
             _repository.Delete(folder);
+        }
+
+        public override List<File> FilesShared(long userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

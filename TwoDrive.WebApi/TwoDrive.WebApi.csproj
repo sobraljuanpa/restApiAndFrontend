@@ -22,6 +22,7 @@
     <ProjectReference Include="..\TwoDrive.BusinessLogic\TwoDrive.BusinessLogic.csproj" />
     <ProjectReference Include="..\TwoDrive.DataAccess\TwoDrive.DataAccess.csproj" />
     <ProjectReference Include="..\TwoDrive.Domain\TwoDrive.Domain.csproj" />
+    <ProjectReference Include="..\TwoDrive.ImportingStrategy\TwoDrive.ImportingStrategy.csproj" />
   </ItemGroup>
 
 </Project>

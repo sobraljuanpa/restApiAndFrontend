@@ -55,13 +55,12 @@ namespace TwoDrive.DataAccess
 
         public void Update(Folder oldFolder, Folder newFolder)
         {
-            oldFolder.Files = newFolder.Files;
-            oldFolder.Folders = newFolder.Folders;
-            oldFolder.Name = newFolder.Name;
-            oldFolder.OwnerId = newFolder.OwnerId;
-            oldFolder.Parent = newFolder.Parent;
-            oldFolder.Readers = newFolder.Readers;
-
+            if (newFolder.Files != null) oldFolder.Files = newFolder.Files;
+            if (newFolder.Folders != null) oldFolder.Folders = newFolder.Folders;
+            if (newFolder.Name != null) oldFolder.Name = newFolder.Name;
+            if (newFolder.OwnerId != 0) oldFolder.OwnerId = newFolder.OwnerId;
+            if (newFolder.Parent != null) oldFolder.Parent = newFolder.Parent;
+            if (newFolder.Readers != null) oldFolder.Readers.Concat(newFolder.Readers);
             _context.SaveChanges();
         }
 

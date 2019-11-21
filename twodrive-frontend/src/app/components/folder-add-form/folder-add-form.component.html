@@ -1,0 +1,17 @@
+<div class="card w-75 mx-auto">
+    <div class="card-header">
+        <form>
+            <div class="form-group w-75 mx-auto">
+                <label>Folder name</label>
+                <input type="text" class="form-control" [(ngModel)]="folderName" value="folderName" name="folderName">
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <select class="form-control" [(ngModel)]="selectedFolder">
+            <option [ngValue]="folder" *ngFor="let folder of userFolders | async">{{folder.name}}</option>
+        </select>
+        <br>
+        <button type="button" class="btn btn-primary" (click)="addFolder()" style="float: right">Add folder</button>
+    </div>
+</div>

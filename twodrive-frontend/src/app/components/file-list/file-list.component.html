@@ -1,0 +1,51 @@
+<br>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="navbar-nav mr-auto">
+        <li>
+            <label>File name</label>
+        </li>
+        <li>
+            <input style="margin-left: 10px" type="text" class="form-control" [(ngModel)]="fileName" name="username">
+        </li>
+        <li style="margin-left: 20px">
+            <button type="submit" class="btn btn-primary" name="searchButton" (click)="onSearch(fileName)">Search</button>
+        </li>
+    </ul>
+    <select name="sortOrder" [(ngModel)]="sortOrder" (change)="onSortOrderSelection()">
+        <option>Name ascending</option>
+        <option>Name descending</option>
+        <option>Creation date ascending</option>
+        <option>Creation date descending</option>
+        <option>Last modification date ascending</option>
+        <option>Last modification date descending</option>
+    </select>
+</nav>
+<br>
+<div *ngFor="let file of files | async">
+    <div class="card w-75 mx-auto">
+        <div class="card-header">
+            {{file.name}}
+            <button type="button" class="btn btn-danger" (click)="render()" style="float: right; margin-left: 10px;">Change look</button>
+            <button type="button" class="btn btn-danger" (click)="delete(file.id)" style="float: right; margin-left: 10px;">Delete</button>
+            <button type="button" class="btn btn-primary" routerLink="/files/edit/{{file.id}}" style="float: right">Edit</button>
+        </div>
+        <div *ngIf="option; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock> 
+            <div class="card-body">
+                {{file.content}}
+            </div>
+        </ng-template>
+        <ng-template #elseBlock>
+            <div class="card-body" [innerHTML]="file.content">
+    
+            </div>
+        </ng-template>
+        <div class="card-footer">
+            <button type="button" class="btn btn-info" (click)="shareFile(file.id, selectedUser.id)" style="float: left">Share with</button>
+            <select class="form-control w-50 mx-auto" [(ngModel)]="selectedUser">
+                <option [ngValue]="user" *ngFor="let user of friends | async">{{user.username}}</option>
+            </select>
+        </div>
+    </div>
+    <p></p>
+</div>

@@ -1,0 +1,18 @@
+<div class="card text-center w-75 mx-auto">
+    <div class="card-header">
+        Log into TwoDrive!
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="form-group w-50 mx-auto">
+                <label>Username</label>
+                <input type="text" class="form-control" [(ngModel)]="username" placeholder="username" name="username">
+            </div>
+            <div class="form-group w-50 mx-auto">
+                <label>Password</label>
+                <input type="password" class="form-control" [(ngModel)]="password" placeholder="password" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary" name="loginButton" (click)="onLogin()">Submit</button>
+        </form>
+    </div>
+</div>

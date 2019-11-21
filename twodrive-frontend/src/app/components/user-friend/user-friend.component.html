@@ -1,0 +1,18 @@
+<br>
+<div *ngFor="let user of usersFriend | async">
+    <div class="card w-75 mx-auto">
+        <div class="card-header">
+            {{user.username}}
+            <button type="button" class="btn btn-danger" style="float: right; margin-left: 10px;" (click)="RemoveFriend(user.id)">Remove Friend</button>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>First name: {{user.firstName}}</li>
+                <li>Last name: {{user.lastName}}</li>
+                <li>Username: {{user.username}}</li>
+                <li>Email: {{user.email}}</li>
+                <li>Role: {{user.role}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

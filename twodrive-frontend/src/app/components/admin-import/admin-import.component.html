@@ -1,0 +1,21 @@
+<div class="card w-75 mx-auto" style="margin-top: 10px;">
+    <div class="card-header">
+            <div class="form-group w-75 mx-auto">
+                <select class="form-control" [(ngModel)]="selectedType">
+                    <option *ngFor="let type of typeImport">{{type}}</option>
+                </select>
+            </div>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="form-group w-75 mx-auto">
+                <div class="form-group w-75 mx-auto">
+                    <label>File Path</label>
+                    <input type="text" class="form-control" [(ngModel)]="path" value="path" name="path">
+                </div>
+            </div>
+        </form>
+        <br>
+        <button type="button" class="btn btn-primary" (click)="importFile()" style="float: right">Import</button>
+    </div>
+</div>

@@ -9,12 +9,14 @@ namespace TwoDrive.BusinessLogic
 {
     public class ReportLogic : IReport<File>
     {
-        IDataRepository<File> _repository;
-        IDataRepository<LogItem> _logRepository;
-        public ReportLogic(IDataRepository<File> repository, IDataRepository<LogItem> logRepository)
+        private IDataRepository<File> _repository;
+        private IDataRepository<LogItem> _logRepository;
+        private IDataRepository<User> _userRepository;
+        public ReportLogic(IDataRepository<File> repository, IDataRepository<LogItem> logRepository, IDataRepository<User> userRepository)
         {
             _repository = repository;
             _logRepository = logRepository;
+            _userRepository = userRepository;
         }
 
         public List<File> GetAllSortedFiles(string sortOrder = null, string fileName = null)
@@ -103,7 +105,7 @@ namespace TwoDrive.BusinessLogic
             return files.ToList();
         }
 
-        public IEnumerable<(long, int)> GetTop10FileOwners()
+        public List<User> GetTop10FileOwners()
         {
             var tuples = from f in _repository.GetAll()
                          group f by f.OwnerId into fileGroups
@@ -111,7 +113,13 @@ namespace TwoDrive.BusinessLogic
             tuples = tuples.OrderByDescending(
                 t => t.Item2).Distinct().Take(10).ToList();
 
-            return tuples;
+            var userList = new List<User>();
+
+            foreach(var t in tuples){
+                userList.Add(_userRepository.Get(t.Key));
+            }
+
+            return userList;
         }
 
         public int GetUserModifications(DateTime start, DateTime finish, User user)
@@ -133,6 +141,19 @@ namespace TwoDrive.BusinessLogic
                             select f).Count();
 
             return countMod / (finishDate - startDate).Days;
+        }
+
+        public int GetUserModificationsFolders(User user)
+        {
+            var list = (from f in _logRepository.GetAll()
+                        where (f.UserId == user.Id)
+                        select f).ToList();
+            int count = 0;
+            foreach(var elem in list)
+            {
+                count += elem.Count;
+            }
+            return count;
         }
     }
 }

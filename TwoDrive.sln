@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoDrive.BusinessLogic", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoDrive.BusinessLogic.Interface", "TwoDrive.BusinessLogic.Interface\TwoDrive.BusinessLogic.Interface.csproj", "{7B7219E7-280A-4E50-BDA2-912D2A52E90E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDrive.DataAccess.Interface", "TwoDrive.DataAccess.Interface\TwoDrive.DataAccess.Interface.csproj", "{40265381-051B-4BA5-BCB5-C4F6E0F58E96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoDrive.DataAccess.Interface", "TwoDrive.DataAccess.Interface\TwoDrive.DataAccess.Interface.csproj", "{40265381-051B-4BA5-BCB5-C4F6E0F58E96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoDrive.ImportingStrategy", "TwoDrive.ImportingStrategy\TwoDrive.ImportingStrategy.csproj", "{BB63165C-CA45-482D-A2A3-BC694F91D538}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,18 @@ Global
 		{40265381-051B-4BA5-BCB5-C4F6E0F58E96}.Release|x64.Build.0 = Release|Any CPU
 		{40265381-051B-4BA5-BCB5-C4F6E0F58E96}.Release|x86.ActiveCfg = Release|Any CPU
 		{40265381-051B-4BA5-BCB5-C4F6E0F58E96}.Release|x86.Build.0 = Release|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Debug|x64.Build.0 = Debug|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Debug|x86.Build.0 = Debug|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Release|x64.ActiveCfg = Release|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Release|x64.Build.0 = Release|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Release|x86.ActiveCfg = Release|Any CPU
+		{BB63165C-CA45-482D-A2A3-BC694F91D538}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

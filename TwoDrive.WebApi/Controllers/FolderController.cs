@@ -20,15 +20,51 @@ namespace TwoDrive.WebApi.Controllers
             _folderLogic = folderLogic;
             _users = userRepository;
         }
+        
+        //GET: /api/folders/all
+        [Authorize(Roles = Role.Admin)]
+        [HttpGet("/all")]
+        public IActionResult GetAllFolders()
+        {
+            try
+            {
+                IEnumerable<Folder> folder = _folderLogic.GetAll();
+                return Ok(folder);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        //GET: /api/folders/{id}/files
+        [Authorize(Roles = Role.User)]
+        [HttpGet("{folderId}/files")]
+        public IActionResult GetFiles(long folderId)
+        {
+            try
+            {
+                Folder folder = _folderLogic.Get(folderId);
+                if(int.Parse(User.Identity.Name) == folder.OwnerId)
+                {
+                    return Ok(folder.Files);
+                }
+                else return Unauthorized("You are not the owner of the folder.");
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
 
         //GET: /api/folders
-        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                IEnumerable<Folder> folder = _folderLogic.GetAll();
+                var currentUser = _users.Get(int.Parse(User.Identity.Name));
+                IEnumerable<Folder> folder = _folderLogic.GetAllUser(currentUser.Id);
                 return Ok(folder);
             }
             catch (Exception e)
@@ -103,7 +139,8 @@ namespace TwoDrive.WebApi.Controllers
                     }
                     if (friendList)
                     {
-                        _folderLogic.AddReader(_folderLogic.Get(folderId), idUsers);
+                        Folder folder = _folderLogic.Get(folderId);
+                        _folderLogic.AddReader(folder, idUsers);
                         return NoContent();
                     }
                     else return Unauthorized("El usuario al que desea agregar como lector no existe en su lista de amigos.");
