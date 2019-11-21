@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
-
+import { environment } from '../../environments/environment';
 import { Folder, FolderAdapter } from "../models/folder";
 import { File, FileAdapter } from "../models/file";
 
@@ -10,7 +10,7 @@ import { File, FileAdapter } from "../models/file";
   providedIn: 'root'
 })
 export class FolderService {
-  private baseUrl = 'http://localhost:57902/api/folders';
+  private baseUrl = `${environment.apiUrl}/folders`;
 
   constructor(private http: HttpClient, private adapter: FolderAdapter, private fileAdapter: FileAdapter) { }
 

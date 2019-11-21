@@ -3,12 +3,13 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { UserAdapter, User } from '../models/user';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-private baseUrl = 'http://localhost:57902/api/users';
+private baseUrl = `${environment.apiUrl}/users`;
 
   constructor(
     private http: HttpClient,
@@ -26,7 +27,7 @@ private baseUrl = 'http://localhost:57902/api/users';
   }
 
   getTop10Users(): Observable<User[]>{
-    return this.http.get("http://localhost:57902/api/files/top10").pipe(
+    return this.http.get(`${environment.apiUrl}/files/top10`).pipe(
       map((data: any[]) => data.map(item => this.adapter.adapt(item))),
     )
   }

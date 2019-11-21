@@ -3,13 +3,14 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 
+import { environment } from '../../environments/environment';
 import { File, FileAdapter } from "../models/file";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
-  private baseUrl = 'http://localhost:57902/api/files';
+  private baseUrl = `${environment.apiUrl}/files`;
 
   constructor(private http: HttpClient, private adapter: FileAdapter) { }
 
