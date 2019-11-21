@@ -50,6 +50,26 @@ paths:
           description: Success
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+  '/api/files':
+    get:
+      tags:
+        - File
+      summary: 'Returns the 10 users with the most files'
+      responses:
+        '200':
+          description: Success
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  '/api/files/shared':
+    get:
+      tags:
+        - File
+      summary: 'Returns all files in the system that are shared with the authenticated user.'
+      responses:
+        '200':
+          description: Success
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
   '/api/files/{id}':
     get:
       tags:
@@ -70,7 +90,7 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           description: Entity not found in system
-  /api/files/view:
+  '/api/files/view':
     get:
       tags:
         - File
@@ -249,7 +269,19 @@ paths:
           description: Success
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  '/api/folders/{folderId}':
+    '/api/folder/all':
+    get:
+      tags:
+        - Folder
+      summary: 'Returns all folders in the system.'
+      description: 'Can only be accessed by an administrator'
+      operationId: GetAllFolders
+      responses:
+        '200':
+          description: Success
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    '/api/folders/{folderId}':
     get:
       tags:
         - Folder
@@ -558,6 +590,68 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           description: User not found
+  "/api/migration/{type}": {
+      "post": {
+        "tags": [
+          "Migration"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
 components:
   responses:
     UnauthorizedError:
