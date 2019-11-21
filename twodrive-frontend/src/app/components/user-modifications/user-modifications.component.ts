@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-user-modifications',
@@ -14,7 +15,8 @@ export class UserModificationsComponent implements OnInit {
   modificationNumber: number;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -24,8 +26,11 @@ export class UserModificationsComponent implements OnInit {
   onUserSelection() {
     this.userService.getModifications(this.selectedUser.id).subscribe(
       res => {
-        console.log(res);
         this.modificationNumber = (res as any);
+        this.alertService.success("User delete correctly!");
+      },
+      err => {
+        this.alertService.danger("Sorry, something went wrong.");
       }
     )
   }

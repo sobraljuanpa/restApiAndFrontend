@@ -19,7 +19,7 @@ export class FileListComponent implements OnInit {
   sortOrder: string;
   friends: Observable<User[]>;
   selectedUser: User;
-  
+  option: Boolean;
 
   constructor(
     private fileService: FileService,
@@ -31,6 +31,7 @@ export class FileListComponent implements OnInit {
   ngOnInit() {
       this.files = this.fileService.getOwnedFiles();
       this.friends = this.userService.getUsersFriends();
+      this.option = true;
   }
 
   delete(id: number) {
@@ -44,6 +45,10 @@ export class FileListComponent implements OnInit {
         this.router.navigateByUrl('http://localhost:4200/')
       }
     );
+  }
+
+  render() {
+    this.option = !this.option;
   }
 
   onSearch(fileName: string) {
@@ -68,7 +73,14 @@ export class FileListComponent implements OnInit {
   }
 
   shareFile(fileId: number, userId: number) {
-    this.fileService.shareFile(fileId, userId).subscribe();
+    this.fileService.shareFile(fileId, userId).subscribe(
+      res => {
+        this.alertService.success("Remove successfuly!");
+      },
+      err => {
+        this.alertService.danger("Sorry, something went wrong.");
+      }
+    )
   }
 
 }

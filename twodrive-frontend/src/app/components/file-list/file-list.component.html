@@ -25,12 +25,21 @@
     <div class="card w-75 mx-auto">
         <div class="card-header">
             {{file.name}}
+            <button type="button" class="btn btn-danger" (click)="render()" style="float: right; margin-left: 10px;">Change look</button>
             <button type="button" class="btn btn-danger" (click)="delete(file.id)" style="float: right; margin-left: 10px;">Delete</button>
             <button type="button" class="btn btn-primary" routerLink="/files/edit/{{file.id}}" style="float: right">Edit</button>
         </div>
-        <div class="card-body">
-            {{file.content}}
-        </div>
+        <div *ngIf="option; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock> 
+            <div class="card-body">
+                {{file.content}}
+            </div>
+        </ng-template>
+        <ng-template #elseBlock>
+            <div class="card-body" [innerHTML]="file.content">
+    
+            </div>
+        </ng-template>
         <div class="card-footer">
             <button type="button" class="btn btn-info" (click)="shareFile(file.id, selectedUser.id)" style="float: left">Share with</button>
             <select class="form-control w-50 mx-auto" [(ngModel)]="selectedUser">
