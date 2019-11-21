@@ -68,7 +68,14 @@ export class FileListComponent implements OnInit {
   }
 
   shareFile(fileId: number, userId: number) {
-    this.fileService.shareFile(fileId, userId).subscribe();
+    this.fileService.shareFile(fileId, userId).subscribe(
+      res => {
+        this.alertService.success("Remove successfuly!");
+      },
+      err => {
+        this.alertService.danger("Sorry, something went wrong.");
+      }
+    )
   }
 
 }
